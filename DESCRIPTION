@@ -1,0 +1,13 @@
+Package: iTSS
+Type: Package
+Title: Transcription Start Sites
+Version: 0.1.0
+Date: 2011-04-14
+Author: Clemens Kreutz, Julian Gehring
+Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
+Imports: methods, Hmisc, minqa
+Depends: R (>= 2.13.0)
+Description: Detect Transcription Start Sites
+License: GPL-3
+LazyLoad: yes
+Encoding: UTF-8
