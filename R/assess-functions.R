@@ -1,4 +1,4 @@
-.assess <- function(lambda, nReads, regpara, exppara, basal, dograd=FALSE) {		
+.assess <- function(lambda, nReads, regpara, basal, dograd=FALSE) {		
 
   ndat <- max(1, sum(lambda > 2*basal, na.rm=TRUE))	# da jedes lambda 1 Mal., Faktor 2 wg. num. ungenauigkeit.
   
@@ -59,9 +59,9 @@ ycAssessAbs <- function(lambda, basal) {
 }
 
 
-.assessGrad <- function(lambda, nReads, regpara, exppara, basal, dograd=TRUE) {
+.assessGrad <- function(lambda, nReads, regpara, basal, dograd=TRUE) {
   
-  OUT <- .assess(lambda, nReads, regpara, exppara, basal, dograd=TRUE)$dassDlambda
+  OUT <- .assess(lambda, nReads, regpara, basal, dograd=TRUE)$dassDlambda
   
   return(OUT)
 }

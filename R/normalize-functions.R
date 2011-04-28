@@ -1,6 +1,6 @@
 ## normalize ##
 .normalize <- function(x, fun=mean, offset=10, basal=1e-4, ratio,
-                       regpara=c(1, 1), exppara=c(20, 20), fit=FALSE) {
+                       regpara=c(1, 1), fit=FALSE) {
 
   ## extract data
   start <- x$start
@@ -43,10 +43,10 @@
     ## Poisson fit
     rOpt <- optim(fn=.assess, gr=.assessGrad, par=lambda0, method="L-BFGS-B",
                   lower=rep(basal, nData), control=list(trace=0, maxit=500), ## CHCK: maxit
-                  nReads, regpara, exppara, basal) ## TODO: arg names
+                  nReads, regpara, basal) ## TODO: arg names
     rTrust <- bobyqa(fn=.assess, par=lambda0, lower=rep(basal, nData),
                      upper=Inf, control=list(iprint=0, maxfun=10*nData^2), ## CHCK: maxfun
-                     nReads, regpara, exppara, basal) ## TODO: arg names
+                     nReads, regpara, basal) ## TODO: arg names
     par <- if(rTrust$fval > rOpt$value) rOpt$par else rTrust$par
     optim <- if(rTrust$fval > rOpt$value) 1L else 2L
 
@@ -60,12 +60,11 @@
 
 
 ## initialRatio ##
-.initialRatio <- function(nReads, regpara, exppara, basal) {
+.initialRatio <- function(nReads, regpara, basal) {
 
   lopt <- rep(NA, length(nReads))
   for(i in 1:length(nReads)) {
-    lopt[i] <- optimize(f=.assess, nReads=nReads[i], regpara=regpara,
-                        exppara=exppara, basal=basal,
+    lopt[i] <- optimize(f=.assess, nReads=nReads[i], regpara=regpara, basal=basal,
                         interval=c(0, nReads[i]+1))$minimum
   }
   ratio <- lopt/nReads
