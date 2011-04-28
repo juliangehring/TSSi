@@ -1,7 +1,8 @@
 import(methods)
 
-exportClasses(TssRaw)
+importFrom(Hmisc, approxExtrap)
+importFrom(minqa, bobyqa)
 
-exportMethods(Tss)
+exportClasses(TssNorm)
 
-exportPattern("*")
+exportMethods(normalize)
