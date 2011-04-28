@@ -1,18 +1,18 @@
-\name{TssRaw-class}
+\name{TssResult-class}
 
 \docType{class}
 
-\alias{TssRaw}
-\alias{TssRaw-class}
-\alias{Tss}
-\alias{Tss,integer,integer-method}
+\alias{TssResult}
+\alias{TssResult-class}
+\alias{identify}
+\alias{identify,TssNorm,numeric,function-method}
 
 \title{
-  Class \code{TssRaw}
+  Class \code{TssResult}
 }
 
 \description{
-  TssRaw
+  TssResult
 }
 
 \section{Slots}{
@@ -21,20 +21,20 @@
     \item{\code{region}:}{region}
     \item{\code{chr}:}{chr}
     \item{\code{date}:}{date}
+    \item{\code{parameter}:}{parameter}
   }
 }
 
 \section{Methods}{
   \describe{
-    \item{Tss:}{
-      \code{signature(nReads="integer", start="integer"}
+    \item{identify:}{
+      \code{obj="TssNorm", threshold="numeric", fun="function"}
     }
   }
 }
 
 \examples{
-x <- Tss(nReads=10:1, start=1:10, region=rep(1:2, 5))
-x
+1:10
 }
 
 \keyword{classes}

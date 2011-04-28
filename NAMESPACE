@@ -1,7 +1,9 @@
 import(methods)
 
-exportClasses(TssRaw)
 
-exportMethods(Tss)
+exportClasses(TssResult)
 
-exportPattern("*")
+exportMethods(identify)
+
+export(subtractExpectation)
+
