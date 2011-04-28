@@ -2,6 +2,8 @@ import(methods)
 
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
+importFrom(stats, optimize)
+
 
 exportClasses(TssNorm)
 

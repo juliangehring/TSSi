@@ -13,7 +13,7 @@
   if(any(dup)) {
     ## find regions of duplicates
     rle <- rle(start)
-    ind2 <- cumsum(rle$lengths) ## CHCK: int?
+    ind2 <- cumsum(rle$lengths)
     ind1 <- c(1L, ind2[-length(ind2)]+1L)
     normDup <- function(i, y, i1, i2, fun, ...) fun(y[i1[i]:i2[2]])
     nRep <- function(x) length(unique(x))
@@ -25,7 +25,6 @@
     #replicate0 <- sapply(i=1:length(ind1), normDup, y=nReads0, i1=ind1, i2=ind2, fun=fun)
   }
   nData <- length(mReads)
-  ## THNK: how to treat duplicates on different strands?
 
   ## add basal offsets
   indEst <- (1L:nData) + offset
@@ -43,7 +42,7 @@
     ## Poisson fit
     rOpt <- optim(fn=.assess, gr=.assessGrad, par=lambda0, method="L-BFGS-B",
                   lower=rep(basal, nData), control=list(trace=0, maxit=500), ## CHCK: maxit
-                  nReads, regpara, basal) ## TODO: arg names
+                  nReads, regpara, basal, nRep) ## TODO: arg names
     rTrust <- bobyqa(fn=.assess, par=lambda0, lower=rep(basal, nData),
                      upper=Inf, control=list(iprint=0, maxfun=10*nData^2), ## CHCK: maxfun
                      nReads, regpara, basal) ## TODO: arg names
