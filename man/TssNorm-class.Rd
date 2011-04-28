@@ -5,7 +5,7 @@
 \alias{TssNorm}
 \alias{TssNorm-class}
 \alias{normalize}
-\alias{normalize,Tss,function,integer,numeric,numeric,logical-method}
+\alias{normalize,TssData,function,integer,numeric,numeric,logical-method}
 
 \title{
   Class \code{TssNorm}
@@ -28,7 +28,7 @@
 \section{Methods}{
   \describe{
     \item{normalize:}{
-      \code{obj="Tss", fun="function", offset="integer", basal="numeric",
+      \code{obj="TssData", fun="function", offset="integer", basal="numeric",
         regpara="numeric", fit="logical"}
     }
   }

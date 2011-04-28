@@ -1,4 +1,4 @@
-## TssNorm ##
+## normalize ##
 setGeneric("normalize",
            function(obj, fun=mean, offset=10L, basal=1e-4,
                     regpara=c(1, 1), fit=FALSE, ...)
@@ -6,7 +6,7 @@ setGeneric("normalize",
            )
 
 setMethod("normalize",
-          signature(obj="Tss", fun="function", offset="integer", basal="numeric",
+          signature(obj="TssData", fun="function", offset="integer", basal="numeric",
                     regpara="numeric", fit="logical"),
           function(obj, fun=mean, offset=10, basal=1e-4,
                    regpara=c(1, 1), fit=FALSE, ...) {
