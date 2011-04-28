@@ -1,12 +1,12 @@
 ## class 'TssData' ##
-setClass("TssRaw",
+setClass("TssData",
          representation(data="list",
                         region="character",
                         chr="factor",
                         date="character")
          )
 
-setValidity("TssRaw",
+setValidity("TssData",
             function(object) {
               res <- TRUE
               if(!all.equal(length(object@data), length(object@region),

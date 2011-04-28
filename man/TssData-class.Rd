@@ -1,18 +1,17 @@
-\name{TssRaw-class}
+\name{TssData-class}
 
 \docType{class}
 
-\alias{TssRaw}
-\alias{TssRaw-class}
-\alias{Tss}
-\alias{Tss,integer,integer-method}
+\alias{TssData}
+\alias{TssData-class}
+\alias{TssData,integer,integer-method}
 
 \title{
-  Class \code{TssRaw}
+  Class \code{TssData}
 }
 
 \description{
-  TssRaw
+  TssData
 }
 
 \section{Slots}{
@@ -26,14 +25,14 @@
 
 \section{Methods}{
   \describe{
-    \item{Tss:}{
+    \item{TssData:}{
       \code{signature(nReads="integer", start="integer"}
     }
   }
 }
 
 \examples{
-x <- Tss(nReads=10:1, start=1:10, region=rep(1:2, 5))
+x <- TssData(nReads=10:1, start=1:10, region=rep(1:2, 5))
 
 tssPeak <- function(pos=1:100, posTss=c(32, 64), mu=c(2, 2), scale=c(1e3, 1e3)) {
 
@@ -61,11 +60,10 @@ d2 <- tssPeak()
 d3 <- tssPeak(posTss=c(32, 42))
 d4 <- tssPeak(scale=c(1e3, 5e2))
 
-x1 <- Tss(d1$nReads, d1$start)
-x2 <- Tss(d2$nReads, d2$start)
-x3 <- Tss(d3$nReads, d3$start)
-x4 <- Tss(d4$nReads, d4$start)
-
+x1 <- TssData(d1$nReads, d1$start)
+x2 <- TssData(d2$nReads, d2$start)
+x3 <- TssData(d3$nReads, d3$start)
+x4 <- TssData(d4$nReads, d4$start)
 }
 
 \keyword{classes}
