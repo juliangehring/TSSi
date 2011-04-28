@@ -13,12 +13,11 @@ setMethod("normalize",
 
 
   ## calculate ratio
-  findMaxRead <- function(x, col="start") max(x[col, ])
-  maxRead <- max(sapply(x=obj@data, findMaxRead, col="start"))
+  maxRead <- max(sapply(x=obj@data, .colFun, col="start", fun=max))
   ratio <- .initialRatio(1:(maxRead+1), regpara=regpara, basal=basal)
 
   ## normalize each region individually
-  normData <- lapply(x=obj@data, FUN=zNorm, offset=offset, basal=basal, ## add mclapply
+  normData <- lapply(x=obj@data, FUN=zNorm, offset=offset, basal=basal, ## TODO add mclapply
                      ratio=ratio, regpara=regpara, fit=fit)
 
   pars <- list(offset=offset, basal=basal, ratio=ratio, regpara=regpara, fit=fit)

@@ -73,6 +73,7 @@
 }
 
 
+## initialFun ##
 .initialFun <- function(nReads, ratio, basal) {
 
   ## CHCK: alternative method
@@ -88,4 +89,12 @@
   lambda0[lambda0 < 1] <- basal
   
   return(lambda0)
+}
+
+
+## colFun ##
+.colFun <- function(x, col, fun) {
+  res <- fun(x[col, ])
+
+  return(res)
 }
