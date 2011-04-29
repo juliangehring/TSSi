@@ -9,20 +9,21 @@
   
   ## average over replicates if any present
   dup <- duplicated(start)
-  mReads <- nReads
   if(any(dup)) {
     ## find regions of duplicates
     rle <- rle(start)
     ind2 <- cumsum(rle$lengths)
     ind1 <- c(1L, ind2[-length(ind2)]+1L)
-    normDup <- function(i, y, i1, i2, fun, ...) fun(y[i1[i]:i2[2]])
-    nRep <- function(x) length(unique(x))
+    #.nRep <- function(x) length(unique(x))
     start <- start[ind1]
     end <- end[ind1]
-    mReads <- sapply(i=1:length(ind1), normDup, y=mReads, i1=ind1, i2=ind2, fun=fun)
+    mReads <- sapply(1:length(ind1), .normDup, y=nReads, i1=ind1, i2=ind2, fun=fun)
     nRep <- rle$lengths
     #strand0 <- sapply(i=1:length(ind1), normDup, y=nReads0, i1=ind1, i2=ind2, fun=fun)
     #replicate0 <- sapply(i=1:length(ind1), normDup, y=nReads0, i1=ind1, i2=ind2, fun=fun)
+  } else {
+    mReads <- nReads
+    nRep <- rep(1L, length(mReads))
   }
   nData <- length(mReads)
 
@@ -42,15 +43,15 @@
     ## Poisson fit
     rOpt <- optim(fn=.assess, gr=.assessGrad, par=lambda0, method="L-BFGS-B",
                   lower=rep(basal, nData), control=list(trace=0, maxit=500), ## CHCK: maxit
-                  nReads, regpara, basal, nRep) ## TODO: arg names
+                  nReads=mReads, regpara=regpara, basal=basal, nRep=nRep) ## TODO: arg names
     rTrust <- bobyqa(fn=.assess, par=lambda0, lower=rep(basal, nData),
                      upper=Inf, control=list(iprint=0, maxfun=10*nData^2), ## CHCK: maxfun
-                     nReads, regpara, basal) ## TODO: arg names
+                     nReads=mReads, regpara=regpara, basal=basal, nRep=NULL) ## TODO: arg names
     par <- if(rTrust$fval > rOpt$value) rOpt$par else rTrust$par
     optim <- if(rTrust$fval > rOpt$value) 1L else 2L
 
     ## store results from fit
-    res$pReads <- rep(par, nData)
+    res$pReads <- par
     res$optim <- rep(optim, nData)
   }
 
@@ -63,7 +64,7 @@
 
   lopt <- rep(NA, length(nReads))
   for(i in 1:length(nReads)) {
-    lopt[i] <- optimize(f=.assess, nReads=nReads[i], regpara=regpara, basal=basal,
+    lopt[i] <- optimize(f=.assess, nReads=nReads[i], regpara=regpara, basal=basal, nRep=NULL,
                         interval=c(0, nReads[i]+1))$minimum
   }
   ratio <- lopt/nReads
@@ -93,7 +94,17 @@
 
 ## colFun ##
 .colFun <- function(x, col, fun) {
-  res <- fun(x[col, ])
+  
+  res <- fun(x[ ,col])
+
+  return(res)
+}
+
+
+## normDup ##
+.normDup <- function(i, y, i1, i2, fun) {
+
+  res <- fun(y[i1[i]:i2[i]])
 
   return(res)
 }

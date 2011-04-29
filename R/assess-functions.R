@@ -1,18 +1,18 @@
 ## assess ##
-.assess <- function(lambda, nReads, regpara, basal) {	## nRep needed?
+.assess <- function(lambda, nReads, regpara, basal, nRep) {	## nRep needed?
 
   n <- max(1, sum(lambda > 2*basal, na.rm=TRUE)) ## NA possible?
   
   ass <- c(2*.nReadsLoglik(nReads, lambda)/log(n+1),
            2*regpara[1]*.assessAbs(lambda, basal),
-           2*regpara[2]*.assessSteps(lambda, basal)$ass) ## different functions?
-  
+           2*regpara[2]*.assessSteps(lambda, basal))
+
   res <- sum(ass)
-  
+
   if(is.nan(res) | abs(res)==Inf) ## CHCK needed?
     stop("if(is.nan(ass) | abs(ass)==Inf")
 
-  return(res)		
+  return(res)
 }
 
 
@@ -21,23 +21,13 @@
 
   n <- max(1, sum(lambda > 2*basal, na.rm=TRUE)) ## NA possible?
 
-  ass1  <- 2*.nReadsLoglik(nReads, lambda)/log(n+1)
   dass1 <- 2*.nReadsLoglikGrad(nReads, lambda, nRep)/log(n+1)
-  
-  ass2 <- 2*regpara[1]*.assessAbs(lambda, basal)
   dass2 <- 2*regpara[1]*.assessAbsGrad(lambda, basal)
+  dass3 <- 2*regpara[2]*.assessStepsGrad(lambda, basal)
   
-  tmp3 <- .assessSteps(lambda, basal)
-  
-  ass3 <- 2*regpara[2]*tmp3$ass
-  dass3<- 2*regpara[2]*tmp3$dassDlambda
-  
-  ass <- ass1+ass2+ass3
-  dassDlambda <- dass1+dass2+dass3
-  
-  OUT <- list(ass=ass, dassDlambda=dassDlambda)
-  
-  return(OUT)
+  res <- dass1+dass2+dass3
+
+  return(res)
 }
 
 
@@ -84,26 +74,31 @@ ycAssessAbs <- function(lambda, basal) {
 
 
 ## assessSteps ##
-.assessSteps <- function(lambda, basal, dograd=TRUE) {		
+.assessSteps <- function(lambda, basal) {		
 
   lambda2 <- c(basal, lambda, basal)
   len <- length(lambda2)
 
-  fuerSprung <- diff(lambda2)/sqrt(lambda2[-len]+lambda2[-1])	# Diff zur dessen SE
+  fuerSprung <- diff(lambda2)/sqrt(lambda2[-len]+lambda2[-1])
   ass <- sum(abs(fuerSprung))	
 
-  if(dograd) {
-    x <- lambda2[1:(len-2)]
-    y <- lambda2[3:len]
-    dassLast <- 1/(x+lambda)^(1/2)-1/2*(lambda-x)/(x+lambda)^(3/2)		
-    dassNext <- -1/(y+lambda)^(1/2)-1/2*(y-lambda)/(y+lambda)^(3/2)	
-    dassDlambda <- sign(lambda-x)*dassLast + sign(y-lambda)*dassNext	
-    OUT <- list(ass=ass, dassDlambda=dassDlambda)
-  }
-  else
-    OUT = list(ass=ass)
+  return(ass)
+}
+
+
+## assessStepsGrad ##
+.assessStepsGrad <- function(lambda, basal) {		
+
+  lambda2 <- c(basal, lambda, basal)
+  len <- length(lambda2)	
+
+  x <- lambda2[1:(len-2)]
+  y <- lambda2[3:len]
+  dassLast <- 1/(x+lambda)^(1/2)-1/2*(lambda-x)/(x+lambda)^(3/2)		
+  dassNext <- -1/(y+lambda)^(1/2)-1/2*(y-lambda)/(y+lambda)^(3/2)	
+  dass <- sign(lambda-x)*dassLast + sign(y-lambda)*dassNext	
   
-  return(OUT)
+  return(dass)
 }
 
 
