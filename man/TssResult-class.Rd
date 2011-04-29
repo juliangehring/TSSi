@@ -5,7 +5,7 @@
 \alias{TssResult}
 \alias{TssResult-class}
 \alias{identify}
-\alias{identify,TssNorm,numeric,function-method}
+\alias{identify,TssNorm,numeric,numeric,function-method}
 
 \title{
   Class \code{TssResult}
@@ -28,7 +28,7 @@
 \section{Methods}{
   \describe{
     \item{identify:}{
-      \code{obj="TssNorm", threshold="numeric", fun="function"}
+      \code{obj="TssNorm", threshold="numeric", exppara="numeric", fun="function"}
     }
   }
 }

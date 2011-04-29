@@ -11,15 +11,15 @@
 }
 
 \usage{
-subtractExpectation(fg, bg, indTss, exppara, basal)
+subtractExpectation(fg, bg, indTss, basal, exppara)
 }
 
 \arguments{
   \item{fg}{foreground}
   \item{bg}{backgroud}
   \item{indTss}{index of TSS}
-  \item{exppara}{parameter for exppdf}
   \item{basal}{basal reads}
+  \item{exppara}{parameter for exppdf}
 }
 
 \details{
