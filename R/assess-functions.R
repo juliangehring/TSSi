@@ -1,16 +1,13 @@
 ## assess ##
-.assess <- function(lambda, nReads, regpara, basal, nRep) {	## nRep needed?
+.assess <- function(lambda, nReads, regpara, basal, nRep) {
 
-  n <- max(1, sum(lambda > 2*basal, na.rm=TRUE)) ## NA possible?
+  n <- max(1, sum(lambda > 2*basal))
   
   ass <- c(2*.nReadsLoglik(nReads, lambda)/log(n+1),
            2*regpara[1]*.assessAbs(lambda, basal),
            2*regpara[2]*.assessSteps(lambda, basal))
 
   res <- sum(ass)
-
-  if(is.nan(res) | abs(res)==Inf) ## CHCK needed?
-    stop("if(is.nan(ass) | abs(ass)==Inf")
 
   return(res)
 }
@@ -19,7 +16,7 @@
 ## assessGrad ##
 .assessGrad <- function(lambda, nReads, regpara, basal, nRep) {
 
-  n <- max(1, sum(lambda > 2*basal, na.rm=TRUE)) ## NA possible?
+  n <- max(1, sum(lambda > 2*basal))
 
   dass1 <- 2*.nReadsLoglikGrad(nReads, lambda, nRep)/log(n+1)
   dass2 <- 2*regpara[1]*.assessAbsGrad(lambda, basal)
@@ -125,8 +122,7 @@ ycAssessSteps <- function(lambda, basal, dograd=TRUE) {
 .nReadsLoglik <- function(x, lambda) {
 
   prob <- dpois(x, lambda)
-  prob[prob <= 0] <- .Machine$double.eps ## TODO check
-  res <- -sum(log(prob), na.rm=TRUE) ## CHCK NA possible?
+  res <- -sum(log(prob[prob > 0]))
 
   return(res)
 }
