@@ -24,6 +24,10 @@ setMethod("TssData",
   y <- data.frame(start=start[ord], end=end[ord], strand=factor(strand[ord]),
                   nReads=nReads[ord], replicate=replicate[ord])
 
+  ## check for duplicate positions within the replicates
+  if(any(diff(y$start) == 0 & diff(y$replicate) == 0))
+    stop("Duplicated start positions within a replicate are not allowed.")
+  
   ## TODO: check types
 
   ## find boundaries of regions
