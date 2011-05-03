@@ -1,61 +1,67 @@
 ## identifyCore ##
-.identifyCore <- function(x, basal, exppara, threshold, fun) {
+.identifyCore <- function(x, basal, exppara, threshold, fun, cumulative) {
 
   ## extract data
   pos <- x$start
-  fn <- nReads <- x$nReads
-  lennReads <- length(nReads)
+  fn <- reads <- x$lambda ## TODO chose rigth variable
 
-  if(any(fn > threshold)) { ## > or >= ???
-    indTss <- which.max(fn) ## always chooses first maximum
-
-    for(i in 1:lennReads) {
-      cumBg <- .cumulativeReads(pos, nReads, pos[indTss], basal, exppara) ## expect or nReads? changed or unchanged??
-
-      dif <- fun(nReads, cumBg, indTss, basal, exppara)
-
+  if(any(reads >= threshold)) {
+    indTss <- NULL
+    for(i in 1:length(reads)) {
+      indTss[i] <- which.max(fn)
+      cumBg <- .cumulativeReads(pos, reads, indTss, basal, exppara)
+      dif <- fun(reads, cumBg$expect, indTss, basal, exppara) ## TODO assign by name?
       fn <- dif$delta
       fn[indTss] <- -Inf
-      
-      if(any(fn > threshold))
-        indTss <- c(indTss, which.max(fn))
-      else
+      if(all(fn < threshold))
         break
     }
+
+    ## sum up reads for each tss
+    if(cumulative)
+      yReads <- diff(c(0, cumsum(dif$delta)[cumBg$indEnd]))
+    else
+      yReads <- dif$delta[indTss]
+    
+    tss <- data.frame(pos=pos[indTss], reads=yReads)
+    res <- list(tss=tss, dif=data.frame(delta=dif$delta, expect=dif$expect))
   } else {
-    #expect <- rep(basal, lennReads) ## needed?
     res <- list(posTss=NULL, yTss=NULL,  delta=NULL, expect=NULL)    
   }
-
-  res <- list(posTss=pos[indTss], yTss=dif$delta[indTss], delta=dif$delta,
-              expect=dif$expect)
 
   return(res)
 }
 
 
 ## cumulativeReads ##
-.cumulativeReads <- function(pos, expect, posTss, basal, exppara,
-                             weight0=.exppdf(1, exppara)) {
+.cumulativeReads <- function(pos, expect, indTss, basal, exppara) {
 
-  ## pos: nReads > basal and not a TSS
-  ind0 <- which(expect > basal & !(pos %in% posTss))
+  posTss <- pos[indTss]
+  nPos <- length(pos)
+  nTss <- length(posTss)
 
-  for(i in ind0) {
-    ## find closest TSS
-    indPos <- which.min(abs(posTss - pos[i]))
-    nextPos <- posTss[indPos]
+  ## calculate distance to each tss
+  d <- matrix(pos, nTss, nPos, byrow=TRUE) - posTss
+  da <- abs(d)
 
-    ## compute weights according to side
-    ip <- if(nextPos < pos[i]) 1L else 2L
-    weight <- .exppdf(abs(nextPos - pos[i]), exppara[ip]) / weight0[ip]
+  ## find closest tss, choose parameter
+  group <- apply(da, 2, which.min)
+  idGroup <- group + seq(0L, by=nTss, length.out=nPos)
+  ip <- ifelse(d[idGroup], 1L, 2L)
 
-    ## add reads to next TSS, set current pos to basal
-    expect[indPos] <- expect[indPos] + expect[i]*weight
-    expect[i] <- basal
-  }
+  ## calculate weights
+  weight <- .exppdf(da[idGroup], exppara[ip]) / .exppdf(1, exppara[ip])
+  weight[indTss] <- 1
 
-  return(expect)
+  ## find indices for each group
+  indEnd <- cumsum(rle(group)$lengths)
+
+  ## compute cumulative weights for each tss, set everything else to basal
+  cum <- diff(c(0, cumsum(weight*expect)[indEnd]))
+  expect <- rep(basal, nPos)
+  expect[indTss] <- cum
+
+  return(list(expect=expect, indEnd=indEnd))
 }
 
 
