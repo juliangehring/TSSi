@@ -1,14 +1,16 @@
 import(methods)
 
-exportClasses(TssData)
-
-exportMethods(TssData)
-
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
 importFrom(stats, optimize)
 
+exportClasses(TssData)
 exportClasses(TssNorm)
+exportClasses(TssResult)
 
+exportMethods(TssData)
 exportMethods(normalize)
+exportMethods(identify)
+
+export(subtractExpectation)
 
