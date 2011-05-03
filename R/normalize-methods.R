@@ -12,7 +12,7 @@ setMethod("normalize",
                    regpara=c(1, 1), fit=FALSE, ...) {
 
   ## calculate ratio
-  maxRead <- max(sapply(obj@data, .colFun, col="start", fun=max))
+  maxRead <- max(sapply(obj@data, .colFun, col="nReads", fun=max))
   ratio <- .initialRatio(1:(maxRead+1), regpara=regpara, basal=basal)
 
   ## normalize each region individually
