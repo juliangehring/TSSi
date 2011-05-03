@@ -1,11 +1,11 @@
-Package: iTSS
+Package: jTSS
 Type: Package
 Title: Transcription Start Sites
 Version: 0.1.1
 Date: 2011-04-28
 Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
-Imports: methods, Hmisc, minqa
+Imports: methods, Hmisc, minqa, stats
 Depends: R (>= 2.13.0)
 Description: Detect Transcription Start Sites
 License: GPL-3
