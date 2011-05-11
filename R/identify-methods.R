@@ -6,22 +6,28 @@ setGeneric("identify",
            )
 
 setMethod("identify",
-          signature(obj="TssNorm", threshold="numeric", exppara="numeric", fun="function"),
+          signature(obj="TssNorm"),
           function(obj, threshold=1, exppara=c(20, 20), fun=subtractExpectation,
                    cumulative=FALSE, ...) {
 
   ## get parameter
-  basal <- obj@parameter$basal
+  basal <- obj@parameters$basal
 
   ## extract normalized data, apply for each region
-  y <- lapply(obj@data, .identifyCore,
+  y <- lapply(obj@reads, .identifyCore,
               basal=basal, exppara=exppara, threshold=threshold, fun=fun, cumulative=cumulative)
+  names(y) <- names(obj@reads)
+
+  tss <- lapply(y, '[[', "tss")
+  dif <- lapply(y, '[[', "dif")
+  reads <- mapply(cbind, obj@reads, dif, SIMPLIFY=FALSE)
 
   ## store results
-  pars <- list(exppara=exppara, basal=basal, threshold=threshold, fun=fun, cumulative=cumulative)
+  pars <- c(obj@parameters,
+            list(exppara=exppara, basal=basal, threshold=threshold, fun=fun, cumulative=cumulative))
 
   res <- new("TssResult",
-             data=y, region=obj@region, chr=obj@chr, parameter=pars, date=date())
+             obj, reads=reads, tss=tss, parameters=pars, timestamp=date())
   
   return(res)
 }

@@ -3,14 +3,14 @@
 
   ## extract data
   pos <- x$start
-  fn <- reads <- x$lambda ## TODO chose rigth variable
+  fn <- counts <- x$ratio
 
-  if(any(reads >= threshold)) {
+  if(any(counts >= threshold)) {
     indTss <- NULL
-    for(i in 1:length(reads)) {
+    for(i in 1:length(counts)) {
       indTss[i] <- which.max(fn)
-      cumBg <- .cumulativeReads(pos, reads, indTss, basal, exppara)
-      dif <- fun(reads, cumBg$expect, indTss, basal, exppara) ## TODO assign by name?
+      cumBg <- .cumulativeReads(pos, counts, indTss, basal, exppara)
+      dif <- fun(counts, cumBg$expect, indTss, basal, exppara) ## TODO assign by name?
       fn <- dif$delta
       fn[indTss] <- -Inf
       if(all(fn < threshold))
@@ -19,15 +19,17 @@
 
     ## sum up reads for each tss
     if(cumulative)
-      yReads <- diff(c(0, cumsum(dif$delta)[cumBg$indEnd]))
+      yCounts <- diff(c(0, cumsum(dif$delta)[cumBg$indEnd])) ## useful?
     else
-      yReads <- dif$delta[indTss]
+      yCounts <- dif$delta[indTss]
     
-    tss <- data.frame(pos=pos[indTss], reads=yReads)
-    res <- list(tss=tss, dif=data.frame(delta=dif$delta, expect=dif$expect))
+    tss <- data.frame(pos=pos[indTss], counts=yCounts)
+    dif <- data.frame(delta=dif$delta, expect=dif$expect)
   } else {
-    res <- list(posTss=NULL, yTss=NULL,  delta=NULL, expect=NULL)    
+    tss <- data.frame(pos=NULL, delta=NULL)
+    dif <- data.frame(delta=NULL, expect=NULL)
   }
+  res <- list(tss=tss, dif=dif)
 
   return(res)
 }

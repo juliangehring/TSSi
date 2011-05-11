@@ -5,7 +5,7 @@
 \alias{TssResult}
 \alias{TssResult-class}
 \alias{identify}
-\alias{identify,TssNorm,numeric,numeric,function-method}
+\alias{identify,TssNorm-method}
 
 \title{
   Class \code{TssResult}
@@ -17,24 +17,27 @@
 
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{data}
-    \item{\code{region}:}{region}
-    \item{\code{chr}:}{chr}
-    \item{\code{date}:}{date}
-    \item{\code{parameter}:}{parameter}
+    \item{\code{reads}:}{reads}
+    \item{\code{regions}:}{regions}
+    \item{\code{tss}:}{tss}
+    \item{\code{annotation}:}{annotation}
+    \item{\code{timestamp}:}{timestamp}
+    \item{\code{parameters}:}{parameters}
   }
 }
 
 \section{Methods}{
   \describe{
     \item{identify:}{
-      \code{obj="TssNorm", threshold="numeric", exppara="numeric", fun="function"}
+      \code{obj="TssNorm"}
     }
   }
 }
 
 \examples{
-1:10
+example(normalize)
+z4 <- identify(y4)
+z5 <- identify(y5)
 }
 
 \keyword{classes}
