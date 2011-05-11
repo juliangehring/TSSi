@@ -16,10 +16,10 @@
 
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{data}
-    \item{\code{region}:}{region}
-    \item{\code{chr}:}{chr}
-    \item{\code{date}:}{date}
+    \item{\code{reads}:}{reads}
+    \item{\code{regions}:}{regions}
+    \item{\code{annotation}:}{annotation}
+    \item{\code{timestamp}:}{timestamp}
   }
 }
 
@@ -32,7 +32,8 @@
 }
 
 \examples{
-x <- TssData(nReads=10:1, start=1:10, region=rep(1:2, 5))
+x <- TssData(counts=10:1, start=1:10, region=rep(1:2, 5),
+annotation="test data")
 
 tssPeak <- function(pos=1:100, posTss=c(32, 64), mu=c(2, 2), scale=c(1e3, 1e3)) {
 
@@ -64,6 +65,10 @@ x1 <- TssData(d1$nReads, d1$start)
 x2 <- TssData(d2$nReads, d2$start)
 x3 <- TssData(d3$nReads, d3$start)
 x4 <- TssData(d4$nReads, d4$start)
+
+x5 <- TssData(counts=d4$nReads, start=d4$start, end=d4$start,
+chr=rep(1:2, each=24), region=rep(1:4, each=12), replicate=rep(1:4, 12),
+annotation=list("test data"), strand=rep(c("+", "-"), 24))
 }
 
 \keyword{classes}

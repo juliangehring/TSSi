@@ -1,18 +1,16 @@
 ## class 'TssData' ##
 setClass("TssData",
-         representation(data="list",
-                        region="character",
-                        chr="factor",
-                        date="character")
+         representation(reads="list",
+                        regions="data.frame",
+                        annotation="ANY",
+                        timestamp="character")
          )
 
 setValidity("TssData",
             function(object) {
               res <- TRUE
-              if(!all.equal(length(object@data), length(object@region),
-                            length(object@region))) {
+              if(!all.equal(length(object@reads), nrow(object@regions))) {
                 res <- "Number of regions inconsistent."
-                return(res)
               }
               return(res)
             })

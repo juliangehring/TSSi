@@ -1,28 +1,28 @@
 ## TssData ##
 setGeneric("TssData",
-           function(nReads, start, end=start, chr=rep(1L, length(start)),
+           function(counts, start, end=start, chr=rep(1L, length(start)),
                     region=rep(1L, length(start)), strand=rep(1L, length(start)),
-                    replicate=rep(1L, length(start)), ...)
+                    replicate=rep(1L, length(start)), annotation=NULL, ...)
            standardGeneric("TssData")
            )
 
 setMethod("TssData",
-          signature(nReads="integer", start="integer"),
-          function(nReads, start, end=start, chr=rep(1L, length(start)),
+          signature(counts="integer", start="integer"),
+          function(counts, start, end=start, chr=rep(1L, length(start)),
                    region=rep(1L, length(start)), strand=rep(1L, length(start)),
-                   replicate=rep(1L, length(start)), ...) {
-            ## TODO: class int for replicate
+                   replicate=rep(1L, length(start)), annotation=NULL, ...) {
 
   ## check length of arguments
-  if(!all(sapply(list(start, chr, region, strand, replicate), length) == length(nReads)))
+  if(!all(sapply(list(start, chr, region, strand, replicate), length) == length(counts)))
     warning("Input arguments do not have the same length.")
   
   ## order data
-  ord <- order(chr, region, start, end)
-  region <- region[ord]
-  chr <- factor(chr[ord])
-  y <- data.frame(start=start[ord], end=end[ord], strand=factor(strand[ord]),
-                  nReads=nReads[ord], replicate=replicate[ord])
+  ord <- order(chr, region, strand, start, end)
+  region <- region[ord] ## remove?
+  strand <- strand[ord] ## remove?
+  chr <- chr[ord]
+  y <- data.frame(start=start[ord], end=end[ord],
+                  counts=counts[ord], replicate=replicate[ord])
 
   ## check for duplicate positions within the replicates
   if(any(diff(y$start) == 0 & diff(y$replicate) == 0))
@@ -31,17 +31,23 @@ setMethod("TssData",
   ## TODO: check types
 
   ## find boundaries of regions
-  rle <- rle(paste(region, chr, sep=""))
+  regionNames <- paste(chr, strand, region, sep="_")  ## CHCK strand nicely integrated?
+  rle <- rle(regionNames)
   ind2 <- cumsum(rle$lengths)
-  ind1 <- c(1L, ind2[-length(ind2)]+1)
+  ind1 <- c(1L, ind2[-length(ind2)]+1L)
 
   ## break data into list for all regions, name list elements
-  data <- lapply(1:length(ind1), function(i, y, i1, i2) y[i1[i]:i2[i], ], y, ind1, ind2) ## TODO define externally
-  regionNames <- as.character(region[ind1])
-  names(data) <- regionNames
+  reads <- lapply(1:length(ind1), function(i, y, i1, i2) y[i1[i]:i2[i], ], y, ind1, ind2) ## TODO define externally
+  names(reads) <- regionNames[ind1]
 
+  ## regions
+  nPos <- sapply(reads, nrow)
+  regions <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]), n=nPos,
+                        row.names=names(reads))
+
+  ## create TssData object
   res <- new("TssData",
-             data=data, region=regionNames, chr=chr, date=date())
+             reads=reads, regions=regions, annotation=annotation, timestamp=date())
 
   return(res)
 }
