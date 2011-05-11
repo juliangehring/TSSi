@@ -1,9 +1,9 @@
 ## assess ##
-.assess <- function(lambda, nReads, regpara, basal, nRep) {
+.assess <- function(lambda, counts, regpara, basal, nRep) {
 
   n <- max(1, sum(lambda > 2*basal))
   
-  ass <- c(2*.nReadsLoglik(nReads, lambda)/log(n+1),
+  ass <- c(2*.nReadsLoglik(counts, lambda)/log(n+1),
            2*regpara[1]*.assessAbs(lambda, basal),
            2*regpara[2]*.assessSteps(lambda, basal))
 
@@ -14,11 +14,11 @@
 
 
 ## assessGrad ##
-.assessGrad <- function(lambda, nReads, regpara, basal, nRep) {
+.assessGrad <- function(lambda, counts, regpara, basal, nRep) {
 
   n <- max(1, sum(lambda > 2*basal))
 
-  dass1 <- 2*.nReadsLoglikGrad(nReads, lambda, nRep)/log(n+1)
+  dass1 <- 2*.nReadsLoglikGrad(counts, lambda, nRep)/log(n+1)
   dass2 <- 2*regpara[1]*.assessAbsGrad(lambda, basal)
   dass3 <- 2*regpara[2]*.assessStepsGrad(lambda, basal)
   
@@ -59,10 +59,10 @@ ycAssessAbs <- function(lambda, basal) {
 
 
 ## assessRatio ##
-.assessRatio <- function(lambda, nReads, regpara, basal) {
+.assessRatio <- function(lambda, counts, regpara, basal) {
 
-    ndat <- length(nReads)
-    ass1 <- 2*.nReadsLoglik(nReads, lambda)/log(ndat+1)
+    ndat <- length(counts)
+    ass1 <- 2*.nReadsLoglik(counts, lambda)/log(ndat+1)
     ass2 <- 2*regpara[1]*.assessAbs(lambda, basal)
     ass <- ass1+ass2
 

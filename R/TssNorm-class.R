@@ -1,19 +1,6 @@
 ## class 'TssNorm' ##
 setClass("TssNorm",
-         representation(data="list",
-                        region="character",
-                        chr="factor",
-                        parameter="list",
-                        date="character")
+         representation(parameters="list"),
+         contains="TssData"
          )
 
-setValidity("TssNorm",
-            function(object) {
-              res <- TRUE
-              if(!all.equal(length(object@data), length(object@region),
-                            length(object@region))) {
-                res <- "Number of regions inconsistent."
-                return(res)
-              }
-              return(res)
-            })

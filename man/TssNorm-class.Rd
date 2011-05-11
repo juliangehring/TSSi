@@ -5,7 +5,7 @@
 \alias{TssNorm}
 \alias{TssNorm-class}
 \alias{normalize}
-\alias{normalize,TssData,function,integer,numeric,numeric,logical-method}
+\alias{normalize,TssData-method}
 
 \title{
   Class \code{TssNorm}
@@ -17,21 +17,30 @@
 
 \section{Slots}{
   \describe{
-    \item{\code{data}:}{data}
-    \item{\code{region}:}{region}
-    \item{\code{chr}:}{chr}
-    \item{\code{date}:}{date}
-    \item{\code{parameter}:}{parameter}
+    \item{\code{reads}:}{reads}
+    \item{\code{regions}:}{regions}
+    \item{\code{annotation}:}{annotation}
+    \item{\code{timestamp}:}{timestamp}
+    \item{\code{parameters}:}{parameters}
   }
 }
 
 \section{Methods}{
   \describe{
     \item{normalize:}{
-      \code{obj="TssData", fun="function", offset="integer", basal="numeric",
-        regpara="numeric", fit="logical"}
+      \code{obj="TssData"}
     }
   }
+}
+
+\examples{
+example(TssData)
+
+y4 <- normalize(x4)
+y4
+
+y5 <- normalize(x5, fit=TRUE)
+y5
 }
 
 \keyword{classes}
