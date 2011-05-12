@@ -6,6 +6,12 @@
 \alias{TssNorm-class}
 \alias{normalize}
 \alias{normalize,TssData-method}
+\alias{ratio}
+\alias{ratio,TssNorm-method}
+\alias{fit}
+\alias{fit,TssNorm-method}
+\alias{parameters}
+\alias{parameters,TssNorm-method}
 
 \title{
   Class \code{TssNorm}
@@ -29,6 +35,14 @@
   \describe{
     \item{normalize:}{
       \code{obj="TssData"}
+    }
+
+    get methods:
+    \item{ratio:}{
+      \code{signature(obj="TssNorm"}
+    }
+    \item{fit:}{
+      \code{signature(obj="TssNorm"}
     }
   }
 }

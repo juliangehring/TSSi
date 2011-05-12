@@ -5,6 +5,20 @@
 \alias{TssData}
 \alias{TssData-class}
 \alias{TssData,integer,integer-method}
+\alias{start}
+\alias{start,TssData-method}
+\alias{end}
+\alias{end,TssData-method}
+\alias{counts}
+\alias{counts,TssData-method}
+\alias{reads}
+\alias{reads,TssData-method}
+\alias{regions}
+\alias{regions,TssData-method}
+\alias{timestamp}
+\alias{timestamp,TssData-method}
+\alias{annotation}
+\alias{annotation,TssData-method}
 
 \title{
   Class \code{TssData}
@@ -27,6 +41,29 @@
   \describe{
     \item{TssData:}{
       \code{signature(nReads="integer", start="integer"}
+    }
+
+    get methods:
+    \item{start:}{
+      \code{signature(obj="TssData"}
+    }
+    \item{end:}{
+      \code{signature(obj="TssData"}
+    }
+    \item{counts:}{
+      \code{signature(obj="TssData"}
+    }
+    \item{reads:}{
+      \code{signature(obj="TssData"}
+    }
+    \item{regions:}{
+      \code{signature(obj="TssData"}
+    }
+    \item{timestamp:}{
+      \code{signature(obj="TssData"}
+    }
+    \item{annotation:}{
+      \code{signature(obj="TssData"}
     }
   }
 }

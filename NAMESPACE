@@ -12,5 +12,8 @@ exportMethods(TssData)
 exportMethods(normalize)
 exportMethods(identify)
 
+exportMethods(reads, regions, tss, parameters, timestamp, annotation)
+exportMethods(start, end, counts, ratio, fit, delta, expect)
+
 export(subtractExpectation)
 

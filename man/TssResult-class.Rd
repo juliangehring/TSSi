@@ -6,6 +6,12 @@
 \alias{TssResult-class}
 \alias{identify}
 \alias{identify,TssNorm-method}
+\alias{delta}
+\alias{delta,TssResult-method}
+\alias{expect}
+\alias{expect,TssResult-method}
+\alias{tss}
+\alias{tss,TssResult-method}
 
 \title{
   Class \code{TssResult}
@@ -30,6 +36,17 @@
   \describe{
     \item{identify:}{
       \code{obj="TssNorm"}
+    }
+
+    get methods:
+    \item{delta:}{
+      \code{signature(obj="TssResult"}
+    }
+    \item{expect:}{
+      \code{signature(obj="TssResult"}
+    }
+    \item{tss:}{
+      \code{signature(obj="TssResult"}
     }
   }
 }
