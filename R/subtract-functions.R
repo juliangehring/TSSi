@@ -1,3 +1,4 @@
+## subtractExpectation ##
 subtractExpectation <- function(fg, bg, indTss, basal, exppara) {
 
   n <- length(fg)

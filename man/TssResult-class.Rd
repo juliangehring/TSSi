@@ -12,6 +12,7 @@
 \alias{expect,TssResult-method}
 \alias{tss}
 \alias{tss,TssResult-method}
+\alias{plot,TssResult-method}
 
 \title{
   Class \code{TssResult}
@@ -38,6 +39,11 @@
       \code{obj="TssNorm"}
     }
 
+    plot method:
+    \item{plot:}{
+      \code{signature(obj="TssResult"}
+    }
+    
     get methods:
     \item{delta:}{
       \code{signature(obj="TssResult"}
@@ -55,6 +61,8 @@
 example(normalize)
 z4 <- identify(y4)
 z5 <- identify(y5)
+
+plot(z5, 1)
 }
 
 \keyword{classes}

@@ -19,6 +19,8 @@
 \alias{timestamp,TssData-method}
 \alias{annotation}
 \alias{annotation,TssData-method}
+\alias{plot}
+\alias{plot,TssData-method}
 
 \title{
   Class \code{TssData}
@@ -43,6 +45,11 @@
       \code{signature(nReads="integer", start="integer"}
     }
 
+    plot method:
+    \item{plot:}{
+      \code{signature(obj="TssData"}
+    }
+    
     get methods:
     \item{start:}{
       \code{signature(obj="TssData"}

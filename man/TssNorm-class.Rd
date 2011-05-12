@@ -12,6 +12,7 @@
 \alias{fit,TssNorm-method}
 \alias{parameters}
 \alias{parameters,TssNorm-method}
+\alias{plot,TssNorm-method}
 
 \title{
   Class \code{TssNorm}
@@ -37,6 +38,11 @@
       \code{obj="TssData"}
     }
 
+    plot method:
+    \item{plot:}{
+      \code{signature(obj="TssNorm"}
+    }
+    
     get methods:
     \item{ratio:}{
       \code{signature(obj="TssNorm"}
@@ -55,6 +61,8 @@ y4
 
 y5 <- normalize(x5, fit=TRUE)
 y5
+
+plot(y5, 1)
 }
 
 \keyword{classes}

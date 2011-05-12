@@ -1,4 +1,5 @@
 import(methods)
+import(graphics)
 
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
@@ -14,6 +15,8 @@ exportMethods(identify)
 
 exportMethods(reads, regions, tss, parameters, timestamp, annotation)
 exportMethods(start, end, counts, ratio, fit, delta, expect)
+
+exportMethods(plot)
 
 export(subtractExpectation)
 
