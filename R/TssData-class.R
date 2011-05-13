@@ -3,7 +3,7 @@ setClass("TssData",
          representation(reads="list",
                         regions="data.frame",
                         annotation="ANY",
-                        timestamp="character")
+                        timestamp="POSIXct")
          )
 
 setValidity("TssData",

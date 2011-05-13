@@ -21,7 +21,7 @@ setMethod("normalize",
   pars <- list(offset=offset, basal=basal, regpara=regpara, fit=fit)
 
   res <- new("TssNorm",
-             obj, reads=normData, parameters=pars, timestamp=date())
+             obj, reads=normData, parameters=pars, timestamp=Sys.time())
 
   return(res)
 }

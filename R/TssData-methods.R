@@ -49,7 +49,7 @@ setMethod("TssData",
 
   ## create TssData object
   res <- new("TssData",
-             reads=reads, regions=regions, annotation=annotation, timestamp=date())
+             reads=reads, regions=regions, annotation=annotation, timestamp=Sys.time())
 
   return(res)
 }

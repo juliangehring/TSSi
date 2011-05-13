@@ -25,7 +25,7 @@ setMethod("identify",
             list(exppara=exppara, basal=basal, threshold=threshold, fun=fun))
 
   res <- new("TssResult",
-             obj, reads=reads, tss=tss, parameters=pars, timestamp=date())
+             obj, reads=reads, tss=tss, parameters=pars, timestamp=Sys.time())
   
   return(res)
 }
