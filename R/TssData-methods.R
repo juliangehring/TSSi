@@ -42,7 +42,8 @@ setMethod("TssData",
 
   ## regions
   nPos <- sapply(reads, nrow)
-  regions <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]), n=nPos,
+  regions <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]),
+                        region=region[ind1], n=nPos,
                         row.names=names(reads))
 
   ## create TssData object

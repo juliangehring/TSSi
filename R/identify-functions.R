@@ -1,5 +1,5 @@
 ## identifyCore ##
-.identifyCore <- function(x, basal, exppara, threshold, fun, cumulative) {
+.identifyCore <- function(x, basal, exppara, threshold, fun) {
 
   ## extract data
   pos <- x$start
@@ -18,12 +18,9 @@
     }
 
     ## sum up reads for each tss
-    if(cumulative)
-      yCounts <- diff(c(0, cumsum(dif$delta)[cumBg$indEnd])) ## useful?
-    else
-      yCounts <- dif$delta[indTss]
+    yCounts <- dif$delta[indTss]
     
-    tss <- data.frame(pos=pos[indTss], counts=yCounts)
+    tss <- data.frame(pos=pos[indTss], reads=yCounts)
     dif <- data.frame(delta=dif$delta, expect=dif$expect)
   } else {
     tss <- data.frame(pos=NULL, delta=NULL)

@@ -42,7 +42,7 @@
   ## tss
   if(tss) {
     tssData <- tss(x, y)
-    tss1 <- list(x=tssData$pos, y=tssData$counts)
+    tss1 <- list(x=tssData$pos, y=tssData$reads)
     tss3 <- list(pch=20, lwd=2)
     do.call("points", .getArgs("tssArgs", tss1, c(tss3, type="h"), args))
     do.call("points", .getArgs("tssArgs", tss1, c(tss3, type="p"), args))

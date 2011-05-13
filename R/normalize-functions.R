@@ -44,12 +44,9 @@
     rTrust <- bobyqa(fn=.assess, par=lambda, lower=lower,
                      control=list(iprint=0, maxfun=10*n^2), ## CHCK: maxfun
                      counts=counts, regpara=regpara, basal=basal, nRep=NULL) ## TODO: arg names
-    par <- if(rTrust$fval > rOpt$value) rOpt$par else rTrust$par
-    optim <- if(rTrust$fval > rOpt$value) 1L else 2L
 
-    ## store results from fit
-    res$fit <- par
-    res$optim <- rep(optim, n) ## needed?
+    ## store best fit
+    res$fit <- if(rTrust$fval > rOpt$value) rOpt$par else rTrust$par
   }
 
   return(res)
