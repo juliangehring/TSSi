@@ -10,7 +10,8 @@ setMethod("TssData",
           signature(counts="integer", start="integer"),
           function(counts, start, end=start, chr=rep(1L, length(start)),
                    region=rep(1L, length(start)), strand=rep(1L, length(start)),
-                   replicate=rep(1L, length(start)), annotation=NULL, ...) {
+                   replicate=rep(1L, length(start)), annotation=NULL,
+                   pattern="%1$s_%2$s_%3$s", ...) {
 
   ## check length of arguments
   if(!all(sapply(list(start, chr, region, strand, replicate), length) == length(counts)))
@@ -31,7 +32,7 @@ setMethod("TssData",
   ## TODO: check types
 
   ## find boundaries of regions
-  regionNames <- paste(chr, strand, region, sep="_")  ## CHCK strand nicely integrated?
+  regionNames <- sprintf(pattern, chr, strand, region)
   rle <- rle(regionNames)
   ind2 <- cumsum(rle$lengths)
   ind1 <- c(1L, ind2[-length(ind2)]+1L)
