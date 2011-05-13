@@ -4,10 +4,11 @@
   ## extract data
   pos <- x$start
   fn <- counts <- x$ratio
+  n <- length(counts)
 
   if(any(counts >= threshold)) {
     indTss <- NULL
-    for(i in 1:length(counts)) {
+    for(i in 1:n) {
       indTss[i] <- which.max(fn)
       cumBg <- .cumulativeReads(pos, counts, indTss, basal, exppara)
       dif <- fun(counts, cumBg$expect, indTss, basal, exppara) ## TODO assign by name?
@@ -16,15 +17,11 @@
       if(all(fn < threshold))
         break
     }
-
-    ## sum up reads for each tss
-    yCounts <- dif$delta[indTss]
-    
-    tss <- data.frame(pos=pos[indTss], reads=yCounts)
+    tss <- data.frame(pos=pos[indTss], reads=dif$delta[indTss])
     dif <- data.frame(delta=dif$delta, expect=dif$expect)
   } else {
     tss <- data.frame(pos=NULL, delta=NULL)
-    dif <- data.frame(delta=NULL, expect=NULL)
+    dif <- data.frame(expect=rep(basal, n))
   }
   res <- list(tss=tss, dif=dif)
 

@@ -38,7 +38,7 @@ setMethod("TssData",
   ind1 <- c(1L, ind2[-length(ind2)]+1L)
 
   ## break data into list for all regions, name list elements
-  reads <- lapply(1:length(ind1), function(i, y, i1, i2) y[i1[i]:i2[i], ], y, ind1, ind2) ## TODO define externally
+  reads <- lapply(1:length(ind1), .regionize, y=y, i1=ind1, i2=ind2)
   names(reads) <- regionNames[ind1]
 
   ## regions
