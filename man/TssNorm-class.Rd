@@ -13,6 +13,7 @@
 \alias{parameters}
 \alias{parameters,TssNorm-method}
 \alias{plot,TssNorm-method}
+\alias{show,TssNorm-method}
 
 \title{
   Class \code{TssNorm}

@@ -21,6 +21,8 @@
 \alias{annotation,TssData-method}
 \alias{plot}
 \alias{plot,TssData-method}
+\alias{show}
+\alias{show,TssData-method}
 
 \title{
   Class \code{TssData}

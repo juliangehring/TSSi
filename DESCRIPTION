@@ -5,7 +5,7 @@ Version: 0.1.1
 Date: 2011-05-03
 Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
-Imports: methods, Hmisc, minqa, stats
+Imports: methods, Hmisc, minqa, stats, Biobase
 Depends: R (>= 2.13.0)
 Suggests: multicore
 Description: Detect Transcription Start Sites

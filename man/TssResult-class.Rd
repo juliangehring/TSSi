@@ -13,6 +13,7 @@
 \alias{tss}
 \alias{tss,TssResult-method}
 \alias{plot,TssResult-method}
+\alias{show,TssResult-method}
 
 \title{
   Class \code{TssResult}

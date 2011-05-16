@@ -4,6 +4,7 @@ importFrom(graphics, plot, points, lines, rug, abline)
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
 importFrom(stats, optimize)
+importFrom(Biobase, selectSome)
 
 exportClasses(TssData)
 exportClasses(TssNorm)
@@ -15,6 +16,7 @@ exportMethods(identify)
 
 exportMethods(reads, regions, tss, parameters, timestamp, annotation)
 exportMethods(start, end, counts, ratio, fit, delta, expect)
+exportMethods(show)
 
 exportMethods(plot)
 
