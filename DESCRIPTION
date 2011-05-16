@@ -7,6 +7,7 @@ Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
 Imports: methods, Hmisc, minqa, stats
 Depends: R (>= 2.13.0)
+Suggests: multicore
 Description: Detect Transcription Start Sites
 License: GPL-3
 LazyLoad: yes

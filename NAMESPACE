@@ -1,6 +1,6 @@
 import(methods)
-import(graphics)
 
+importFrom(graphics, plot, points, lines, rug, abline)
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
 importFrom(stats, optimize)

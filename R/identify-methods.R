@@ -1,19 +1,28 @@
 ## identify ##
 setGeneric("identify",
-           function(obj, threshold=1, exppara=c(20, 20), fun=subtractExpectation, ...)
+           function(obj, threshold=1, exppara=c(20, 20),
+                    fun=subtractExpectation, multicore=TRUE, ...)
            standardGeneric("identify")
            )
 
 setMethod("identify",
           signature(obj="TssNorm"),
-          function(obj, threshold=1, exppara=c(20, 20), fun=subtractExpectation, ...) {
+          function(obj, threshold=1, exppara=c(20, 20),
+                   fun=subtractExpectation, multicore=TRUE,  ...) {
 
   ## get parameter
   basal <- obj@parameters$basal
 
   ## extract normalized data, apply for each region
-  y <- lapply(obj@reads, .identifyCore,
-              basal=basal, exppara=exppara, threshold=threshold, fun=fun)
+  y <-
+    if(.useMulticore(multicore))
+      multicore::mclapply(obj@reads, .identifyCore,
+                          basal=basal, exppara=exppara, threshold=threshold,
+                          fun=fun)
+    else
+      lapply(obj@reads, .identifyCore,
+             basal=basal, exppara=exppara, threshold=threshold, fun=fun)
+  
   names(y) <- names(obj@reads)
 
   tss <- lapply(y, '[[', "tss")
