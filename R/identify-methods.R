@@ -29,12 +29,16 @@ setMethod("identify",
   dif <- lapply(y, '[[', "dif")
   reads <- mapply(cbind, obj@reads, dif, SIMPLIFY=FALSE)
 
+  regions <- regions(obj)
+  regions$nTss <- sapply(tss, nrow)
+
   ## store results
   pars <- c(obj@parameters,
             list(exppara=exppara, basal=basal, threshold=threshold, fun=fun))
 
   res <- new("TssResult",
-             obj, reads=reads, tss=tss, parameters=pars, timestamp=Sys.time())
+             obj, reads=reads, regions=regions, tss=tss, parameters=pars,
+             timestamp=Sys.time())
   
   return(res)
 }

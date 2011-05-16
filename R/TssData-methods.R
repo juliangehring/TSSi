@@ -43,8 +43,9 @@ setMethod("TssData",
 
   ## regions
   nPos <- sapply(reads, nrow)
+  nCounts <- sapply(reads, .colFun, "counts", sum)
   regions <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]),
-                        region=region[ind1], nPos=nPos,
+                        region=region[ind1], nPos=nPos, nCounts=nCounts,
                         row.names=names(reads))
 
   ## create TssData object
