@@ -34,7 +34,7 @@ setMethod("identify",
 
   ## store results
   pars <- c(obj@parameters,
-            list(exppara=exppara, basal=basal, threshold=threshold, fun=fun))
+            list(exppara=exppara, threshold=threshold, fun=fun))
 
   res <- new("TssResult",
              obj, reads=reads, regions=regions, tss=tss, parameters=pars,
