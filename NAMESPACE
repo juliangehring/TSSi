@@ -3,7 +3,7 @@ import(methods)
 importFrom(graphics, plot, points, lines, rug, abline)
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
-importFrom(stats, optimize)
+importFrom(stats, optimize, optim, convolve, dpois)
 importFrom(Biobase, selectSome)
 
 exportClasses(TssData)
