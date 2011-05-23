@@ -10,18 +10,20 @@ setMethod("identify",
           function(obj, threshold=1, exppara=c(20, 20),
                    fun=subtractExpectation, multicore=TRUE,  ...) {
 
-  ## get parameter
-  basal <- obj@parameters$basal
+  ## get parameters
+  basal <- parameters(obj, "basal")
+  readCol <- if(fit <- parameters(obj, "fit")) "fit" else "ratio"
 
   ## extract normalized data, apply for each region
   y <-
     if(.useMulticore(multicore))
       multicore::mclapply(obj@reads, .identifyCore,
                           basal=basal, exppara=exppara, threshold=threshold,
-                          fun=fun)
+                          fun=fun, readCol=readCol, ...)
     else
       lapply(obj@reads, .identifyCore,
-             basal=basal, exppara=exppara, threshold=threshold, fun=fun)
+             basal=basal, exppara=exppara, threshold=threshold, fun=fun,
+             readCol=readCol)
   
   names(y) <- names(obj@reads)
 

@@ -1,9 +1,9 @@
 ## identifyCore ##
-.identifyCore <- function(x, basal, exppara, threshold, fun) {
+.identifyCore <- function(x, basal, exppara, threshold, fun, readCol) {
 
   ## extract data
   pos <- x$start
-  fn <- counts <- x$ratio
+  fn <- counts <- x[[readCol]]
   n <- length(counts)
 
   if(any(counts >= threshold)) {
