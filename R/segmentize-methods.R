@@ -1,12 +1,12 @@
-## TssData ##
-setGeneric("TssData",
+## segmentize ##
+setGeneric("segmentize",
            function(counts, start, end=start, chr=rep(1L, length(start)),
                     region=rep(1L, length(start)), strand=rep(1L, length(start)),
                     replicate=rep(1L, length(start)), annotation=NULL, ...)
-           standardGeneric("TssData")
+           standardGeneric("segmentize")
            )
 
-setMethod("TssData",
+setMethod("segmentize",
           signature(counts="integer", start="integer"),
           function(counts, start, end=start, chr=rep(1L, length(start)),
                    region=rep(1L, length(start)), strand=rep(1L, length(start)),
@@ -31,26 +31,26 @@ setMethod("TssData",
   
   ## TODO: check types
 
-  ## find boundaries of regions
-  regionNames <- sprintf(pattern, chr, strand, region)
-  rle <- rle(regionNames)
+  ## find boundaries of segments
+  segmentNames <- sprintf(pattern, chr, strand, region)
+  rle <- rle(segmentNames)
   ind2 <- cumsum(rle$lengths)
   ind1 <- c(1L, ind2[-length(ind2)]+1L)
 
-  ## break data into list for all regions, name list elements
-  reads <- lapply(1:length(ind1), .regionize, y=y, i1=ind1, i2=ind2)
-  names(reads) <- regionNames[ind1]
+  ## break data into list for all segments, name list elements
+  reads <- lapply(1:length(ind1), .breakInSegments, y=y, i1=ind1, i2=ind2)
+  names(reads) <- segmentNames[ind1]
 
-  ## regions
+  ## segments
   nPos <- sapply(reads, nrow)
   nCounts <- sapply(reads, .colFun, "counts", sum)
-  regions <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]),
+  segments <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]),
                         region=region[ind1], nPos=nPos, nCounts=nCounts,
                         row.names=names(reads))
 
   ## create TssData object
   res <- new("TssData",
-             reads=reads, regions=regions, annotation=annotation, timestamp=Sys.time())
+             reads=reads, segments=segments, annotation=annotation, timestamp=Sys.time())
 
   return(res)
 }

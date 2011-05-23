@@ -26,7 +26,7 @@
 \section{Slots}{
   \describe{
     \item{\code{reads}:}{reads}
-    \item{\code{regions}:}{regions}
+    \item{\code{segments}:}{segments}
     \item{\code{tss}:}{tss}
     \item{\code{annotation}:}{annotation}
     \item{\code{timestamp}:}{timestamp}

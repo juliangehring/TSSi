@@ -4,7 +4,7 @@ setMethod("show",
           function(object) {
   
   .showClassInfo(object)
-  .showRegion(object)
+  .showSegment(object)
   .showTimestamp(object)
 
 }
@@ -17,7 +17,7 @@ setMethod("show",
           function(object) {
   
   .showClassInfo(object)
-  .showRegion(object)
+  .showSegment(object)
   .showParameters(object)
   .showTimestamp(object)
 
@@ -31,7 +31,7 @@ setMethod("show",
           function(object) {
   
   .showClassInfo(object)
-  .showRegion(object)
+  .showSegment(object)
   .showParameters(object)
   .showTimestamp(object)
 
@@ -49,20 +49,20 @@ setMethod("show",
 }
 
 
-## showRegion ##
-.showRegion <- function(object) {
+## showSegment ##
+.showSegment <- function(object) {
 
-  regions <- regions(object)
+  segments <- segments(object)
   indent <- "   "
 
-  cat(sprintf("** %s **\n", "Regions"))
-  cat(.showSome(rownames(regions), "Segments", indent))
-  cat(.showSome(unique(regions$chr), "Chromosomes", indent))
-  cat(.showSome(unique(regions$strand), "Strands", indent))
-  cat(.showSome(unique(regions$region), "Regions", indent))
-  cat(.showSome(regions$nCounts, "nCounts", indent))
+  cat(sprintf("** %s **\n", "Segments"))
+  cat(.showSome(rownames(segments), "Segments", indent))
+  cat(.showSome(unique(segments$chr), "Chromosomes", indent))
+  cat(.showSome(unique(segments$strand), "Strands", indent))
+  cat(.showSome(unique(segments$region), "Regions", indent))
+  cat(.showSome(segments$nCounts, "nCounts", indent))
   if(as.character(class(object)) == "TssResult")
-    cat(.showSome(regions$nTss, "nTSS", indent))
+    cat(.showSome(segments$nTss, "nTSS", indent))
   cat("\n")
 
 }

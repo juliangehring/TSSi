@@ -4,7 +4,8 @@
 
 \alias{TssData}
 \alias{TssData-class}
-\alias{TssData,integer,integer-method}
+\alias{segmentize}
+\alias{segmentize,integer,integer-method}
 \alias{start}
 \alias{start,TssData-method}
 \alias{end}
@@ -13,8 +14,8 @@
 \alias{counts,TssData-method}
 \alias{reads}
 \alias{reads,TssData-method}
-\alias{regions}
-\alias{regions,TssData-method}
+\alias{segments}
+\alias{segments,TssData-method}
 \alias{timestamp}
 \alias{timestamp,TssData-method}
 \alias{annotation}
@@ -37,7 +38,7 @@
 \section{Slots}{
   \describe{
     \item{\code{reads}:}{reads}
-    \item{\code{regions}:}{regions}
+    \item{\code{segments}:}{segments}
     \item{\code{annotation}:}{annotation}
     \item{\code{timestamp}:}{timestamp}
   }
@@ -45,7 +46,7 @@
 
 \section{Methods}{
   \describe{
-    \item{TssData:}{
+    \item{segmentize:}{
       \code{signature(nReads="integer", start="integer"}
     }
 
@@ -67,7 +68,7 @@
     \item{reads:}{
       \code{signature(obj="TssData"}
     }
-    \item{regions:}{
+    \item{segments:}{
       \code{signature(obj="TssData"}
     }
     \item{timestamp:}{
@@ -80,7 +81,7 @@
 }
 
 \examples{
-x <- TssData(counts=10:1, start=1:10, region=rep(1:2, 5),
+x <- segmentize(counts=10:1, start=1:10, region=rep(1:2, 5),
 annotation="test data")
 
 tssPeak <- function(pos=1:100, posTss=c(32, 64), mu=c(2, 2), scale=c(1e3, 1e3)) {
@@ -109,12 +110,12 @@ d2 <- tssPeak()
 d3 <- tssPeak(posTss=c(32, 42))
 d4 <- tssPeak(scale=c(1e3, 5e2))
 
-x1 <- TssData(d1$nReads, d1$start)
-x2 <- TssData(d2$nReads, d2$start)
-x3 <- TssData(d3$nReads, d3$start)
-x4 <- TssData(d4$nReads, d4$start)
+x1 <- segmentize(d1$nReads, d1$start)
+x2 <- segmentize(d2$nReads, d2$start)
+x3 <- segmentize(d3$nReads, d3$start)
+x4 <- segmentize(d4$nReads, d4$start)
 
-x5 <- TssData(counts=d4$nReads, start=d4$start, end=d4$start,
+x5 <- segmentize(counts=d4$nReads, start=d4$start, end=d4$start,
 chr=rep(1:2, each=24), region=rep(1:4, each=12), replicate=rep(1:4, 12),
 annotation=list("test data"), strand=rep(c("+", "-"), 24))
 }

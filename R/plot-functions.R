@@ -6,7 +6,7 @@
 
   ## get data
   reads <- reads(x, y)
-  regionName <- rownames(regions(x, y))
+  segmentName <- rownames(segments(x, y))
   start <- reads$start
 
   ## check for index
@@ -15,7 +15,7 @@
 
   ## plot
   plot1 <- list(x=reads$start, y=reads$counts, type="n") ## TODO better
-  plot3 <- list(xlab="Position", ylab="Reads", main=regionName)  
+  plot3 <- list(xlab="Position", ylab="Reads", main=segmentName)  
   do.call("plot", .getArgs("plotArgs", plot1, plot3, args))
   
   ## threshold

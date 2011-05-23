@@ -136,17 +136,17 @@ setMethod("reads",
 )
 
 
-## regions ##
-setGeneric("regions",
+## segments ##
+setGeneric("segments",
            function(obj, row, column, ...)
-           standardGeneric("regions")
+           standardGeneric("segments")
            )
 
-setMethod("regions",
+setMethod("segments",
           signature(obj="TssData"),
           function(obj, row, column, drop=FALSE) {
 
-  res <- obj@regions[row, column, drop]
+  res <- obj@segments[row, column, drop]
 
   return(res)
 }

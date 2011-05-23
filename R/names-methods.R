@@ -3,7 +3,7 @@ setMethod("names",
           signature(x="TssData"),
           function(x) {
 
-  res <- rownames(regions(x))
+  res <- rownames(segments(x))
 
   return(res)
 }

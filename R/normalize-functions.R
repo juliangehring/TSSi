@@ -10,7 +10,7 @@
   ## average over replicates if any present
   dup <- duplicated(start)
   if(any(dup)) {
-    ## find regions of duplicates
+    ## find segments of duplicates
     rle <- rle(start)
     ind2 <- cumsum(rle$lengths)
     ind1 <- c(1L, ind2[-length(ind2)]+1L)

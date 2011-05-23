@@ -14,7 +14,7 @@ setMethod("normalize",
   maxRead <- max(sapply(obj@reads, .colFun, col="counts", fun=max))
   ratio <- .initialRatio(1:(maxRead+1), regpara=regpara, basal=basal)
 
-  ## normalize each region individually
+  ## normalize each segment individually
   normData <-
     if(.useMulticore(multicore))
       multicore::mclapply(X=obj@reads, FUN=.normalize,
