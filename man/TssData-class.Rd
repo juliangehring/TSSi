@@ -23,6 +23,8 @@
 \alias{plot,TssData-method}
 \alias{show}
 \alias{show,TssData-method}
+\alias{names}
+\alias{names,TssData-method}
 
 \title{
   Class \code{TssData}

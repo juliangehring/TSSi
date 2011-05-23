@@ -15,8 +15,8 @@ exportMethods(normalize)
 exportMethods(identify)
 
 exportMethods(reads, regions, tss, parameters, timestamp, annotation)
-exportMethods(start, end, counts, ratio, fit, delta, expect)
-exportMethods(show)
+exportMethods(start, end, counts, ratio, fit, expect)
+exportMethods(show, names)
 
 exportMethods(plot)
 
