@@ -1,11 +1,11 @@
-\name{readData}
+\name{readData-data}
 
 \docType{data}
 
 \alias{readData}
 \alias{readData-data}
 
-\title{Spike-in ChIP-chip data set}
+\title{CAP capture data}
 
 \description{
   Results from a 5'-CAP capture experiment, after mapping the reads to
@@ -26,7 +26,7 @@
 	read.}
       \item{strand}{Forward and reverse strand, given as '+' and '-',
 	respectively.}
-      \item{reads}{Number of reads at the respective position.}
+      \item{counts}{Number of reads at the respective position.}
     }
   }
 }
@@ -34,7 +34,6 @@
 \examples{
 ## load data
 data(readData)
-readData <- readData[1:500, ]
 }
 
 \source{Rensing et al., 2010}

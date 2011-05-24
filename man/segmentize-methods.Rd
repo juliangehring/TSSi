@@ -115,7 +115,7 @@ example(readData)
 
 ## import and segmentize data
 attach(readData)
-x <- segmentize(counts=reads, start=start, chr=chromosome,
+x <- segmentize(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
 detach(readData)
 }
