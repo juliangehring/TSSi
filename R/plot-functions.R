@@ -83,7 +83,7 @@
 
   ## fit
   fitArgs <- NULL
-  if(fit && "fit" %in% names(reads)) {
+  if(fit <- fit && "fit" %in% names(reads)) {
     fit1 <- list(x=start, y=reads$fit)
     fit3 <- list(pch=20, col=3, lwd=1, lty=1, type="p")
     fitArgs <- .getArgs("fitArgs", fit1, fit3, args)
