@@ -4,15 +4,6 @@
 
 \alias{TssResult}
 \alias{TssResult-class}
-\alias{identify}
-\alias{identify,TssNorm-method}
-\alias{delta}
-\alias{delta,TssResult-method}
-\alias{expect}
-\alias{expect,TssResult-method}
-\alias{tss}
-\alias{tss,TssResult-method}
-\alias{plot,TssResult-method}
 \alias{show,TssResult-method}
 
 \title{
@@ -20,50 +11,57 @@
 }
 
 \description{
-  TssResult
+  Class \code{TssResulting} storing final sequence read data with
+  identified TSS.
 }
 
 \section{Slots}{
   \describe{
-    \item{\code{reads}:}{reads}
-    \item{\code{segments}:}{segments}
-    \item{\code{tss}:}{tss}
-    \item{\code{annotation}:}{annotation}
-    \item{\code{timestamp}:}{timestamp}
-    \item{\code{parameters}:}{parameters}
+    \item{\code{reads}:}{List with the read data for each sagment.}
+    \item{\code{segments}:}{Data frame with the information of the
+      individual segments.}
+    \item{\code{tss}:}{List of the identified TSS locations.}
+    \item{\code{annotation}:}{Annotation data object, as passed through the
+      \code{annotation} argument.}
+    \item{\code{timestamp}:}{Timestamp with the creation time of the object.}
+    \item{\code{parameters}:}{List with the parameters.}
   }
 }
 
 \section{Methods}{
+  All methods for class \code{TssNorm}, as well as:
+  
+  identify methods:
   \describe{
     \item{identify:}{
-      \code{obj="TssNorm"}
+      \code{signature(obj="TssNorm")}
+    }{
+      Identify TSS in the normalized data.
     }
+  }
 
-    plot method:
-    \item{plot:}{
-      \code{signature(obj="TssResult"}
+  get methods:
+  \describe{
+    \item{expect:}{
+      \code{signature(obj="TssResult")}
+    }{
+      Get the expectation for non-specific reads, see\code{start}.
     }
     
-    get methods:
-    \item{delta:}{
-      \code{signature(obj="TssResult"}
-    }
-    \item{expect:}{
-      \code{signature(obj="TssResult"}
-    }
     \item{tss:}{
-      \code{signature(obj="TssResult"}
+      \code{signature(obj="TssResult")}
+    }{
+      Get the identified transcription start sites, see\code{start}.
     }
   }
 }
 
-\examples{
-example(normalize)
-z4 <- identify(y4)
-z5 <- identify(y5)
+\author{
+  Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
+}
 
-plot(z5, 1)
+\examples{
+showClass("TssResult")
 }
 
 \keyword{classes}

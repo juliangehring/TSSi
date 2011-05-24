@@ -4,120 +4,114 @@
 
 \alias{TssData}
 \alias{TssData-class}
-\alias{segmentize}
-\alias{segmentize,integer,integer-method}
-\alias{start}
-\alias{start,TssData-method}
-\alias{end}
-\alias{end,TssData-method}
-\alias{counts}
-\alias{counts,TssData-method}
-\alias{reads}
-\alias{reads,TssData-method}
-\alias{segments}
-\alias{segments,TssData-method}
-\alias{timestamp}
-\alias{timestamp,TssData-method}
-\alias{annotation}
-\alias{annotation,TssData-method}
-\alias{plot}
-\alias{plot,TssData-method}
 \alias{show}
 \alias{show,TssData-method}
-\alias{names}
-\alias{names,TssData-method}
 
 \title{
   Class \code{TssData}
 }
 
 \description{
-  TssData
+  Class \code{TssData} storing raw sequence read data.
 }
 
 \section{Slots}{
   \describe{
-    \item{\code{reads}:}{reads}
-    \item{\code{segments}:}{segments}
-    \item{\code{annotation}:}{annotation}
-    \item{\code{timestamp}:}{timestamp}
+    \item{\code{reads}:}{List with the read data for each sagment.}
+    \item{\code{segments}:}{Data frame with the information of the
+      individual segments.}
+    \item{\code{annotation}:}{Annotation data object, as passed through the
+      \code{annotation} argument.}
+    \item{\code{timestamp}:}{Timestamp with the creation time of the object.}
   }
 }
 
 \section{Methods}{
+
+  segmentize methods:
   \describe{
     \item{segmentize:}{
-      \code{signature(nReads="integer", start="integer"}
-    }
-
-    plot method:
-    \item{plot:}{
-      \code{signature(obj="TssData"}
-    }
-    
-    get methods:
-    \item{start:}{
-      \code{signature(obj="TssData"}
-    }
-    \item{end:}{
-      \code{signature(obj="TssData"}
-    }
-    \item{counts:}{
-      \code{signature(obj="TssData"}
-    }
-    \item{reads:}{
-      \code{signature(obj="TssData"}
-    }
-    \item{segments:}{
-      \code{signature(obj="TssData"}
-    }
-    \item{timestamp:}{
-      \code{signature(obj="TssData"}
-    }
-    \item{annotation:}{
-      \code{signature(obj="TssData"}
+      \code{signature(nReads="integer", start="integer")}
+    }{
+      Import raw data and divide into segments.
     }
   }
+
+  plot method:
+  \describe{
+    \item{plot:}{
+      \code{signature(x="TssData", y="ANY")}
+    }{
+      Visualize the data.
+    }
+  }
+    
+  get methods:
+  \describe{
+    \item{start:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get the read start sites. The second argument selects the
+      individual segment; if missing returns a list containing the
+      information of all segments.
+    }
+    
+    \item{end:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get the read end sites, see \code{start}.
+    }
+    
+    \item{counts:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get the raw read counts, see \code{start}.
+    }
+    
+    \item{reads:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get all the read data of the segments, including
+      e.g. \sQuote{start}, \sQuote{counts}, \sQuote{replicate}, , see
+      \code{start}.
+    }
+    
+    \item{segments:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get the information associated with the segments, e.g. chromosome,
+      strand, region. The second and third argment select the segment
+      and the variable of interest.
+    }
+    
+    \item{timestamp:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get the creation timestamp of the object.
+    }
+    
+    \item{annotation:}{
+      \code{signature(obj="TssData")}
+    }{
+      Get the annotation data, as passed through the \code{annotation}
+      argument.
+    }
+  }
+  
+  show methods:
+  \describe{
+    \item{show:}{
+      \code{signature(object="TssData")}
+    }
+  }
+}
+
+\author{
+  Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
 }
 
 \examples{
-x <- segmentize(counts=10:1, start=1:10, region=rep(1:2, 5),
-annotation="test data")
-
-tssPeak <- function(pos=1:100, posTss=c(32, 64), mu=c(2, 2), scale=c(1e3, 1e3)) {
-
-  if(!all.equal(length(posTss), length(mu), length(scale)))
-    stop("args have not same length")
-
-  n <- length(posTss)
-  z <- rep(0, length(pos))
-  for(i in 1:n) {
-    y <- dexp(abs(pos-posTss[i]), 1/mu[i])
-    z <- z + floor(y*scale[i])
-  }
-  
-  ind <- z > 0
-  start <- pos[ind]
-  nReads <- as.integer(z[ind])
-
-  res <- list(start=start, nReads=nReads, posTss=posTss, mu=mu, scale=scale)
-
-  return(res)
-}
-
-d1 <- tssPeak(posTss=32, mu=2, scale=1e3)
-d2 <- tssPeak()
-d3 <- tssPeak(posTss=c(32, 42))
-d4 <- tssPeak(scale=c(1e3, 5e2))
-
-x1 <- segmentize(d1$nReads, d1$start)
-x2 <- segmentize(d2$nReads, d2$start)
-x3 <- segmentize(d3$nReads, d3$start)
-x4 <- segmentize(d4$nReads, d4$start)
-
-x5 <- segmentize(counts=d4$nReads, start=d4$start, end=d4$start,
-chr=rep(1:2, each=24), region=rep(1:4, each=12), replicate=rep(1:4, 12),
-annotation=list("test data"), strand=rep(c("+", "-"), 24))
+showClass("TssData")
 }
 
 \keyword{classes}

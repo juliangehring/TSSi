@@ -4,15 +4,6 @@
 
 \alias{TssNorm}
 \alias{TssNorm-class}
-\alias{normalize}
-\alias{normalize,TssData-method}
-\alias{ratio}
-\alias{ratio,TssNorm-method}
-\alias{fit}
-\alias{fit,TssNorm-method}
-\alias{parameters}
-\alias{parameters,TssNorm-method}
-\alias{plot,TssNorm-method}
 \alias{show,TssNorm-method}
 
 \title{
@@ -20,50 +11,57 @@
 }
 
 \description{
-  TssNorm
+   Class \code{TssNorm} storing normalized sequence read data.
 }
 
 \section{Slots}{
   \describe{
-    \item{\code{reads}:}{reads}
-    \item{\code{segments}:}{segments}
-    \item{\code{annotation}:}{annotation}
-    \item{\code{timestamp}:}{timestamp}
-    \item{\code{parameters}:}{parameters}
+    \item{\code{reads}:}{List with the read data for each sagment.}
+    \item{\code{segments}:}{Data frame with the information of the
+      individual segments.}
+    \item{\code{annotation}:}{Annotation data object, as passed through the
+      \code{annotation} argument.}
+    \item{\code{timestamp}:}{Timestamp with the creation time of the object.}
+    \item{\code{parameters}:}{List with the parameters.}
   }
 }
 
 \section{Methods}{
-  \describe{
-    \item{normalize:}{
-      \code{obj="TssData"}
-    }
 
-    plot method:
-    \item{plot:}{
-      \code{signature(obj="TssNorm"}
+  All methods for class \code{TssData}, as well as:
+
+  identify methods:
+  \describe{
+    \item{identify:}{
+      \code{signature(obj="TssNorm")}
+    }{
+      Identify TSS in the normalized data.
+    }
+  }
+
+  get methods:
+  \describe{
+    \item{ratio:}{
+      \code{signature(obj="TssNorm")}
+    }{
+      Get the normalized reads based on the Poisson ratios,
+      see\code{start}.
     }
     
-    get methods:
-    \item{ratio:}{
-      \code{signature(obj="TssNorm"}
-    }
     \item{fit:}{
-      \code{signature(obj="TssNorm"}
+      \code{signature(obj="TssNorm")}
+    }{
+      Get the normalized reads based on the fit, see\code{start}.
     }
   }
 }
 
+\author{
+  Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
+}
+
 \examples{
-example(TssData)
-
-y4 <- normalize(x4)
-y4
-
-y5 <- normalize(x5, fit=TRUE)
-y5
-
-plot(y5, 1)
+showClass("TssNorm")
 }
 
 \keyword{classes}
