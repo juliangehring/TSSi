@@ -1,6 +1,6 @@
 ## plot ##
 .plotTss <- function(x, y, counts=FALSE, ratio=FALSE, fit=FALSE, expect=FALSE,
-                     tss=FALSE, threshold=FALSE, rug=FALSE, legend=TRUE, ...) {
+                     tss=FALSE, threshold=FALSE, rug=FALSE, legend=TRUE, baseline=TRUE, ...) {
   
   args <- list(...)
 
@@ -18,6 +18,11 @@
     .getArgs("thresholdArgs", args,
              list(h=parameters(x, "threshold")),
              list(col="gray"))
+  
+  baselineArgs <- if(baseline)
+    .getArgs("baselineArgs", args,
+             list(h=0),
+             list(col="black"))
 
   rugArgs <- if(rug)
     .getArgs("rugArgs", args,
@@ -69,6 +74,7 @@
 
   ## plot
   do.call("plot", plotArgs)
+  if(baseline) do.call("abline", baselineArgs)
   if(threshold) do.call("abline", thresholdArgs)
   if(rug) do.call("rug", rugArgs)
   if(expect) do.call("points", expectArgs)

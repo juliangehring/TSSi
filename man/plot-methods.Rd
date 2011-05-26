@@ -112,6 +112,11 @@ plot(x, y, ...)
     \item{\code{rugArgs}}{Graphical parameters for the
       \sQuote{rug} variable, passed to the \code{rug} function.}
 
+    \item{\code{baseline}}{Logical indicating whether a baseline
+      indicating zero reads should be drawn.}
+    \item{\code{baselineArgs}}{Graphical parameters for the
+      \sQuote{baseline} variable, passed to the \code{abline} function.}   
+
     \item{\code{legend}}{Logical indicating whether a legend should be
       plotted.}
     \item{\code{legendArgs}}{Graphical parameters for the
