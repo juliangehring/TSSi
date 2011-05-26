@@ -36,7 +36,13 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   \item{annotation}{Optional object containing metadata passed along it
     the analysis. This argument does not affect the analysis in any
     kind.}
-  \item{...}{Optional arguments, currently not used.}
+  \item{...}{Optional arguments.}
+  \describe{
+    \item{pattern}{Regular expression specifying the naming of the
+      segments. The terms \sQuote{\%1$s}, \sQuote{\%2$s}, and
+      \sQuote{\%3$s} refer to the chromosome, the strand, and the
+      region, respectively.}
+  }
 }
 
 \section{Methods}{
