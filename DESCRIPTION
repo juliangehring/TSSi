@@ -1,8 +1,8 @@
 Package: mTSS
 Type: Package
 Title: Transcription Start Sites
-Version: 0.1.1
-Date: 2011-05-03
+Version: 0.3.0
+Date: 2011-05-27
 Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
 Imports: methods, Hmisc, minqa, stats, Biobase
@@ -12,3 +12,4 @@ Description: Detect Transcription Start Sites
 License: GPL-3
 LazyLoad: yes
 Encoding: UTF-8
+biocViews: Sequencing, HighThroughputSequencing, RNAseq, Genetics, Preprocessing
