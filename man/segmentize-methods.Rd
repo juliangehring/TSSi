@@ -76,6 +76,30 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
 }
 
+\seealso{
+  Classes:
+  \code{\linkS4class{TssData}}
+  \code{\linkS4class{TssNorm}}
+  \code{\linkS4class{TssResult}}
+  
+  Methods:
+  \code{\link[mTSS]{segmentize}}
+  \code{\link[mTSS]{normalize}}
+  \code{\link[mTSS]{identify}}
+  
+  \code{\link[mTSS]{get-methods}}
+  \code{\link[mTSS]{plot}}
+
+  Functions:
+  \code{\link[mTSS]{subtract-functions}}
+
+  Data:
+  \code{\link[mTSS]{readData}}
+
+  Package:
+  \code{\link[mTSS]{mTSS-package}}
+}
+
 \examples{
 x <- segmentize(counts=10:1, start=1:10, region=rep(1:2, 5),
 annotation="test data")

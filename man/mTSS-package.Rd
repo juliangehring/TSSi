@@ -48,6 +48,9 @@
 
   Data:
   \code{\link[mTSS]{readData}}
+
+  Package:
+  \code{\link[mTSS]{mTSS-package}}
 }
 
 \examples{
