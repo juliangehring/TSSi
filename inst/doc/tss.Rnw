@@ -1,0 +1,189 @@
+%% LyX 2.0.0 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,english]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+<<echo=F>>=
+  if(exists("ls.enc")) options(encoding=ls.enc)
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\VignetteIndexEntry{Introduction to the TSSi package: Identification of Transcription Start Sites}
+%\VignettePackage{TSSi}
+
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Rmethod}[1]{{\textit{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+\newcommand{\Rvar}[1]{{\textit{\textsf{#1}}}}
+
+%% avoid single lines
+\widowpenalty=10000
+\clubpenalty=10000
+
+%% format captions
+\usepackage[small,bf,margin=.5cm]{caption}
+
+\makeatother
+
+\begin{document}
+
+\title{Introduction to the \Rpackage{TSSi} package:\\
+Identification of Transcription Start Sites}
+
+
+\author{Julian Gehring, Clemens Kreutz}
+
+\maketitle
+<<settings, echo=FALSE>>=
+set.seed(1)
+options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.1))))
+@
+
+
+\section{Introduction}
+
+Along with the advances in high-throughput sequencing, the detection
+of transcription start sites \emph{(TSS)} using CAP-capture techniques
+has evolved recently. While many experimental applications exist,
+is the analysis of such data still non-trivial. Approaching this,
+the \Rpackage{TSSi} package offers a flexible statistical preprocessing
+for CAP-capture data and an automated identification of start sites.
+
+
+\section{Data set}
+
+In this vignette we use experimental CAP-capture data obtained with
+Solexa sequencing. The data was mapped to the genome using the bowtie
+algorithm and further processed, such that each the number of the
+5' reads for each position are available. The data frame \Rvar{readData}
+contains the chromosome, the strand, the 5' position of the reads,
+and the total number of reads at that position. Further, regions based
+on existing annotation are also provided; this is useful for performing
+the following the analysis steps.
+
+<<load_data>>=
+library(mTSS)
+data(readData)
+head(readData)
+@
+
+
+\section{Segment read data}
+
+As a first step in the analysis, the read data is taken by the \Rmethod{segmentize}
+method. Here, the data is divided into \emph{segments}, for which
+the following analysis is performed independently. This is done based
+on the information of the chromosomes, the strands, and the optional
+regions. The segmented data is returned as an object of the class
+\Rclass{TssData}.
+
+<<segmentize>>=
+attach(readData)
+x <- segmentize(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
+detach(readData)
+x
+@
+
+The final segments and the associated read data can be assessed with
+several \Rmethod{get} methods. The data from individual segments
+can be called either by its name or an index. Each segment can easily
+be visualized with the \Rmethod{plot} method.
+
+
+<<get_segments>>=
+segments(x)
+names(x)
+@
+
+<<get_reads>>=
+head(reads(x, 3))
+head(start(x, 3))
+head(start(x, names(x)[3]))
+@
+
+
+\section{Preprocessing}
+
+The data is preprocessed, assuming a Poisson distribution for the
+loss of bases around each TSS. The computation can be performed with
+a fast approximation of the distribution based on all reads, or fitted
+explicitly for each segment. On platforms supporting the \Rpackage{multicore}
+package, the fitting can be parallelized over multiple processor cores
+in order to increase computing speed.
+
+<<normalize_ratio>>=
+yRatio <- normalize(x)
+@
+
+<<normalize_fit>>=
+yFit <- normalize(x, fit=TRUE)
+yFit
+head(reads(yFit, 3))
+@
+
+<<plot_normalize_fit, fig=TRUE, echo=TRUE>>=
+plot(yFit, 3)
+@
+
+
+\section{Identifying Start Sites}
+
+For identifying the TSS, peaks in the normalized counts are detected.
+Reads below an exponential background are iteratively added to the
+neighboring peaks.
+
+<<identify>>=
+z <- identify(yFit)
+z
+head(segments(z))
+head(tss(z, 3))
+head(reads(z, 3))
+@
+
+<<plot_identify, fig=TRUE, echo=TRUE>>=
+plot(z, 3)
+@
+
+
+\section{Customizing figures}
+
+The \Rmethod{plot} method allows for a simple, but powerful customization
+of the produced figures. To each element of the graphic, all possible
+arguments can be set, supplying them in the form of named lists. In
+the following, we omit the the plotting of the threshold and the ratio
+estimates, as well as adapt the representation of some components.
+For a detailed description on the individual settings, please refer
+to the manual pages of the package.
+
+
+<<plot_custom, fig=TRUE, echo=TRUE>>=
+plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, countsArgs=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
+@
+
+\newpage{}
+
+
+\section*{Session info}
+
+<<sessionInfo, results=tex, echo=FALSE>>=
+toLatex(sessionInfo(), locale=FALSE)
+@
+
+\end{document}
