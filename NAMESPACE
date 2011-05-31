@@ -1,3 +1,5 @@
+useDynLib("mTSS")
+
 import(methods)
 
 importFrom(graphics, plot, points, lines, rug, abline)

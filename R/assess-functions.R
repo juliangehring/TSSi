@@ -13,6 +13,44 @@
 }
 
 
+## assessAbs ##
+.assessAbs <- function(lambda, basal) {
+
+  out <- .C("assessAbs", PACKAGE="mTSS",
+            lambda=as.double(lambda), basal=as.double(basal),
+            nin=as.integer(length(lambda)),
+            ass=double(1L))
+  res <- out$ass
+  
+  return(res)
+}
+
+
+## assessSteps ##
+.assessSteps <- function(lambda, basal) {
+
+  lambda2 <- c(basal, lambda, basal)
+
+  out <- .C("assessSteps", PACKAGE="mTSS",
+            lambda2=as.double(lambda2), len=as.integer(length(lambda2)),
+            ass=double(1L))
+  
+  res <- out$ass
+  
+  return(res)
+}
+
+
+## nReadsLoglik ##
+.nReadsLoglik <- function(x, lambda) {
+
+  prob <- dpois(x, lambda)
+  res <- -sum(log(prob[prob > 0]))
+
+  return(res)
+}
+
+
 ## assessGrad ##
 .assessGrad <- function(lambda, counts, regpara, basal, nRep) {
 
@@ -28,33 +66,41 @@
 }
 
 
-## assessAbs ##
-.assessAbs <- function(lambda, basal) {
-  
-  ass <- sum(abs((lambda-basal)/sqrt(lambda+basal)))
-    
-  return(ass)
-}
-
-
-## ycAssessAbs ##
-ycAssessAbs <- function(lambda, basal) {
-
-  out <- .C("cAssessAbs", PACKAGE="TSS",
-            lambda=as.double(lambda), basal=as.double(basal),
-            nin=as.integer(length(lambda)), ass=double(1), dass=double(length(lambda)))
-  OUT <- list(ass=out$ass, dassDlambda=out$dass)
-  
-  return(OUT)
-}
-
-
 ## assessAbsGrad ##
 .assessAbsGrad <- function(lambda, basal) {
+
+  out <- .C("assessAbsGrad", PACKAGE="mTSS",
+            lambda=as.double(lambda), basal=as.double(basal),
+            nin=as.integer(length(lambda)),
+            dass=double(length(lambda)))
+  res <- out$dass
   
-  dass <- abs(1/(lambda+basal)^(1/2)-1/2*(lambda-basal)/(lambda+basal)^(3/2))
-    
-  return(dass)
+  return(res)
+}
+
+
+## assessStepsGrad ##
+.assessStepsGrad <- function(lambda, basal) {
+
+  lambda2 <- c(basal, lambda, basal)
+  len2 <- length(lambda2)
+
+  out <- .C("assessStepsGrad", PACKAGE="mTSS",
+            lambda2=as.double(lambda2), len2=as.integer(len2),
+            dass=double(len2-2L))
+  
+  res <- out$dass
+  
+  return(res)
+}
+
+
+## nReadsLoglikGrad ##
+.nReadsLoglikGrad <- function(x, lambda, nRep) {
+
+  res <- nRep - x/lambda
+
+  return(res)
 }
 
 
@@ -67,72 +113,5 @@ ycAssessAbs <- function(lambda, basal) {
     ass <- ass1+ass2
 
     return(ass)
-}
-
-
-## assessSteps ##
-.assessSteps <- function(lambda, basal) {		
-
-  lambda2 <- c(basal, lambda, basal)
-  len <- length(lambda2)
-
-  fuerSprung <- diff(lambda2)/sqrt(lambda2[-len]+lambda2[-1])
-  ass <- sum(abs(fuerSprung))	
-
-  return(ass)
-}
-
-
-## assessStepsGrad ##
-.assessStepsGrad <- function(lambda, basal) {		
-
-  lambda2 <- c(basal, lambda, basal)
-  len <- length(lambda2)	
-
-  x <- lambda2[1:(len-2)]
-  y <- lambda2[3:len]
-  dassLast <- 1/(x+lambda)^(1/2)-1/2*(lambda-x)/(x+lambda)^(3/2)		
-  dassNext <- -1/(y+lambda)^(1/2)-1/2*(y-lambda)/(y+lambda)^(3/2)	
-  dass <- sign(lambda-x)*dassLast + sign(y-lambda)*dassNext	
-  
-  return(dass)
-}
-
-
-## ycAssessSteps ##
-ycAssessSteps <- function(lambda, basal, dograd=TRUE) {
-
-  lambda2 <- c(basal, lambda, basal)
-  len <- length(lambda2)
-
-  out <- .C("cAssessSteps", PACKAGE="TSS",
-            lambda2=as.double(lambda2), len=as.integer(len),
-            dograd=as.integer(dograd), ass=double(1L), dass=double(len-2))
-
-  if(dograd)
-    OUT <- list(ass=out$ass, dassDlambda=out$dass)
-  else
-    OUT <- list(ass=out$ass)
-  
-  return(OUT)
-}
-
-
-## nReadsLoglik ##
-.nReadsLoglik <- function(x, lambda) {
-
-  prob <- dpois(x, lambda)
-  res <- -sum(log(prob[prob > 0]))
-
-  return(res)
-}
-
-
-## nReadsLoglikGrad ##
-.nReadsLoglikGrad <- function(x, lambda, nRep) {
-
-  res <- nRep - x/lambda
-
-  return(res)
 }
 
