@@ -80,7 +80,8 @@
   if(threshold) do.call("abline", thresholdArgs)
   if(rug) do.call("rug", rugArgs)
   if(expect) do.call("points", expectArgs)
-  if(tss) {    
+  if(tss) {
+    tssArgs <- tssArgs[!names(tssArgs) %in% "type"]
     do.call("points", c(type="h", tssArgs))
     do.call("points", c(type="p", tssArgs))
     tssArgs <- c(tssArgs, type="h") ## for legend
