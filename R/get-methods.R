@@ -219,3 +219,38 @@ setMethod("tss",
   return(res)
 }
 )
+
+
+## [ ##
+setMethod("[",
+          signature(x="TssData", i="ANY"),
+          function(x, i) {
+
+  res <- new("TssData",
+             x, reads=reads(x)[i], segments=segments(x, i))
+
+  return(res)
+}
+)
+
+setMethod("[",
+          signature(x="TssNorm", i="ANY"),
+          function(x, i) {
+
+  res <- new("TssNorm",
+             x, reads=reads(x)[i], segments=segments(x, i))
+
+  return(res)
+}
+)
+
+setMethod("[",
+          signature(x="TssResult", i="ANY"),
+          function(x, i) {
+
+  res <- new("TssResult",
+             x, reads=reads(x)[i], segments=segments(x, i), tss=tss(x, )[i])
+
+  return(res)
+}
+)

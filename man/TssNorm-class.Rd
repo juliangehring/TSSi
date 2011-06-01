@@ -53,6 +53,12 @@
     }{
       Get the normalized reads based on the fit, see\code{start}.
     }
+
+    \item{[:}{
+      \code{signature(obj="TssNorm")}
+    }{
+      Subset the object, by name or index.
+    }
   }
 }
 

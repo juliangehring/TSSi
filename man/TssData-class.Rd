@@ -96,6 +96,12 @@
       Get the annotation data, as passed through the \code{annotation}
       argument.
     }
+
+    \item{[:}{
+      \code{signature(obj="TssData")}
+    }{
+      Subset the object, by name or index.
+    }   
   }
   
   show methods:

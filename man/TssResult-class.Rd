@@ -53,6 +53,12 @@
     }{
       Get the identified transcription start sites, see\code{start}.
     }
+
+    \item{[:}{
+      \code{signature(obj="TssResult")}
+    }{
+      Subset the object, by name or index.
+    }
   }
 }
 

@@ -31,6 +31,9 @@
 \alias{expect,TssResult-method}
 \alias{tss}
 \alias{tss,TssResult-method}
+\alias{[,TssData-method}
+\alias{[,TssNorm-method}
+\alias{[,TssResult-method}
 
 \title{
   Get methods
@@ -92,6 +95,12 @@
     }{
       Get the annotation data, as passed through the \code{annotation}
       argument.
+    }
+    
+    \item{[:}{
+      \code{signature(obj="TssData")}
+    }{
+      Subset the object, by name or index.
     }
   }
   
