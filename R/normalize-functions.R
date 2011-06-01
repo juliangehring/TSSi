@@ -1,6 +1,6 @@
 ## normalize ##
 .normalize <- function(x, fun=mean, offset=10L, basal=1e-4, ratio,
-                       regpara=c(1, 1), fit=FALSE) {
+                       regpara=c(1, 1), fit=FALSE, optimizer="all") {
 
   ## extract data
   start <- x$start
@@ -38,12 +38,20 @@
     ## Poisson fit
     n <- length(lambda)
     lower <- rep(basal, n)
-    rOpt <- optim(fn=.assess, gr=.assessGrad, par=lambda, method="L-BFGS-B",
-                  lower=lower, control=list(trace=0, maxit=500), ## CHCK: maxit
-                  counts=counts, regpara=regpara, basal=basal, nRep=nRep) ## TODO: arg names
-    rTrust <- bobyqa(fn=.assess, par=lambda, lower=lower,
-                     control=list(iprint=0, maxfun=10*n^2), ## CHCK: maxfun
-                     counts=counts, regpara=regpara, basal=basal, nRep=NULL) ## TODO: arg names
+    
+    rOpt <- if(optimizer %in% c("optim", "all"))
+      optim(fn=.assess, gr=.assessGrad, par=lambda, method="L-BFGS-B",
+            lower=lower, control=list(trace=0, maxit=500), ## CHCK: maxit
+            counts=counts, regpara=regpara, basal=basal, nRep=nRep) ## TODO: arg names
+    else
+      list(value=Inf)
+    
+    rTrust <- if(optimizer %in% c("bobyqa", "all"))
+      bobyqa(fn=.assess, par=lambda, lower=lower,
+             control=list(iprint=0, maxfun=10*n^2), ## CHCK: maxfun
+             counts=counts, regpara=regpara, basal=basal, nRep=NULL) ## TODO: arg names
+    else
+      list(fval=Inf)
 
     ## store best fit
     res$fit <- if(rTrust$fval > rOpt$value) rOpt$par else rTrust$par

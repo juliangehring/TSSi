@@ -15,7 +15,7 @@
 
 \usage{
 normalize(obj, fun=mean, offset=10L, basal=1e-4, regpara=c(1, 1),
-fit=FALSE, multicore=TRUE, ...)
+fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
 \arguments{
@@ -35,6 +35,12 @@ fit=FALSE, multicore=TRUE, ...)
     section.}
   \item{...}{Additional arguments passed for the \pkg{multicore} package
     if used.For details, see the \sQuote{details} section.}
+  \item{optimizer}{Character string choosing the optimizer for the
+    fit. Possible choices are \dQuote{optim} for the \sQuote{optim}
+    function from the \pkg{stats} package, \dQuote{bobyqa} for the \sQuote{bobyqa}
+    function from the \pkg{minqu} package, or \dQuote{all} for taking
+    the best fit out of both.
+  }
 }
 
 \section{Methods}{
