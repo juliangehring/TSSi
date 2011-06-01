@@ -53,24 +53,26 @@
              list(x=tss(x, y)$pos, y=tss(x, y)$reads),
              list(pch=20, lwd=2, col=1, lty=1))
 
-  ## legend
-  if(legend && any(ind <- c(expect, counts, ratio, fit, tss))) {
-    lArgs <- list(expectArgs, countsArgs, ratioArgs, fitArgs, tssArgs)
-    varNames <- c("expect", "counts", "ratio", "fit", "tss")
-    isLine <- !(.catLegend("type", lArgs) %in% c("p", "n"))
-    legend1 <- list(legend=varNames[ind],
-                    col=.catLegend("col", lArgs),
-                    pch=.catLegend("pch", lArgs),
-                    lwd=ifelse(isLine, .catLegend("lwd", lArgs), NA),
-                    lty=ifelse(isLine, .catLegend("lty", lArgs), NA))
-    legend3 <- list(x="topleft")
-    legendArgs <- .getArgs("legendArgs", args, legend1, legend3)
-  }
+  ## collect args
+  lArgs <- list(expectArgs, countsArgs, ratioArgs, fitArgs, tssArgs)
+  ind <- c(expect, counts, ratio, fit, tss)
 
   ylim <- c(0, max(.catLegend("y", lArgs[ind])))
   plotArgs <- .getArgs("plotArgs", args,
                        list(x=start, y=reads$counts, type="n"),
                        list(xlab="Position", ylab="Reads", ylim=ylim, main=segmentName))
+
+  ## legend
+  if(legend <- legend && any(ind)) {
+    varNames <- c("expect", "counts", "ratio", "fit", "tss")
+    isLine <- !(.catLegend("type", lArgs) %in% c("p", "n"))
+    legend1 <- list(col=.catLegend("col", lArgs),
+                    pch=.catLegend("pch", lArgs),
+                    lwd=ifelse(isLine, .catLegend("lwd", lArgs), NA),
+                    lty=ifelse(isLine, .catLegend("lty", lArgs), NA))
+    legend3 <- list(legend=varNames[ind], x="topleft")
+    legendArgs <- .getArgs("legendArgs", args, legend1, legend3)
+  }
 
   ## plot
   do.call("plot", plotArgs)
@@ -87,7 +89,7 @@
   if(ratio) do.call("points", ratioArgs)
   if(fit) do.call("points", fitArgs)
 
-  do.call("legend", legendArgs)
+  if(legend) do.call("legend", legendArgs)
 }
 
 
