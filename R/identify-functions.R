@@ -7,11 +7,11 @@
   n <- length(counts)
 
   if(any(counts >= threshold)) {
-    indTss <- NULL
+    indTss <- logical(n)
     for(i in 1:n) {
-      indTss[i] <- which.max(fn)
+      indTss[fn == max(fn)] <- TRUE
       cumBg <- .cumulativeReads(pos, counts, indTss, basal, exppara)
-      dif <- fun(counts, cumBg$expect, indTss, basal, exppara) ## TODO assign by name?
+      dif <- fun(counts, cumBg, indTss, basal, exppara) ## TODO assign by name?
       fn <- dif$delta
       fn[indTss] <- -Inf
       if(all(fn < threshold))
@@ -57,7 +57,7 @@
   expect <- rep(basal, nPos)
   expect[indTss] <- cum
 
-  return(list(expect=expect, indEnd=indEnd))
+  return(expect)
 }
 
 
