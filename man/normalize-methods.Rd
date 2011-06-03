@@ -4,13 +4,14 @@
 
 \alias{normalize}
 \alias{normalize,TssData-method}
+\alias{normalize-methods}
 
 \title{
   Normalize methods
 }
 
 \description{
-  Normalize sequence read data.
+  Normalize sequence read count data.
 }
 
 \usage{
@@ -24,7 +25,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   \item{offset}{Integer defining the number of bases add to the ends of
     each segment with \code{basal} reads rate.}
   \item{basal}{Numeric specifying the basal read rate.}
-  \item{regpara}{Vector with two numerics specifying the regulation
+  \item{regpara}{Numeric vector of length two specifying the regulation
     parameter for each side of the segment.}
   \item{fit}{Logical whether the fitting should be performed in addition
     to the estimation based on the Poisson ratios obtained from all
@@ -33,14 +34,14 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
     parallelize the fitting. Has only an effect if the package is
     available and loaded. For details, see the \sQuote{details}
     section.}
-  \item{...}{Additional arguments passed for the \pkg{multicore} package
-    if used.For details, see the \sQuote{details} section.}
   \item{optimizer}{Character string choosing the optimizer for the
-    fit. Possible choices are \dQuote{optim} for the \sQuote{optim}
-    function from the \pkg{stats} package, \dQuote{bobyqa} for the \sQuote{bobyqa}
-    function from the \pkg{minqu} package, or \dQuote{all} for taking
-    the best fit out of both.
-  }
+    fit (default: \dQuote{all}). Possible choices are \dQuote{optim} for
+    the \sQuote{optim} function from the \pkg{stats} package,
+    \dQuote{bobyqa} for the \sQuote{bobyqa} function from the
+    \pkg{minqu} package,or \dQuote{all} for taking the best fit out of
+    both.}
+  \item{...}{Additional arguments passed for the \pkg{multicore} package
+    if used. For details, see the \sQuote{details} section.}
 }
 
 \section{Methods}{
@@ -49,8 +50,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
     \item{normalize:}{
       \code{signature(obj="TssData")}
     }{
-      \code{normalize(obj, fun=mean, offset=10L, basal=1e-4,
-	regpara=c(1, 1), fit=FALSE, multicore=TRUE, ...)}
+      \code{normalize(obj, ...)}
     }
   }
 }
@@ -79,16 +79,12 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 
 \seealso{
   Classes:
-  \code{\linkS4class{TssData}}
-  \code{\linkS4class{TssNorm}}
+  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
   \code{\linkS4class{TssResult}}
   
-  Methods:
-  \code{\link[TSSi]{segmentize}}
-  \code{\link[TSSi]{normalize}}
-  \code{\link[TSSi]{identify}}
-  
-  \code{\link[TSSi]{get-methods}}
+  Methods:  
+  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
+  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}
 
   Functions:
@@ -102,11 +98,13 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
 \examples{
+## preceding steps
 example(segmentize)
 
 ## normalize data, w/o and w/ fitting
 yRatio <- normalize(x)
 yFit <- normalize(x, fit=TRUE)
+
 yFit
 }
 

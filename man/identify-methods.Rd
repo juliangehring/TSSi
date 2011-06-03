@@ -4,13 +4,14 @@
 
 \alias{identify}
 \alias{identify,TssNorm-method}
+\alias{idenfify-methods}
 
 \title{
   Identify methods
 }
 
 \description{
-  Identify TSS in sequence read data.
+  Identify TSS in sequence read count data.
 }
 
 \usage{
@@ -22,16 +23,17 @@ multicore=TRUE, ...)
   \item{obj}{Object of class \code{TssNorm} with normalized data.}
   \item{threshold}{Numeric with the minimal number of reads to be
     treated as a potential TSS.}
-  \item{exppara}{Vector with two numerics specifying the
+  \item{exppara}{Numeric vector of length two specifying the
     \eqn{\sQuote{mu}}{\mu} parameter of the exponential function for
-    each side of the segment.} 
-  \item{fun}{Function to calculate the expection for each TSS.}
+    each side of the segment.}
+  \item{fun}{Function to calculate the expection for each TSS. For
+    details, see the \sQuote{details} section.}
   \item{multicore}{Logical whether to use the \pkg{multicore} package to
     parallelize the fitting. Has only an effect if the package is
     available and loaded. For details, see the \sQuote{details}
     section.}
   \item{...}{Additional arguments passed for the \pkg{multicore} package
-    if used.For details, see the \sQuote{details} section.}
+    if used. For details, see the \sQuote{details} section.}
 }
 
 \section{Methods}{
@@ -40,8 +42,7 @@ multicore=TRUE, ...)
     \item{identify:}{
       \code{signature(obj="TssNorm")}
     }{
-      \code{identify(obj, threshold=1, exppara=c(20, 20),
-	fun=subtractExpectation, multicore=TRUE, ...)}
+      \code{identify(obj, ...)}
     }
   }
 }
@@ -70,17 +71,15 @@ multicore=TRUE, ...)
 
 \seealso{
   Classes:
-  \code{\linkS4class{TssData}}
-  \code{\linkS4class{TssNorm}}
+  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}
-  \code{\link[TSSi]{normalize}}
-  \code{\link[TSSi]{identify}}
-  
-  \code{\link[TSSi]{get-methods}}
+  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
+  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}
+  
+  \code{\link[TSSi]{get-methods}}, \code{\link[TSSi]{plot}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}
@@ -93,10 +92,12 @@ multicore=TRUE, ...)
 }
 
 \examples{
+## preceding steps
 example(normalize)
 
 ## identify TSS
 z <- identify(yFit)
+
 z
 }
 

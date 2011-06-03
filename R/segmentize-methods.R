@@ -1,7 +1,7 @@
 ## segmentize ##
 setGeneric("segmentize",
            function(counts, start, end=start, chr=rep(1L, length(start)),
-                    region=rep(1L, length(start)), strand=rep(1L, length(start)),
+                    region=rep(1L, length(start)), strand=rep("*", length(start)),
                     replicate=rep(1L, length(start)), annotation=NULL, ...)
            standardGeneric("segmentize")
            )
@@ -9,7 +9,7 @@ setGeneric("segmentize",
 setMethod("segmentize",
           signature(counts="integer", start="integer"),
           function(counts, start, end=start, chr=rep(1L, length(start)),
-                   region=rep(1L, length(start)), strand=rep(1L, length(start)),
+                   region=rep(1L, length(start)), strand=rep("*", length(start)),
                    replicate=rep(1L, length(start)), annotation=NULL,
                    pattern="%1$s_%2$s_%3$s", ...) {
 

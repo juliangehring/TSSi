@@ -118,16 +118,12 @@
 
 \seealso{
   Classes:
-  \code{\linkS4class{TssData}}
-  \code{\linkS4class{TssNorm}}
+  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}
-  \code{\link[TSSi]{normalize}}
-  \code{\link[TSSi]{identify}}
-  
-  \code{\link[TSSi]{get-methods}}
+  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
+  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}
 
   Functions:

@@ -46,7 +46,8 @@
 
 \section{Methods}{
   
-  class \code{TssData}, \code{TssNorm}, \code{TssResult}:
+  class \code{TssData}, \code{TssNorm} (inherited), \code{TssResult}
+  (inherited):
   \describe{
     \item{start:}{
       \code{signature(obj="TssData")}
@@ -59,20 +60,20 @@
     \item{end:}{
       \code{signature(obj="TssData")}
     }{
-      Get the read end sites, see \code{start}.
+      Get the read end sites; see \code{start}.
     }
 
     \item{counts:}{
       \code{signature(obj="TssData")}
     }{
-      Get the raw read counts, see \code{start}.
+      Get the raw read counts; see \code{start}.
     }
     
     \item{reads:}{
       \code{signature(obj="TssData")}
     }{
       Get all the read data of the segments, including
-      e.g. \sQuote{start}, \sQuote{counts}, \sQuote{replicate}, , see
+      e.g. \sQuote{start}, \sQuote{counts}, \sQuote{replicate}; see
       \code{start}.
     }
     
@@ -104,19 +105,19 @@
     }
   }
   
-  class \code{TssNorm}, \code{TssResult}:
+  class \code{TssNorm}, \code{TssResult} (inherited):
   \describe{
     \item{ratio:}{
       \code{signature(obj="TssNorm")}
     }{
-      Get the normalized reads based on the Poisson ratios,
+      Get the normalized reads based on the Poisson ratios;
       see\code{start}.
     }
     
     \item{fit:}{
       \code{signature(obj="TssNorm")}
     }{
-      Get the normalized reads based on the fit, see\code{start}.
+      Get the normalized reads based on the fit; see\code{start}.
     }
   }
   
@@ -125,13 +126,13 @@
     \item{expect:}{
       \code{signature(obj="TssResult")}
     }{
-      Get the expectation for non-specific reads, see\code{start}.
+      Get the expectation for non-specific reads; see\code{start}.
     }
     
     \item{tss:}{
       \code{signature(obj="TssResult")}
     }{
-      Get the identified transcription start sites, see\code{start}.
+      Get the identified transcription start sites; see\code{start}.
     }
   }
   
@@ -143,16 +144,12 @@
 
 \seealso{
   Classes:
-  \code{\linkS4class{TssData}}
-  \code{\linkS4class{TssNorm}}
+  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}
-  \code{\link[TSSi]{normalize}}
-  \code{\link[TSSi]{identify}}
-  
-  \code{\link[TSSi]{get-methods}}
+  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
+  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}
 
   Functions:

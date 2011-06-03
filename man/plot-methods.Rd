@@ -22,11 +22,11 @@ plot(x, y, ...)
 
 \arguments{
   \item{x}{An object of class \code{TssData}, \code{TssNorm}, or
-    \code{TssResult}}
+    \code{TssResult}.}
   \item{y}{A single integer or character string specifying which segment
     to plot. An integer is interpreted as the index of the segment while
     a character string is matched against the segment names.}
-  \item{...}{Optional arguments used in order to customize the plot. See
+  \item{...}{Optional arguments used in order to customize the figure. See
     the \sQuote{details} section.}
 }
 
@@ -123,15 +123,15 @@ plot(x, y, ...)
       \sQuote{legend} variable, passed to the \code{legend} function.}
   }
 
-  Thus, changing for example the limit of the y-axis, the plot type and
-  color of the ECDF, and the label of the x-axis, you can use:
-
-  \code{plot(x, 1, ratio=FALSE, threshold=FALSE,
+  Thus, for (a) omitting the ratio estimates, the threshold, and the
+  legend, (b) customizing the graphical parameters of the raw read
+  counts, (c) customizing the axis labels and the title, the following
+  code can be used:
+  
+  \code{plot(x, 1, ratio=FALSE, threshold=FALSE, legend=FALSE,
     countsArgs=list(type="h", col="darkgray", pch=NA),
     plotArgs=list(xlab="Genomic position", main="TSS for segment
     's1_-_155'")}
-
-  For more details, please see the \sQuote{examples} section.
 }
 
 \author{
@@ -140,16 +140,12 @@ plot(x, y, ...)
 
 \seealso{
   Classes:
-  \code{\linkS4class{TssData}}
-  \code{\linkS4class{TssNorm}}
+  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}
-  \code{\link[TSSi]{normalize}}
-  \code{\link[TSSi]{identify}}
-  
-  \code{\link[TSSi]{get-methods}}
+  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
+  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}
 
   Functions:
@@ -163,9 +159,13 @@ plot(x, y, ...)
 }
 
 \examples{
+## preceding steps
 example(identify)
 
+## plot
 plot(yFit, 1)
+
+## plot w/ some custom settings
 plot(z, 1, ratio=FALSE, threshold=FALSE, countsArgs=list(type="h",
 col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position",
 main="TSS for segment 's1_-_155'"))
