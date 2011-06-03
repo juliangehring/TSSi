@@ -16,7 +16,7 @@
 ## assessAbs ##
 .assessAbs <- function(lambda, basal) {
 
-  out <- .C("assessAbs", PACKAGE="mTSS",
+  out <- .C("assessAbs", PACKAGE="TSSi",
             lambda=as.double(lambda), basal=as.double(basal),
             nin=as.integer(length(lambda)),
             ass=double(1L))
@@ -31,7 +31,7 @@
 
   lambda2 <- c(basal, lambda, basal)
 
-  out <- .C("assessSteps", PACKAGE="mTSS",
+  out <- .C("assessSteps", PACKAGE="TSSi",
             lambda2=as.double(lambda2), len=as.integer(length(lambda2)),
             ass=double(1L))
   
@@ -69,7 +69,7 @@
 ## assessAbsGrad ##
 .assessAbsGrad <- function(lambda, basal) {
 
-  out <- .C("assessAbsGrad", PACKAGE="mTSS",
+  out <- .C("assessAbsGrad", PACKAGE="TSSi",
             lambda=as.double(lambda), basal=as.double(basal),
             nin=as.integer(length(lambda)),
             dass=double(length(lambda)))
@@ -85,7 +85,7 @@
   lambda2 <- c(basal, lambda, basal)
   len2 <- length(lambda2)
 
-  out <- .C("assessStepsGrad", PACKAGE="mTSS",
+  out <- .C("assessStepsGrad", PACKAGE="TSSi",
             lambda2=as.double(lambda2), len2=as.integer(len2),
             dass=double(len2-2L))
   

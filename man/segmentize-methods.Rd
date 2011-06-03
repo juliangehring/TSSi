@@ -10,7 +10,7 @@
 }
 
 \description{
-  Import sequence read data into the \pkg{mTSS} package.
+  Import sequence read data into the \pkg{TSSi} package.
 }
 
 \usage{
@@ -83,21 +83,21 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[mTSS]{segmentize}}
-  \code{\link[mTSS]{normalize}}
-  \code{\link[mTSS]{identify}}
+  \code{\link[TSSi]{segmentize}}
+  \code{\link[TSSi]{normalize}}
+  \code{\link[TSSi]{identify}}
   
-  \code{\link[mTSS]{get-methods}}
-  \code{\link[mTSS]{plot}}
+  \code{\link[TSSi]{get-methods}}
+  \code{\link[TSSi]{plot}}
 
   Functions:
-  \code{\link[mTSS]{subtract-functions}}
+  \code{\link[TSSi]{subtract-functions}}
 
   Data:
-  \code{\link[mTSS]{readData}}
+  \code{\link[TSSi]{readData}}
 
   Package:
-  \code{\link[mTSS]{mTSS-package}}
+  \code{\link[TSSi]{TSSi-package}}
 }
 
 \examples{

@@ -197,7 +197,7 @@ Rvar{readData}
 \end_layout
 
 \begin_layout Chunk
-library(mTSS)
+library(TSSi)
 \end_layout
 
 \begin_layout Chunk

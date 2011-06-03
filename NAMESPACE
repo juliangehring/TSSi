@@ -1,4 +1,4 @@
-useDynLib("mTSS")
+useDynLib("TSSi")
 
 import(methods)
 

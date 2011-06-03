@@ -1,14 +1,14 @@
-Package: mTSS
+Package: TSSi
 Type: Package
-Title: Transcription Start Sites
-Version: 0.3.2
-Date: 2011-06-01
+Title: Transcription Start Sites Identification
+Version: 0.3.3
+Date: 2011-06-03
 Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
 Imports: methods, Hmisc, minqa, stats, Biobase
 Depends: R (>= 2.12.0)
 Enhances: multicore
-Description: Detect Transcription Start Sites
+Description: Identify Transcription Start Sites in Sequencing Data
 License: GPL-3
 LazyLoad: yes
 Encoding: UTF-8

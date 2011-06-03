@@ -79,7 +79,7 @@ on existing annotation are also provided; this is useful for performing
 the following the analysis steps.
 
 <<load_data>>=
-library(mTSS)
+library(TSSi)
 data(readData)
 head(readData)
 @
