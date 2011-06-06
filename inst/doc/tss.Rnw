@@ -177,6 +177,30 @@ to the manual pages of the package.
 plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, countsArgs=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
+
+\section{Converting and exporting results}
+
+While the get methods \Rmethod{reads}, \Rmethod{segments}, and \Rmethod{tss}
+provide a simple access to relevant results, such data can also be
+represented with the framework provided by the \Rpackage{IRanges}
+package. Converting the data to an object of class \Rclass{RangedData}
+allows for a standard representation and interface to other formats,
+for example using the \Rpackage{rtracklayer} package.
+
+<<convert_iranges>>=
+readsRd <- readsAsRangedData(z)
+segmentsRd <- segmentsAsRangedData(z)
+tssRd <- tssAsRangedData(z)
+head(readsRd)
+@
+<<export_rtracklayer>>=
+library(rtracklayer)
+tmpFile <- tempfile()
+export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
+export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
+export.bed(tssRd, paste(tmpFile, "bed", sep="."))
+@
+
 \newpage{}
 
 

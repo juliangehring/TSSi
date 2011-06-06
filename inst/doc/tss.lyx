@@ -535,6 +535,147 @@ plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, countsArgs=list(type="h
 @
 \end_layout
 
+\begin_layout Section
+Converting and exporting results
+\end_layout
+
+\begin_layout Standard
+While the get methods 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{reads}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{segments}
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{tss}
+\end_layout
+
+\end_inset
+
+ provide a simple access to relevant results, such data can also be represented
+ with the framework provided by the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{IRanges}
+\end_layout
+
+\end_inset
+
+ package.
+ Converting the data to an object of class 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rclass{RangedData}
+\end_layout
+
+\end_inset
+
+ allows for a standard representation and interface to other formats, for
+ example using the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{rtracklayer}
+\end_layout
+
+\end_inset
+
+ package.
+\end_layout
+
+\begin_layout Chunk
+<<convert_iranges>>=
+\end_layout
+
+\begin_layout Chunk
+readsRd <- readsAsRangedData(z)
+\end_layout
+
+\begin_layout Chunk
+segmentsRd <- segmentsAsRangedData(z)
+\end_layout
+
+\begin_layout Chunk
+tssRd <- tssAsRangedData(z)
+\end_layout
+
+\begin_layout Chunk
+head(readsRd)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+<<export_rtracklayer>>=
+\end_layout
+
+\begin_layout Chunk
+library(rtracklayer)
+\end_layout
+
+\begin_layout Chunk
+tmpFile <- tempfile()
+\end_layout
+
+\begin_layout Chunk
+export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
+\end_layout
+
+\begin_layout Chunk
+export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
+\end_layout
+
+\begin_layout Chunk
+export.bed(tssRd, paste(tmpFile, "bed", sep="."))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset

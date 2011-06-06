@@ -45,8 +45,9 @@ setMethod("segmentize",
   nPos <- sapply(reads, nrow)
   nCounts <- sapply(reads, .colFun, "counts", sum)
   segments <- data.frame(chr=factor(chr[ind1]), strand=factor(strand[ind1]),
-                        region=region[ind1], nPos=nPos, nCounts=nCounts,
-                        row.names=names(reads))
+                         region=region[ind1], nPos=nPos, nCounts=nCounts,
+                         start=y$start[ind1], end=y$end[ind2],
+                         row.names=names(reads))
 
   ## create TssData object
   res <- new("TssData",

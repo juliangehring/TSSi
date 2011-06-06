@@ -20,4 +20,6 @@ subtractExpectation <- function(fg, bg, indTss, basal, exppara) {
   delta[delta < 0] <- 0
 
   res <- list(delta=delta, expect=expect)
+
+  return(res)
 }

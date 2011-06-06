@@ -7,6 +7,8 @@ importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
 importFrom(stats, optimize, optim, convolve, dpois)
 importFrom(Biobase, selectSome)
+importFrom(plyr, rbind.fill)
+importFrom(IRanges, IRanges, RangedData, Rle)
 
 exportClasses(TssData)
 exportClasses(TssNorm)
@@ -19,7 +21,7 @@ exportMethods(identify)
 exportMethods(reads, segments, tss, parameters, timestamp, annotation, "[")
 exportMethods(start, end, counts, ratio, fit, expect)
 exportMethods(show, names)
-
+exportMethods(readsAsRangedData, segmentsAsRangedData, tssAsRangedData)
 exportMethods(plot)
 
 export(subtractExpectation)
