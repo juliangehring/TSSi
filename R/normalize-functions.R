@@ -94,15 +94,6 @@
 }
 
 
-## colFun ##
-.colFun <- function(x, col, fun) {
-  
-  res <- fun(x[ ,col])
-
-  return(res)
-}
-
-
 ## normDup ##
 .normDup <- function(i, y, i1, i2, fun) {
 

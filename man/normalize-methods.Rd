@@ -85,7 +85,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   Methods:  
   \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
   \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
-  \code{\link[TSSi]{plot}}
+  \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}

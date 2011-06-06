@@ -110,6 +110,24 @@
       \code{signature(object="TssData")}
     }
   }
+
+  asRangedData methods:
+  \describe{
+    \item{readsAsRangedData:}{
+      \code{signature(obj="TssData")}
+    }{
+      Convert the reads, as obtained by the \code{reads} method, to an
+      object of class \code{RangedData}.
+    }
+
+    \item{segmentsAsRangedData:}{
+      \code{signature(obj="TssData")}
+    }{
+      Convert the segments, as obtained by the \code{segments} method,
+      to an object of class \code{RangedData}.
+    }
+  }
+  
 }
 
 \author{
@@ -124,7 +142,7 @@
   Methods:
   \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
   \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
-  \code{\link[TSSi]{plot}}
+  \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}
