@@ -1,8 +1,10 @@
 ## subtractExpectation ##
-subtractExpectation <- function(fg, bg, indTss, basal, exppara) {
+subtractExpectation <- function(fg, bg, indTss, pos, basal, exppara) {
 
-  n <- length(fg)
-  
+  idx <- pos - pos[1L] + 1L
+  idxTss <- idx[indTss]
+  n <- pos[length(fg)] - pos[1L] + 1L
+
   fak <- 1/.exppdf(1, exppara)
 
   win1 <- fak[1]*.exppdf(n:1, exppara[1])
@@ -10,10 +12,10 @@ subtractExpectation <- function(fg, bg, indTss, basal, exppara) {
   win <- c(win1, 0, win2)
 
   bgb <- rep(0, n)
-  bgb[indTss] <- bg[indTss]
+  bgb[idxTss] <- bg[indTss]
   cums <- convolve(win, rev(bgb), type="open")
   
-  expect <- cums[(n+1L):(length(cums)-n)]
+  expect <- cums[(n+1L):(length(cums)-n)][idx]
   expect[expect < basal] <- basal
 
   delta <- fg - expect

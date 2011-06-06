@@ -13,7 +13,7 @@
 }
 
 \usage{
-subtractExpectation(fg, bg, indTss, basal, exppara)
+subtractExpectation(fg, bg, indTss, pos, basal, exppara)
 }
 
 \arguments{
@@ -22,6 +22,8 @@ subtractExpectation(fg, bg, indTss, basal, exppara)
     \code{fg}.}
   \item{indTss}{Index vector indicating the expected TSS sites in
     \code{fg}.}
+  \item{pos}{Positions of the reads in the segment, as given in the
+    \code{segmentize} method.}
   \item{basal}{See the \code{normalize} method.}
   \item{exppara}{See the \code{identify} method.}
 }
