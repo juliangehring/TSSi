@@ -43,10 +43,10 @@
   ## find closest tss, choose parameter
   group <- apply(da, 2, which.min)
   idGroup <- group + seq(0L, by=nTss, length.out=nPos)
-  ip <- ifelse(d[idGroup], 1L, 2L)
+  ip <- ifelse(d[idGroup] < 0, 1L, 2L)
 
   ## calculate weights
-  weight <- .exppdf(da[idGroup], exppara[ip]) / .exppdf(1, exppara[ip])
+  weight <- .exppdf(da[idGroup], exppara[ip]) / .exppdf(1, exppara[ip]) ## causes a plateau
   weight[indTss] <- 1
 
   ## find indices for each group
