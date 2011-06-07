@@ -126,7 +126,7 @@ set.seed(1)
 
 \begin_layout Chunk
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1,
- 1.1))))
+ 1.5))))
 \end_layout
 
 \begin_layout Chunk
@@ -526,9 +526,9 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
-plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, countsArgs=list(type="h
-", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position", main="TSS
- for segment 's1_-_155'"))
+plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, expect=TRUE, countsArgs
+=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position",
+ main="TSS for segment 's1_-_155'"))
 \end_layout
 
 \begin_layout Chunk
@@ -641,7 +641,7 @@ tssRd <- tssAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
-head(readsRd)
+tssRd
 \end_layout
 
 \begin_layout Chunk

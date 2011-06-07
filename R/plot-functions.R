@@ -17,7 +17,7 @@
   thresholdArgs <- if(threshold)
     .getArgs("thresholdArgs", args,
              list(h=parameters(x, "threshold")),
-             list(col="gray"))
+             list(col="lightgray"))
   
   baselineArgs <- if(baseline)
     .getArgs("baselineArgs", args,
@@ -31,27 +31,27 @@
   expectArgs <- if(expect)
     .getArgs("expectArgs", args,
              list(x=start, y=reads$expect),
-             list(pch=24, col=4, type="b", lwd=1, lty=1))
+             list(pch=20, col="#F4BC7A", type="p", lwd=0.3, lty=1, cex=0.75)) ## 1
 
   countsArgs <- if(counts)
     .getArgs("countsArgs", args,
              list(x=start, y=reads$counts),
-             list(pch=21, col=1, lwd=1, lty=1, type="p"))
+             list(pch=20, col="#5655A6", lwd=1, lty=1, type="p")) ## 4
   
   ratioArgs <- if(ratio)
     .getArgs("ratioArgs", args,
              list(x=start, y=reads$ratio),
-             list(pch=22, col=2, lwd=1, lty=1, type="p"))
+             list(pch=20, col="#009A6D", lwd=1, lty=1, type="p")) ## 3
 
   fitArgs <- if(fit <- fit && "fit" %in% names(reads))
     .getArgs("fitArgs", args,
              list(x=start, y=reads$fit),
-             list(pch=20, col=3, lwd=1, lty=1, type="p"))
+             list(pch=20, col="#96B74E", lwd=1, lty=1, type="p")) ## 2
 
   tssArgs <- if(tss)
     .getArgs("tssArgs", args,
              list(x=tss(x, y)$pos, y=tss(x, y)$reads),
-             list(pch=20, lwd=2, col=1, lty=1))
+             list(pch=20, cex=1.8, col="#840472", lwd=2, lty=1)) ## 5
 
   ## collect args
   lArgs <- list(expectArgs, countsArgs, ratioArgs, fitArgs, tssArgs)

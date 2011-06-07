@@ -53,7 +53,7 @@ Identification of Transcription Start Sites}
 \maketitle
 <<settings, echo=FALSE>>=
 set.seed(1)
-options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.1))))
+options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
 @
 
 
@@ -174,7 +174,7 @@ to the manual pages of the package.
 
 
 <<plot_custom, fig=TRUE, echo=TRUE>>=
-plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, countsArgs=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
+plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, expect=TRUE, countsArgs=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
 
@@ -191,7 +191,7 @@ for example using the \Rpackage{rtracklayer} package.
 readsRd <- readsAsRangedData(z)
 segmentsRd <- segmentsAsRangedData(z)
 tssRd <- tssAsRangedData(z)
-head(readsRd)
+tssRd
 @
 <<export_rtracklayer>>=
 library(rtracklayer)
