@@ -11,7 +11,7 @@
 }
 
 \description{
-  Normalize sequence read count data.
+  Normalize sequence read count data. *missing*
 }
 
 \usage{
@@ -21,10 +21,11 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 
 \arguments{
   \item{obj}{Object of class \code{TssData} with raw data to normalize.} 
-  \item{fun}{Function used to average over replicates (default: mean).}
+  \item{fun}{Function used to average over replicates (default:
+    \code{mean}).}
   \item{offset}{Integer defining the number of bases add to the ends of
-    each segment with \code{basal} reads rate.}
-  \item{basal}{Numeric specifying the basal read rate.}
+    each segment with \code{basal} rate.}
+  \item{basal}{Numeric specifying the basal rate.}
   \item{regpara}{Numeric vector of length two specifying the regulation
     parameter for each side of the segment.}
   \item{fit}{Logical whether the fitting should be performed in addition
@@ -36,8 +37,8 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
     section.}
   \item{optimizer}{Character string choosing the optimizer for the
     fit (default: \dQuote{all}). Possible choices are \dQuote{optim} for
-    the \sQuote{optim} function from the \pkg{stats} package,
-    \dQuote{bobyqa} for the \sQuote{bobyqa} function from the
+    the \code{optim} function from the \pkg{stats} package,
+    \dQuote{bobyqa} for the \code{bobyqa} function from the
     \pkg{minqu} package,or \dQuote{all} for taking the best fit out of
     both.}
   \item{...}{Additional arguments passed for the \pkg{multicore} package
@@ -56,17 +57,16 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
 \details{
-  The \code{normalize} method preprocesses the raw read data, based on
-  eighter the Poisson ratios obtained from the information of all reads
-  or an fitting of the distribution.
+  *missing*
 
-  In order to speed up the fitting step, the \code{mclapply} function of
-  \pkg{multicore} can be used. For this, the \pkg{multicore} package has
-  to be loaded manully before starting the computation, additional
-  parameters are passed via the \code{...} argument, e.g. as
-  \code{normalize(obj, mc.ncores=2)}. The \code{multicore} argument can
-  further be used to temporarily disable the parallel estimation by
-  setting it to \code{FALSE}.
+  In order to distribute the identification step over multiple processor
+  cores, the \code{mclapply} function of the \pkg{multicore} package can
+  be used. For this, the \pkg{multicore} package has to be loaded
+  manully before starting the computation, additional parameters are
+  passed via the \code{...} argument, e.g.as \code{normalize(obj,
+    mc.ncores=2)}. The \code{multicore} argument can further be used to
+  temporarily disable the parallel estimation by setting it to
+  \code{FALSE}.
 }
 
 \value{
@@ -106,6 +106,12 @@ yRatio <- normalize(x)
 yFit <- normalize(x, fit=TRUE)
 
 yFit
+
+\dontrun{
+## multicore computation
+library(multicore)
+yFit <- normalize(x, fit=TRUE)
+}
 }
 
 \keyword{methods}

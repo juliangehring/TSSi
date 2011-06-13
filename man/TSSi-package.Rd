@@ -5,16 +5,15 @@
 \alias{TSSi}
 \alias{TSSi-package}
 
-\title{Transcription Start Sites Identification}
+\title{Transcription Start Site Identification}
 
 \description{
-  The \pkg{TSSi} package normalizes and detects transcription start
-  sites in sequencing data.
+  The \pkg{TSSi} package normalizes and identifies transcription start
+  sites in high-throughput sequencing data.
 }
 
 \details{
-  The \pkg{TSSi} package normalizes and detects transcription start
-  sites in sequencing data.
+  *missing*
 
   The package is published under the GPL-3 license.
 }
@@ -30,10 +29,9 @@
 }
 
 \seealso{
-  Classes:
-  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
-  \code{\linkS4class{TssResult}}
-  
+  Package:
+  \code{\link[TSSi]{TSSi-package}}
+
   Methods:
   \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
   \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
@@ -42,23 +40,24 @@
   Functions:
   \code{\link[TSSi]{subtract-functions}}
 
-  Data:
+  Classes:
+  \code{\linkS4class{TssData}}, \code{\linkS4class{TssNorm}},
+  \code{\linkS4class{TssResult}} 
+
+  Data set:
   \code{\link[TSSi]{readData}}
-
-  Package:
-  \code{\link[TSSi]{TSSi-package}}
-
 }
 
 \examples{
-## load data
+## load data set
 data(readData)
 
-## import and segmentize data
+## segmentize data
 attach(readData)
 x <- segmentize(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
 detach(readData)
+
 x
 segments(x)
 

@@ -1,6 +1,6 @@
 ## readsAsRangedData
 setGeneric("readsAsRangedData",
-           function(x, ...)
+           function(x)
            standardGeneric("readsAsRangedData")
            )
 

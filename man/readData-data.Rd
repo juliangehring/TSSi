@@ -10,6 +10,8 @@
 \description{
   Results from a 5'-CAP capture experiment, after mapping the reads to
   the genome.
+
+  *missing*
 }
 
 \usage{data(readData)}
@@ -29,6 +31,10 @@
       \item{counts}{Number of reads at the respective position.}
     }
   }
+}
+
+\details{
+  *missing*
 }
 
 \seealso{
@@ -52,11 +58,13 @@
 }
 
 \examples{
-## load data
+## load data set
 data(readData)
 }
 
-\source{Rensing et al., 2010}
+\source{
+  *missing*
+}
 
 \keyword{datasets}
 

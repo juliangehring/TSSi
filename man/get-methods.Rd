@@ -46,7 +46,7 @@
 
 \section{Methods}{
   
-  class \code{TssData}, \code{TssNorm} (inherited), \code{TssResult}
+  For class \code{TssData}, \code{TssNorm} (inherited), \code{TssResult}
   (inherited):
   \describe{
     \item{start:}{
@@ -81,8 +81,8 @@
       \code{signature(obj="TssData")}
     }{
       Get the information associated with the segments, e.g. chromosome,
-      strand, region. The second and third argment select the segment
-      and the variable of interest.
+      strand, region. The optional second and third argments select the
+      segment and the variable of interest.
     }
     
     \item{timestamp:}{
@@ -105,37 +105,40 @@
     }
   }
   
-  class \code{TssNorm}, \code{TssResult} (inherited):
+  For class \code{TssNorm}, \code{TssResult} (inherited):
   \describe{
     \item{ratio:}{
       \code{signature(obj="TssNorm")}
     }{
       Get the normalized reads based on the Poisson ratios;
-      see\code{start}.
+      see \code{start}.
     }
     
     \item{fit:}{
       \code{signature(obj="TssNorm")}
     }{
-      Get the normalized reads based on the fit; see\code{start}.
+      Get the normalized reads based on the fit; see \code{start}.
     }
   }
   
-  class \code{TssResult}:
+  For class \code{TssResult}:
   \describe{
     \item{expect:}{
       \code{signature(obj="TssResult")}
     }{
-      Get the expectation for non-specific reads; see\code{start}.
+      Get the expectation for non-specific reads; see \code{start}.
     }
     
     \item{tss:}{
       \code{signature(obj="TssResult")}
     }{
-      Get the identified transcription start sites; see\code{start}.
+      Get the identified transcription start sites; see \code{start}.
     }
   }
-  
+}
+
+\value{
+  A data frame or list
 }
 
 \author{

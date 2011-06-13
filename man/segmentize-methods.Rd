@@ -11,7 +11,7 @@
 }
 
 \description{
-  Import sequence read count data and transform it into segments.
+  Import sequence read count data and transform it into segments. *missing*
 }
 
 \usage{
@@ -42,10 +42,10 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   \item{...}{Optional arguments.}
   \describe{
     \item{pattern}{Regular expression specifying the naming of the
-      segments. The terms \sQuote{\%1$s}, \sQuote{\%2$s}, and
-      \sQuote{\%3$s} refer to the chromosome, the strand, and the
+      segments. The terms \code{\%1$s}, \code{\%2$s}, and
+      \code{\%3$s} refer to the chromosome, the strand, and the
       region, respectively. If not supplied the standard naming pattern
-      \sQuote{\%1$s_\%2$s_\%3$s} will be used.}
+      \code{\%1$s_\%2$s_\%3$s} will be used.}
   }
 }
 
@@ -71,6 +71,8 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   respectively. Usage of the \code{region} argument is beneficial if the
   location of potential TSS can be contrained below the level of
   chromosomes and strands.
+
+  *missing*
 }
 
 \value{
@@ -102,7 +104,7 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
 }
 
 \examples{
-## load data
+## load data set
 example(readData)
 
 ## import and segmentize data
