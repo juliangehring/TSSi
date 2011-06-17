@@ -13,7 +13,7 @@
 }
 
 \usage{
-subtractExpectation(fg, bg, indTss, pos, basal, exppara)
+subtractExpectation(fg, bg, indTss, pos, basal, tau)
 }
 
 \arguments{
@@ -25,7 +25,7 @@ subtractExpectation(fg, bg, indTss, pos, basal, exppara)
   \item{pos}{Positions of the reads in the segment, as given in the
     \code{segmentize} method.}
   \item{basal}{See the \code{normalize} method.}
-  \item{exppara}{See the \code{identify} method.}
+  \item{tau}{See the \code{identify} method.}
 }
 
 \details{

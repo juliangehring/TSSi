@@ -15,7 +15,7 @@
 }
 
 \usage{
-identify(obj, threshold=1, exppara=c(20, 20), fun=subtractExpectation,
+identify(obj, threshold=1, tau=c(20, 20), fun=subtractExpectation,
 multicore=TRUE, ...)
 }
 
@@ -23,8 +23,8 @@ multicore=TRUE, ...)
   \item{obj}{Object of class \code{TssNorm} with normalized data.}
   \item{threshold}{Numeric with the minimal number of reads to be
     treated as a potential TSS.}
-  \item{exppara}{Numeric vector of length two specifying the
-    \eqn{\mu}{\sQuote{mu}} parameter of the exponential function for
+  \item{tau}{Numeric vector of length two specifying the
+    \eqn{\tau}{\sQuote{tau}} parameter of the exponential function for
     each side of the segment.}
   \item{fun}{Function to calculate the expection for each TSS. For
     details, see the \sQuote{details} section.}

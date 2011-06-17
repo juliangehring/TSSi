@@ -1,5 +1,5 @@
 ## identifyCore ##
-.identifyCore <- function(x, basal, exppara, threshold, fun, readCol) {
+.identifyCore <- function(x, basal, tau, threshold, fun, readCol) {
 
   ## extract data
   pos <- x$start
@@ -10,8 +10,8 @@
     indTss <- logical(n)
     for(i in 1:n) {
       indTss[fn == max(fn)] <- TRUE
-      cumBg <- .cumulativeReads(pos, counts, indTss, basal, exppara)
-      dif <- fun(counts, cumBg, indTss, pos, basal, exppara) ## TODO assign by name?
+      cumBg <- .cumulativeReads(pos, counts, indTss, basal, tau)
+      dif <- fun(counts, cumBg, indTss, pos, basal, tau) ## TODO assign by name?
       fn <- dif$delta
       fn[indTss] <- -Inf
       if(all(fn < threshold))
@@ -30,7 +30,7 @@
 
 
 ## cumulativeReads ##
-.cumulativeReads <- function(pos, expect, indTss, basal, exppara) {
+.cumulativeReads <- function(pos, expect, indTss, basal, tau) {
 
   posTss <- pos[indTss]
   nPos <- length(pos)
@@ -46,7 +46,7 @@
   ip <- ifelse(d[idGroup] < 0, 1L, 2L)
 
   ## calculate weights
-  weight <- .exppdf(da[idGroup], exppara[ip]) / .exppdf(1, exppara[ip]) ## causes a plateau
+  weight <- .exppdf(da[idGroup], tau[ip]) / .exppdf(1, tau[ip]) ## causes a plateau
   weight[indTss] <- 1
 
   ## find indices for each group
