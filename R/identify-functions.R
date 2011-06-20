@@ -46,7 +46,7 @@
   ip <- ifelse(d[idGroup] < 0, 1L, 2L)
 
   ## calculate weights
-  weight <- .exppdf(da[idGroup], tau[ip]) / .exppdf(1, tau[ip]) ## causes a plateau
+  weight <- .exppdf(da[idGroup], tau[ip]) / .exppdf(0, tau[ip])
   weight[indTss] <- 1
 
   ## find indices for each group
