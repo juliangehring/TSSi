@@ -96,6 +96,9 @@ plot(x, y, ...)
       estimates should be plotted.}
     \item{\code{expectArgs}}{Graphical parameters for the
       \sQuote{expect} variable, passed to the \code{points} function.}
+    \item{\code{expect}}{Logical indicating whether the background
+      estimates should be computed for all positions, rather than only
+      for those with reads.}
 
     \item{\code{tss}}{Logical indicating whether the identified TSS
       should be plotted.}

@@ -1,9 +1,9 @@
 ## subtractExpectation ##
-subtractExpectation <- function(fg, bg, indTss, pos, basal, tau) {
+subtractExpectation <- function(fg, bg, indTss, pos, basal, tau, extend=FALSE) {
 
   idx <- pos - pos[1L] + 1L
   idxTss <- idx[indTss]
-  n <- pos[length(fg)] - pos[1L] + 1L
+  n <- pos[length(pos)] - pos[1L] + 1L
 
   fak <- 1/.exppdf(1, tau)
 
@@ -15,7 +15,9 @@ subtractExpectation <- function(fg, bg, indTss, pos, basal, tau) {
   bgb[idxTss] <- bg[indTss]
   cums <- convolve(win, rev(bgb), type="open")
   
-  expect <- cums[(n+1L):(length(cums)-n)][idx]
+  expect <- cums[(n+1L):(length(cums)-n)]
+  if(!extend)
+    expect <- expect[idx]
   expect[expect < basal] <- basal
 
   delta <- fg - expect

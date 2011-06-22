@@ -13,7 +13,7 @@
 }
 
 \usage{
-subtractExpectation(fg, bg, indTss, pos, basal, tau)
+subtractExpectation(fg, bg, indTss, pos, basal, tau, extend=FALSE)
 }
 
 \arguments{
@@ -26,6 +26,9 @@ subtractExpectation(fg, bg, indTss, pos, basal, tau)
     \code{segmentize} method.}
   \item{basal}{See the \code{normalize} method.}
   \item{tau}{See the \code{identify} method.}
+  \item{extend}{Logical indicating whether the background estimates
+    should be computed for all positions, rather than only for those
+    with reads.}
 }
 
 \details{

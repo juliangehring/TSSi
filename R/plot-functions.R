@@ -1,6 +1,7 @@
 ## plot ##
 .plotTss <- function(x, y, counts=FALSE, ratio=FALSE, fit=FALSE, expect=FALSE,
-                     tss=FALSE, threshold=FALSE, rug=FALSE, legend=TRUE, baseline=TRUE, ...) {
+                     tss=FALSE, threshold=FALSE, rug=FALSE, legend=TRUE, baseline=TRUE,
+                     extend=FALSE, ...) {
   
   args <- list(...)
 
@@ -31,7 +32,7 @@
   expectArgs <- if(expect)
     .getArgs("expectArgs", args,
              list(x=start, y=reads$expect),
-             list(pch=20, col="#F4BC7A", type="p", lwd=0.3, lty=1, cex=0.75)) ## 1
+             list(pch=20, col="#F4BC7A", type="p", lwd=0.5, lty=1, cex=0.75)) ## 1
 
   countsArgs <- if(counts)
     .getArgs("countsArgs", args,
@@ -72,6 +73,19 @@
                     lty=ifelse(isLine, .catLegend("lty", lArgs), NA))
     legend3 <- list(legend=varNames[ind], x="topleft")
     legendArgs <- .getArgs("legendArgs", args, legend1, legend3)
+  }
+
+  ## extend expect
+  if(expect && extend) {
+    expectArgs$x <- start[1L]:start[length(start)]
+    cou <- if(fit) reads$fit else reads$ratio
+    indTss <- start %in% tss(x, y)$pos
+    basal <- parameters(x, "basal")
+    tau <- parameters(x, "tau")
+    fun <- parameters(x, "fun")
+    
+    cumBg <- .cumulativeReads(start, cou, indTss, basal, tau)
+    expectArgs$y <- fun(NA, cumBg, indTss, start, basal, tau, extend=TRUE)$expect
   }
 
   ## plot
