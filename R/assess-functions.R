@@ -1,11 +1,9 @@
 ## assess ##
 .assess <- function(lambda, counts, regpara, basal, nRep) {
 
-  n <- max(1, sum(lambda > 2*basal))
-  
-  ass <- c(2*.nReadsLoglik(counts, lambda)/log(n+1),
-           2*regpara[1]*.assessAbs(lambda, basal),
-           2*regpara[2]*.assessSteps(lambda, basal))
+  ass <- c(2*.nReadsLoglik(counts, lambda),
+           regpara[1]*.assessAbs(lambda, basal),
+           regpara[2]*.assessSteps(lambda, basal))
 
   res <- sum(ass)
 
@@ -54,13 +52,11 @@
 ## assessGrad ##
 .assessGrad <- function(lambda, counts, regpara, basal, nRep) {
 
-  n <- max(1, sum(lambda > 2*basal))
-
-  dass1 <- 2*.nReadsLoglikGrad(counts, lambda, nRep)/log(n+1)
-  dass2 <- 2*regpara[1]*.assessAbsGrad(lambda, basal)
-  dass3 <- 2*regpara[2]*.assessStepsGrad(lambda, basal)
+  dass1 <- 2*.nReadsLoglikGrad(counts, lambda, nRep)
+  dass2 <- regpara[1]*.assessAbsGrad(lambda, basal)
+  dass3 <- regpara[2]*.assessStepsGrad(lambda, basal)
   
-  res <- dass1+dass2+dass3
+  res <- dass1 + dass2 + dass3
 
   return(res)
 }
@@ -72,7 +68,7 @@
   out <- .C("assessAbsGrad", PACKAGE="TSSi",
             lambda=as.double(lambda), basal=as.double(basal),
             nin=as.integer(length(lambda)),
-            dass=double(length(lambda)))
+            dass=double(1L))
   res <- out$dass
   
   return(res)
@@ -87,7 +83,7 @@
 
   out <- .C("assessStepsGrad", PACKAGE="TSSi",
             lambda2=as.double(lambda2), len2=as.integer(len2),
-            dass=double(len2-2L))
+            dass=double(1L))
   
   res <- out$dass
   
@@ -107,9 +103,8 @@
 ## assessRatio ##
 .assessRatio <- function(lambda, counts, regpara, basal) {
 
-    ndat <- length(counts)
-    ass1 <- 2*.nReadsLoglik(counts, lambda)/log(ndat+1)
-    ass2 <- 2*regpara[1]*.assessAbs(lambda, basal)
+    ass1 <- 2*.nReadsLoglik(counts, lambda)
+    ass2 <- regpara[1]*.assessAbs(lambda, basal)
     ass <- ass1+ass2
 
     return(ass)
