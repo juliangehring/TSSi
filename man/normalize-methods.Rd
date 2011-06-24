@@ -15,7 +15,7 @@
 }
 
 \usage{
-normalize(obj, fun=mean, offset=10L, basal=1e-4, regpara=c(1, 1),
+normalize(obj, fun=mean, offset=10L, basal=1e-4, lambda=c(1, 1),
 fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
@@ -26,7 +26,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   \item{offset}{Integer defining the number of bases add to the ends of
     each segment with \code{basal} rate.}
   \item{basal}{Numeric specifying the basal rate.}
-  \item{regpara}{Numeric vector of length two specifying the regulation
+  \item{lambda}{Numeric vector of length two specifying the regulation
     parameter for each side of the segment.}
   \item{fit}{Logical whether the fitting should be performed in addition
     to the estimation based on the Poisson ratios obtained from all

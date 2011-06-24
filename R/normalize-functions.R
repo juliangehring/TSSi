@@ -1,6 +1,6 @@
 ## normalize ##
-.normalize <- function(x, fun=mean, offset=10L, basal=1e-4, ratio,
-                       regpara=c(1, 1), fit=FALSE, optimizer="all") {
+.normalize <- function(x, fun=mean, offset=10L, basal=1e-4, initial,
+                       lambda=c(1, 1), fit=FALSE, optimizer="all") {
 
   ## extract data
   start <- x$start
@@ -28,28 +28,27 @@
   longReads[indEst] <- mReads
 
   ## Poisson ratio
-  lambda0 <- .initialFun(longReads, ratio, basal)[indEst]
-  lambda <- rep(lambda0, nRep)
+  ratio <- rep(.initialFun(longReads, initial, basal)[indEst], nRep)
 
   ## store results from Poisson ratio
-  res <- data.frame(start=start, end=end, counts=counts, ratio=lambda)
+  res <- data.frame(start=start, end=end, counts=counts, ratio=ratio)
 
   if(fit == TRUE) {
     ## Poisson fit
-    n <- length(lambda)
+    n <- length(ratio)
     lower <- rep(basal, n)
     
     rOpt <- if(optimizer %in% c("optim", "all"))
-      optim(fn=.assess, gr=.assessGrad, par=lambda, method="L-BFGS-B",
+      optim(fn=.assess, gr=.assessGrad, par=ratio, method="L-BFGS-B",
             lower=lower, control=list(trace=0, maxit=500), ## CHCK: maxit
-            counts=counts, regpara=regpara, basal=basal, nRep=nRep) ## TODO: arg names
+            counts=counts, lambda=lambda, basal=basal, nRep=nRep) ## TODO: arg names
     else
       list(value=Inf)
     
     rTrust <- if(optimizer %in% c("bobyqa", "all"))
-      bobyqa(fn=.assess, par=lambda, lower=lower,
+      bobyqa(fn=.assess, par=ratio, lower=lower,
              control=list(iprint=0, maxfun=10*n^2), ## CHCK: maxfun
-             counts=counts, regpara=regpara, basal=basal, nRep=NULL) ## TODO: arg names
+             counts=counts, lambda=lambda, basal=basal, nRep=NULL) ## TODO: arg names
     else
       list(fval=Inf)
 
@@ -62,35 +61,35 @@
 
 
 ## initialRatio ##
-.initialRatio <- function(counts, regpara, basal) {
+.initialRatio <- function(counts, lambda, basal) {
 
   lopt <- rep(NA, length(counts))
   for(i in 1:length(counts)) {
-    lopt[i] <- optimize(f=.assess, counts=counts[i], regpara=regpara, basal=basal, nRep=NULL,
+    lopt[i] <- optimize(f=.assess, counts=counts[i], lambda=lambda, basal=basal, nRep=NULL,
                         interval=c(0, counts[i]+1))$minimum
   }
-  ratio <- lopt/counts
+  initial <- lopt/counts
   
-  return(ratio)
+  return(initial)
 }
 
 
 ## initialFun ##
-.initialFun <- function(counts, ratio, basal) {
+.initialFun <- function(counts, initial, basal) {
 
   ## CHCK: alternative method
-  x <- 1:length(ratio)
+  x <- 1:length(initial)
   #ind <- counts %in% x
-  lambda0 <- counts
-  #lambda0[ind] <- ratio[counts[ind]]
+  ratio0 <- counts
+  #ratio0[ind] <- ratio[counts[ind]]
   #if(any(!ind))
-  #  lambda0 <- approxExtrap(x, ratio, counts[!ind])$y * counts[!ind]
-  #lambda0[lambda0 < 1] <- basal
+  #  ratio0 <- approxExtrap(x, ratio, counts[!ind])$y * counts[!ind]
+  #ratio0[ratio0 < 1] <- basal
 
-  lambda0 <- approxExtrap(x, ratio, counts)$y * counts
-  lambda0[lambda0 < 1] <- basal
+  ratio0 <- approxExtrap(x, initial, counts)$y * counts
+  ratio0[ratio0 < 1] <- basal
   
-  return(lambda0)
+  return(ratio0)
 }
 
 
