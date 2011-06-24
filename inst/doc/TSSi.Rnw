@@ -174,7 +174,13 @@ to the manual pages of the package.
 
 
 <<plot_custom, fig=TRUE, echo=TRUE>>=
-plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, expect=TRUE, countsArgs=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
+plot(z, 4,
+ratio=FALSE,
+threshold=FALSE,
+baseline=FALSE,
+expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
+countsArgs=list(type="h", col="darkgray", pch=NA),
+plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
 

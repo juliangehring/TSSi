@@ -526,9 +526,31 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
-plot(z, 4, ratio=FALSE, threshold=FALSE, baseline=FALSE, expect=TRUE, countsArgs
-=list(type="h", col="darkgray", pch=NA), plotArgs=list(xlab="Genomic position",
- main="TSS for segment 's1_-_155'"))
+plot(z, 4,
+\end_layout
+
+\begin_layout Chunk
+ratio=FALSE,
+\end_layout
+
+\begin_layout Chunk
+threshold=FALSE,
+\end_layout
+
+\begin_layout Chunk
+baseline=FALSE,
+\end_layout
+
+\begin_layout Chunk
+expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
+\end_layout
+
+\begin_layout Chunk
+countsArgs=list(type="h", col="darkgray", pch=NA),
+\end_layout
+
+\begin_layout Chunk
+plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 \end_layout
 
 \begin_layout Chunk
