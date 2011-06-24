@@ -84,8 +84,9 @@
     basal <- parameters(x, "basal")
     tau <- parameters(x, "tau")
     fun <- parameters(x, "fun")
+    neighbor <- parameters(x, "neighbor")
     
-    cumBg <- .cumulativeReads(start, cou, indTss, basal, tau)
+    cumBg <- .cumulativeReads(start, cou, indTss, basal, tau, neighbor)
     expectArgs$y <- fun(NA, cumBg, indTss, start, basal, tau, extend=TRUE)$expect
   }
 

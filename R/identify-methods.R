@@ -1,13 +1,13 @@
 ## identify ##
 setGeneric("identify",
-           function(obj, threshold=1, tau=c(20, 20),
+           function(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
                     fun=subtractExpectation, multicore=TRUE, ...)
            standardGeneric("identify")
            )
 
 setMethod("identify",
           signature(obj="TssNorm"),
-          function(obj, threshold=1, tau=c(20, 20),
+          function(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
                    fun=subtractExpectation, multicore=TRUE,  ...) {
 
   ## get parameters
@@ -19,11 +19,12 @@ setMethod("identify",
     if(.useMulticore(multicore))
       multicore::mclapply(obj@reads, .identifyCore,
                           basal=basal, tau=tau, threshold=threshold,
-                          fun=fun, readCol=readCol, ...)
+                          fun=fun, readCol=readCol, neighbor=neighbor,
+                          ...)
     else
       lapply(obj@reads, .identifyCore,
              basal=basal, tau=tau, threshold=threshold, fun=fun,
-             readCol=readCol)
+             readCol=readCol, neighbor=neighbor)
   
   names(y) <- names(obj@reads)
 
@@ -36,7 +37,8 @@ setMethod("identify",
 
   ## store results
   pars <- c(obj@parameters,
-            list(tau=tau, threshold=threshold, fun=fun))
+            list(tau=tau, threshold=threshold, fun=fun, readCol=readCol,
+                 neighbor=neighbor))
 
   res <- new("TssResult",
              obj, reads=reads, segments=segments, tss=tss, parameters=pars,

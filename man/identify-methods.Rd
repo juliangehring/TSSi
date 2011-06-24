@@ -15,8 +15,8 @@
 }
 
 \usage{
-identify(obj, threshold=1, tau=c(20, 20), fun=subtractExpectation,
-multicore=TRUE, ...)
+identify(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
+fun=subtractExpectation, multicore=TRUE, ...)
 }
 
 \arguments{
@@ -26,6 +26,9 @@ multicore=TRUE, ...)
   \item{tau}{Numeric vector of length two specifying the
     \eqn{\tau}{\sQuote{tau}} parameter of the exponential function for
     each side of the segment.}
+  \item{neighbor}{Logical whether the background estimates should be
+    iteratively assigned to the predicted TSS during the estimation
+    (default: TRUE).}
   \item{fun}{Function to calculate the expection for each TSS. For
     details, see the \sQuote{details} section.}
   \item{multicore}{Logical whether to use the \pkg{multicore} package to
