@@ -81,7 +81,7 @@
       \code{signature(obj="TssData")}
     }{
       Get the information associated with the segments, e.g. chromosome,
-      strand, region. The optional second and third argments select the
+      strand, region. The optional second and third arguments select the
       segment and the variable of interest.
     }
     

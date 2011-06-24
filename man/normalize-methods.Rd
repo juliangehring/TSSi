@@ -32,7 +32,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
     to the estimation based on the Poisson ratios obtained from all
     reads.}
   \item{multicore}{Logical whether to use the \pkg{multicore} package to
-    parallelize the fitting. Has only an effect if the package is
+    speed up the fitting. Has only an effect if the package is
     available and loaded. For details, see the \sQuote{details}
     section.}
   \item{optimizer}{Character string choosing the optimizer for the
@@ -59,7 +59,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 \details{
   The normalization reduces the noise by shrinking the counts towards
   zero. This step is intended to eliminate false positive counts as well
-  as making further analyses more robust by reducing the impact of large
+  as making further analyzes more robust by reducing the impact of large
   counts. Such a shrinkage or regularization procedure constitutes a
   well-established strategy in statistics to make predictions
   conservative, i.e. to reduce the number of false positive predictions.
@@ -84,7 +84,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   In order to distribute the identification step over multiple processor
   cores, the \code{mclapply} function of the \pkg{multicore} package can
   be used. For this, the \pkg{multicore} package has to be loaded
-  manully before starting the computation, additional parameters are
+  manually before starting the computation, additional parameters are
   passed via the \code{...} argument, e.g.as \code{normalize(obj,
     mc.ncores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to

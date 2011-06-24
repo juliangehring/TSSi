@@ -56,7 +56,6 @@ set.seed(1)
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
 @
 
-\selectlanguage{english}%
 
 \section{Introduction}
 
@@ -76,7 +75,7 @@ algorithm and processed, such that the number of the 5' end of reads
 for each position are available. The data frame \Rvar{readData} contains
 the chromosome, the strand, the 5' position of the reads, and the
 total number of reads at that position. Further, regions based on
-existing annotation are also provided which are used to devide the
+existing annotation are also provided which are used to divide the
 data into independent subsets for analysis.
 
 <<load_data>>=
@@ -85,7 +84,6 @@ data(readData)
 head(readData)
 @
 
-\selectlanguage{english}%
 
 \section{Segment read data}
 
@@ -103,7 +101,6 @@ detach(readData)
 x
 @
 
-\selectlanguage{english}%
 The final segments and the associated read data can be assessed with
 several \Rmethod{get} methods. The data from individual segments
 can be called either by its name or an index. Each segment can easily
@@ -121,13 +118,12 @@ head(start(x, 3))
 head(start(x, names(x)[3]))
 @
 
-\selectlanguage{english}%
 
 \section{Normalization}
 
 The normalization reduces the noise by shrinking the counts towards
 zero. This step is intended to eliminate false positive counts as
-well as making further analyses more robust by reducing the impact
+well as making further analyzes more robust by reducing the impact
 of large counts. Such a shrinkage or regularization procedure constitutes
 a well-established strategy in statistics to make predictions conservative,
 i.e. to reduce the number of false positive predictions. To enhance
@@ -139,8 +135,8 @@ between adjacent count estimates.
 The computation can be performed with a fast approximation of the
 distribution based on all reads, or fitted explicitly for each segment.
 On platforms supporting the \Rpackage{multicore} package, the fitting
-can be parallelized over multiple processor cores in order to decrease
-computation time.
+can be spread over multiple processor cores in order to decrease computation
+time.
 
 <<normalize_ratio>>=
 yRatio <- normalize(x)
@@ -156,7 +152,6 @@ head(reads(yFit, 3))
 plot(yFit, 3)
 @
 
-\selectlanguage{english}%
 
 \section{Identifying transcription start sites}
 
@@ -187,7 +182,6 @@ head(reads(z, 3))
 plot(z, 3)
 @
 
-\selectlanguage{english}%
 
 \section{Customizing figures}
 
@@ -210,7 +204,6 @@ countsArgs=list(type="h", col="darkgray", pch=NA),
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
-\selectlanguage{english}%
 
 \section{Converting and exporting results}
 
@@ -235,7 +228,6 @@ export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 @
 
-\selectlanguage{english}%
 \newpage{}
 
 

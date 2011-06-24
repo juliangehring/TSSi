@@ -30,14 +30,14 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
     reads. If not supplied all reads will are assumed to be located on
     one chromosome.}
   \item{region}{Optional vector with an assignment of each read to a
-    seperate region, for example based on additional annotation. If not
+    separate region, for example based on additional annotation. If not
     supplied all reads will be part of one region.}
   \item{strand}{Optional vector with the strand location of each
     read.}
   \item{replicate}{Optional integer vector identifying the replicate each
     read was obtained from, in the case of data from multiple
     measurements.}
-  \item{annotation}{Optional object containing metadata passed along it
+  \item{annotation}{Optional object containing meta data passed along it
     the analysis. This argument does not influence the analysis.}
   \item{...}{Optional arguments.}
   \describe{
@@ -63,13 +63,13 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
 
 \details{
   The \code{segmentize} method takes the raw data and breaks it into
-  segments which will be analyzed seperately in the subsequent
+  segments which will be analyzed separately in the subsequent
   steps. Segments are defined in a way such that any has a unique
   combination of the input arguments \code{chr}, \code{region}, and
-  \code{strand}. In case any of these is not supplied it is assumend
+  \code{strand}. In case any of these is not supplied it is assumed
   that all reads belong to one chromosome, region, or strand,
   respectively. Usage of the \code{region} argument is beneficial if the
-  location of potential TSS can be contrained below the level of
+  location of potential TSS can be constrained below the level of
   chromosomes and strands.
 }
 

@@ -16,7 +16,7 @@
 
 \section{Slots}{
   \describe{
-    \item{\code{reads}:}{List with the read data for each sagment.}
+    \item{\code{reads}:}{List with the read data for each segment.}
     \item{\code{segments}:}{Data frame with the information of the
       individual segments.}
     \item{\code{annotation}:}{Annotation data object, as passed through the

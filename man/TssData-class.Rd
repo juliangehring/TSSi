@@ -17,7 +17,7 @@
 
 \section{Slots}{
   \describe{
-    \item{\code{reads}:}{List with the read data for each sagment.}
+    \item{\code{reads}:}{List with the read data for each segment.}
     \item{\code{segments}:}{Data frame with the information of the
       individual segments.}
     \item{\code{annotation}:}{Annotation data object, as passed through the
@@ -80,7 +80,7 @@
       \code{signature(obj="TssData")}
     }{
       Get the information associated with the segments, e.g. chromosome,
-      strand, region. The second and third argment select the segment
+      strand, region. The second and third argument select the segment
       and the variable of interest.
     }
     

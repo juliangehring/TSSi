@@ -18,7 +18,7 @@ subtractExpectation(fg, bg, indTss, pos, basal, tau, extend=FALSE)
 
 \arguments{
   \item{fg}{Numeric vector with foreground.}
-  \item{bg}{Numeric vector with backgroud of the same length as
+  \item{bg}{Numeric vector with background of the same length as
     \code{fg}.}
   \item{indTss}{Index vector indicating the expected TSS sites in
     \code{fg}.}

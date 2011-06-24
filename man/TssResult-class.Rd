@@ -11,13 +11,13 @@
 }
 
 \description{
-  Class \code{TssResulting} storing final sequence read data with
+  Class \code{TssResult} storing final sequence read data with
   identified TSS.
 }
 
 \section{Slots}{
   \describe{
-    \item{\code{reads}:}{List with the read data for each sagment.}
+    \item{\code{reads}:}{List with the read data for each segment.}
     \item{\code{segments}:}{Data frame with the information of the
       individual segments.}
     \item{\code{tss}:}{List of the identified TSS locations.}

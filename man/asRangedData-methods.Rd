@@ -51,7 +51,7 @@ tssAsRangedData(x)
     \item{tssAsRangedData:}{
       \code{signature(obj="TssResult")}
     }{
-      Convert the tss predictions, as obtained by the \code{tss} method,
+      Convert the TSS predictions, as obtained by the \code{tss} method,
       to an object of class \code{RangedData}.
     }
   }
