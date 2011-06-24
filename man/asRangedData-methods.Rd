@@ -58,9 +58,9 @@ tssAsRangedData(x)
 }
 
 \details{
-  The \code{tssAsRangedData} class provides a widely used framework for
-  representing sequence information. Storing the data as an object of
-  this class allows an easy sharing with other packages and export to
+  The \code{RangedData} class provides a widely used framework for
+  representing sequence information. Converting the data to an object of
+  this class allows an easy interaction with other packages and export to
   common formats, using for example the \pkg{rtracklayer} package. For
   an example, please see the vignette of this package.
 }

@@ -11,7 +11,7 @@
 }
 
 \description{
-  Normalize sequence read count data. *missing*
+  Normalize sequence read count data.
 }
 
 \usage{
@@ -57,7 +57,29 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
 \details{
-  *missing*
+  The normalization reduces the noise by shrinking the counts towards
+  zero. This step is intended to eliminate false positive counts as well
+  as making further analyses more robust by reducing the impact of large
+  counts. Such a shrinkage or regularization procedure constitutes a
+  well-established strategy in statistics to make predictions
+  conservative, i.e. to reduce the number of false positive predictions.
+  
+  An objective function is minimized to estimate the transcription level
+  in a regularized manner. The log-likelihood is given by the product of
+  the probabilities of the counts which is assumed as a Poisson
+  distribution by default.
+
+  For \eqn{\lambda_1 > 0}{\sQuote{lambda[1] > 0}}, counts unequal to
+  zero are penalized to obtain conservative estimates of the
+  transcription levels with a preferably small number components,
+  i.e. genomic positions, unequal to zero. The larger
+  \eqn{\lambda_1}{\sQuote{lambda[1]}}, the more conservative is the
+  identification procedure.
+
+  To enhance the shrinkage of isolated counts in comparison to counts in
+  regions of strong transcriptional activity, the information of
+  consecutive genomic positions in the measurements is regarded by
+  evaluating differences between adjacent count estimates.
 
   In order to distribute the identification step over multiple processor
   cores, the \code{mclapply} function of the \pkg{multicore} package can
@@ -110,7 +132,7 @@ yFit
 \dontrun{
 ## multicore computation
 library(multicore)
-yFit <- normalize(x, fit=TRUE)
+yFit <- normalize(x, fit=TRUE, mc.ncores=2)
 }
 }
 

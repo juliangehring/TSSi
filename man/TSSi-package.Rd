@@ -13,7 +13,21 @@
 }
 
 \details{
-  *missing*
+  High throughput sequencing has become an essential experimental
+  approach for the investigation of transcriptional mechanisms. For some
+  applications like ChIP-seq, there are several available approaches for
+  the prediction of peak locations. However, these methods are not
+  designed for the identification of transcription start sites (TSS)
+  because such data sets have qualitatively different noise.
+
+  The \pkg{TSSi} provides a heuristic framework for the identification
+  of TSS based on high-throughput sequencing data. Probabilistic
+  assumptions for the count distribution as well as for systematic
+  errors, i.e. for contaminating measurements close to a TSS, are made
+  and can be adapted by the user. The framework also comprises a
+  regularization procedure which can be applied as a preprocessing step
+  to decrease the noise and thereby reduce the number of false
+  predictions.
 
   The package is published under the GPL-3 license.
 }
@@ -25,7 +39,11 @@
 }
 
 \references{
-  to be published
+  C. Kreutz, J. Gehring, D. Lang, J. Timmer, and S. Rensing:
+  TSSi - An R package for transcription start site identification from
+  high throughput sequencing data.
+  
+  in preparation
 }
 
 \seealso{

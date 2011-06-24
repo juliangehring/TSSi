@@ -117,19 +117,23 @@ Julian Gehring, Clemens Kreutz
 \end_layout
 
 \begin_layout Chunk
+
 <<settings, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 set.seed(1)
 \end_layout
 
 \begin_layout Chunk
+
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1,
  1.5))))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -144,7 +148,7 @@ Along with the advances in high-throughput sequencing, the detection of
 (TSS)
 \emph default
  using CAP-capture techniques has evolved recently.
- While many experimental applications exist, is the analysis of such data
+ While many experimental applications exist, the analysis of such data is
  still non-trivial.
  Approaching this, the 
 \begin_inset ERT
@@ -170,9 +174,8 @@ Data set
 \begin_layout Standard
 In this vignette we use experimental CAP-capture data obtained with Solexa
  sequencing.
- The data was mapped to the genome using the bowtie algorithm and further
- processed, such that each the number of the 5' reads for each position
- are available.
+ The data was mapped to the genome using the bowtie algorithm and processed,
+ such that the number of the 5' end of reads for each position are available.
  The data frame 
 \begin_inset ERT
 status open
@@ -188,27 +191,32 @@ Rvar{readData}
 
  contains the chromosome, the strand, the 5' position of the reads, and
  the total number of reads at that position.
- Further, regions based on existing annotation are also provided; this is
- useful for performing the following the analysis steps.
+ Further, regions based on existing annotation are also provided which are
+ used to devide the data into independent subsets for analysis.
 \end_layout
 
 \begin_layout Chunk
+
 <<load_data>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(TSSi)
 \end_layout
 
 \begin_layout Chunk
+
 data(readData)
 \end_layout
 
 \begin_layout Chunk
+
 head(readData)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -255,27 +263,33 @@ Rclass{TssData}
 \end_layout
 
 \begin_layout Chunk
+
 <<segmentize>>=
 \end_layout
 
 \begin_layout Chunk
+
 attach(readData)
 \end_layout
 
 \begin_layout Chunk
+
 x <- segmentize(counts=counts, start=start, chr=chromosome, region=region,
  strand=strand)
 \end_layout
 
 \begin_layout Chunk
+
 detach(readData)
 \end_layout
 
 \begin_layout Chunk
+
 x
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -318,6 +332,7 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
+
 <<get_segments>>=
 \begin_inset Newline newline
 \end_inset
@@ -326,10 +341,12 @@ segments(x)
 \end_layout
 
 \begin_layout Chunk
+
 names(x)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -338,33 +355,49 @@ names(x)
 \end_layout
 
 \begin_layout Chunk
+
 <<get_reads>>=
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(x, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(start(x, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(start(x, names(x)[3]))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Section
-Preprocessing
+Normalization
 \end_layout
 
 \begin_layout Standard
-The data is preprocessed, assuming a Poisson distribution for the loss of
- bases around each TSS.
- The computation can be performed with a fast approximation of the distribution
+The normalization reduces the noise by shrinking the counts towards zero.
+ This step is intended to eliminate false positive counts as well as making
+ further analyses more robust by reducing the impact of large counts.
+ Such a shrinkage or regularization procedure constitutes a well-established
+ strategy in statistics to make predictions conservative, i.e.
+ to reduce the number of false positive predictions.
+ To enhance the shrinkage of isolated counts in comparison to counts in
+ regions of strong transcriptional activity, the information of consecutive
+ genomic positions in the measurements is regarded by evaluating differences
+ between adjacent count estimates.
+\end_layout
+
+\begin_layout Standard
+The computation can be performed with a fast approximation of the distribution
  based on all reads, or fitted explicitly for each segment.
  On platforms supporting the 
 \begin_inset ERT
@@ -380,18 +413,21 @@ Rpackage{multicore}
 \end_inset
 
  package, the fitting can be parallelized over multiple processor cores
- in order to increase computing speed.
+ in order to decrease computation time.
 \end_layout
 
 \begin_layout Chunk
+
 <<normalize_ratio>>=
 \end_layout
 
 \begin_layout Chunk
+
 yRatio <- normalize(x)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -400,22 +436,27 @@ yRatio <- normalize(x)
 \end_layout
 
 \begin_layout Chunk
+
 <<normalize_fit>>=
 \end_layout
 
 \begin_layout Chunk
+
 yFit <- normalize(x, fit=TRUE)
 \end_layout
 
 \begin_layout Chunk
+
 yFit
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(yFit, 3))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -424,52 +465,90 @@ head(reads(yFit, 3))
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_normalize_fit, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(yFit, 3)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Section
-Identifying Start Sites
+Identifying transcription start sites
 \end_layout
 
 \begin_layout Standard
-For identifying the TSS, peaks in the normalized counts are detected.
- Reads below an exponential background are iteratively added to the neighboring
- peaks.
+After normalization of the count data, an iterative algorithm is applied
+ for each segment to identify the TSS.
+ The expected number of false positive counts is initialized with a default
+ value given by the read frequency in the whole data set.
+ The position with the largest counts above is identified as a TSS, if the
+ expected transcription level is at least one read above the expected number
+ of false positive reads.
+ The transcription levels for all TSS are calculated by adding all counts
+ to their nearest neighbor TSS.
+\end_layout
+
+\begin_layout Standard
+Then, the expected number of false positive reads is updated by convolution
+ with exponential kernels.
+ The decay rates 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rfunarg{tau}
+\end_layout
+
+\end_inset
+
+ in 3' direction and towards the 5'-end can be chosen differently to account
+ for the fact that false positive counts are preferably found in 5' direction
+ of a TSS.
+ This procedure is iterated as long as the set of TSS increases.
 \end_layout
 
 \begin_layout Chunk
+
 <<identify>>=
 \end_layout
 
 \begin_layout Chunk
+
 z <- identify(yFit)
 \end_layout
 
 \begin_layout Chunk
+
 z
 \end_layout
 
 \begin_layout Chunk
+
 head(segments(z))
 \end_layout
 
 \begin_layout Chunk
+
 head(tss(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -478,14 +557,17 @@ head(reads(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_identify, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(z, 3)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -514,7 +596,20 @@ Rmethod{plot}
  In the following, we omit the the plotting of the threshold and the ratio
  estimates, as well as adapt the representation of some components.
  For a detailed description on the individual settings, please refer to
- the manual pages of the package.
+ the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{plot}
+\end_layout
+
+\end_inset
+
+ documentation of this package.
 \end_layout
 
 \begin_layout Chunk
@@ -522,38 +617,47 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_custom, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(z, 4,
 \end_layout
 
 \begin_layout Chunk
+
 ratio=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 threshold=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 baseline=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
 \end_layout
 
 \begin_layout Chunk
+
 countsArgs=list(type="h", col="darkgray", pch=NA),
 \end_layout
 
 \begin_layout Chunk
+
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -647,54 +751,67 @@ Rpackage{rtracklayer}
 \end_layout
 
 \begin_layout Chunk
+
 <<convert_iranges>>=
 \end_layout
 
 \begin_layout Chunk
+
 readsRd <- readsAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 segmentsRd <- segmentsAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 tssRd <- tssAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 tssRd
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<export_rtracklayer>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(rtracklayer)
 \end_layout
 
 \begin_layout Chunk
+
 tmpFile <- tempfile()
 \end_layout
 
 \begin_layout Chunk
+
 export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -710,14 +827,17 @@ Session info
 \end_layout
 
 \begin_layout Chunk
+
 <<sessionInfo, results=tex, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 toLatex(sessionInfo(), locale=FALSE)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 

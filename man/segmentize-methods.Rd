@@ -11,7 +11,7 @@
 }
 
 \description{
-  Import sequence read count data and transform it into segments. *missing*
+  Import sequence read count data and transform it into segments.
 }
 
 \usage{
@@ -71,8 +71,6 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   respectively. Usage of the \code{region} argument is beneficial if the
   location of potential TSS can be contrained below the level of
   chromosomes and strands.
-
-  *missing*
 }
 
 \value{

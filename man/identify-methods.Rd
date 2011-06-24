@@ -48,7 +48,22 @@ multicore=TRUE, ...)
 }
 
 \details{
-  *missing*
+  After normalization of the count data, an iterative algorithm is
+  applied for each segment to identify the TSS.
+
+  The expected number of false positive counts is initialized with a
+  default value given by the read frequency in the whole data set. The
+  position with the largest counts above is identified as a TSS, if the
+  expected transcription level is at least one read above the expected
+  number of false positive reads. The transcription levels for all TSS
+  are calculated by adding all counts to their nearest neighbor TSS.
+
+  Then, the expected number of false positive reads is updated by
+  convolution with exponential kernels. The decay rates \eqn{\tau}{tau}
+  in 3' direction and towards the 5'-end can be chosen differently to
+  account for the fact that false positive counts are preferably found
+  in 5' direction of a TSS. This procedure is iterated as long as the
+  set of TSS increases.
 
   In order to distribute the identification step over multiple processor
   cores, the \code{mclapply} function of the \pkg{multicore} package can

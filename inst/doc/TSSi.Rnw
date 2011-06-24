@@ -56,13 +56,14 @@ set.seed(1)
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
 @
 
+\selectlanguage{english}%
 
 \section{Introduction}
 
 Along with the advances in high-throughput sequencing, the detection
 of transcription start sites \emph{(TSS)} using CAP-capture techniques
 has evolved recently. While many experimental applications exist,
-is the analysis of such data still non-trivial. Approaching this,
+the analysis of such data is still non-trivial. Approaching this,
 the \Rpackage{TSSi} package offers a flexible statistical preprocessing
 for CAP-capture data and an automated identification of start sites.
 
@@ -71,12 +72,12 @@ for CAP-capture data and an automated identification of start sites.
 
 In this vignette we use experimental CAP-capture data obtained with
 Solexa sequencing. The data was mapped to the genome using the bowtie
-algorithm and further processed, such that each the number of the
-5' reads for each position are available. The data frame \Rvar{readData}
-contains the chromosome, the strand, the 5' position of the reads,
-and the total number of reads at that position. Further, regions based
-on existing annotation are also provided; this is useful for performing
-the following the analysis steps.
+algorithm and processed, such that the number of the 5' end of reads
+for each position are available. The data frame \Rvar{readData} contains
+the chromosome, the strand, the 5' position of the reads, and the
+total number of reads at that position. Further, regions based on
+existing annotation are also provided which are used to devide the
+data into independent subsets for analysis.
 
 <<load_data>>=
 library(TSSi)
@@ -84,6 +85,7 @@ data(readData)
 head(readData)
 @
 
+\selectlanguage{english}%
 
 \section{Segment read data}
 
@@ -101,6 +103,7 @@ detach(readData)
 x
 @
 
+\selectlanguage{english}%
 The final segments and the associated read data can be assessed with
 several \Rmethod{get} methods. The data from individual segments
 can be called either by its name or an index. Each segment can easily
@@ -118,15 +121,26 @@ head(start(x, 3))
 head(start(x, names(x)[3]))
 @
 
+\selectlanguage{english}%
 
-\section{Preprocessing}
+\section{Normalization}
 
-The data is preprocessed, assuming a Poisson distribution for the
-loss of bases around each TSS. The computation can be performed with
-a fast approximation of the distribution based on all reads, or fitted
-explicitly for each segment. On platforms supporting the \Rpackage{multicore}
-package, the fitting can be parallelized over multiple processor cores
-in order to increase computing speed.
+The normalization reduces the noise by shrinking the counts towards
+zero. This step is intended to eliminate false positive counts as
+well as making further analyses more robust by reducing the impact
+of large counts. Such a shrinkage or regularization procedure constitutes
+a well-established strategy in statistics to make predictions conservative,
+i.e. to reduce the number of false positive predictions. To enhance
+the shrinkage of isolated counts in comparison to counts in regions
+of strong transcriptional activity, the information of consecutive
+genomic positions in the measurements is regarded by evaluating differences
+between adjacent count estimates.
+
+The computation can be performed with a fast approximation of the
+distribution based on all reads, or fitted explicitly for each segment.
+On platforms supporting the \Rpackage{multicore} package, the fitting
+can be parallelized over multiple processor cores in order to decrease
+computation time.
 
 <<normalize_ratio>>=
 yRatio <- normalize(x)
@@ -142,12 +156,24 @@ head(reads(yFit, 3))
 plot(yFit, 3)
 @
 
+\selectlanguage{english}%
 
-\section{Identifying Start Sites}
+\section{Identifying transcription start sites}
 
-For identifying the TSS, peaks in the normalized counts are detected.
-Reads below an exponential background are iteratively added to the
-neighboring peaks.
+After normalization of the count data, an iterative algorithm is applied
+for each segment to identify the TSS. The expected number of false
+positive counts is initialized with a default value given by the read
+frequency in the whole data set. The position with the largest counts
+above is identified as a TSS, if the expected transcription level
+is at least one read above the expected number of false positive reads.
+The transcription levels for all TSS are calculated by adding all
+counts to their nearest neighbor TSS.
+
+Then, the expected number of false positive reads is updated by convolution
+with exponential kernels. The decay rates \Rfunarg{tau} in 3' direction
+and towards the 5'-end can be chosen differently to account for the
+fact that false positive counts are preferably found in 5' direction
+of a TSS. This procedure is iterated as long as the set of TSS increases.
 
 <<identify>>=
 z <- identify(yFit)
@@ -161,6 +187,7 @@ head(reads(z, 3))
 plot(z, 3)
 @
 
+\selectlanguage{english}%
 
 \section{Customizing figures}
 
@@ -170,7 +197,7 @@ arguments can be set, supplying them in the form of named lists. In
 the following, we omit the the plotting of the threshold and the ratio
 estimates, as well as adapt the representation of some components.
 For a detailed description on the individual settings, please refer
-to the manual pages of the package.
+to the \Rmethod{plot} documentation of this package.
 
 
 <<plot_custom, fig=TRUE, echo=TRUE>>=
@@ -183,6 +210,7 @@ countsArgs=list(type="h", col="darkgray", pch=NA),
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
+\selectlanguage{english}%
 
 \section{Converting and exporting results}
 
@@ -207,6 +235,7 @@ export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 @
 
+\selectlanguage{english}%
 \newpage{}
 
 

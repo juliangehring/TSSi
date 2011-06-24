@@ -13,7 +13,7 @@
 }
 
 \description{
-  Plot methods for the \pkg{TSSi} package.
+  Plot the data and results of the \pkg{TSSi} package.
 }
 
 \usage{

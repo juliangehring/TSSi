@@ -8,10 +8,8 @@
 \title{CAP capture data}
 
 \description{
-  Results from a 5'-CAP capture experiment, after mapping the reads to
-  the genome.
-
-  *missing*
+  Data of a 5'-CAP capture experiment, after mapping the reads to the
+  genome.
 }
 
 \usage{data(readData)}
@@ -21,7 +19,7 @@
     \item{readData}{Data frame with results from a 5'-CAP capture
       experiment, with the columns:}
     \describe{
-      \item{chromosome}{Chromosomes}
+      \item{chromosome}{Chromosome the read is mapped to.}
       \item{region}{Predefined region based on annotations, which can be treated
 	independently in the analysis.}
       \item{start}{Start position, given as bp, of the 5' end of the
@@ -34,7 +32,11 @@
 }
 
 \details{
-  *missing*
+  The transcription data was mapped using the bowtie software. Then, the
+  positions of 5' ends of each read were extracted and the number of
+  reads at each position counted.
+
+  For further details, please see the publication.
 }
 
 \seealso{
@@ -63,7 +65,9 @@ data(readData)
 }
 
 \source{
-  *missing*
+  Rensing et al., 2011.
+
+  in preparation
 }
 
 \keyword{datasets}
