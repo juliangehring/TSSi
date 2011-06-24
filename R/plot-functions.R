@@ -32,7 +32,7 @@
   expectArgs <- if(expect)
     .getArgs("expectArgs", args,
              list(x=start, y=reads$expect),
-             list(pch=20, col="#F4BC7A", type="p", lwd=0.5, lty=1, cex=0.75)) ## 1
+             list(pch=20, col="#F4BC7A", type="p", lwd=0.75, lty=1, cex=0.75)) ## 1
 
   countsArgs <- if(counts)
     .getArgs("countsArgs", args,
@@ -52,7 +52,7 @@
   tssArgs <- if(tss)
     .getArgs("tssArgs", args,
              list(x=tss(x, y)$pos, y=tss(x, y)$reads),
-             list(pch=20, cex=1.8, col="#840472", lwd=2, lty=1)) ## 5
+             list(pch=20, cex=1.8, col="#840472", lwd=2, lty=1, type="o")) ## 5
 
   ## collect args
   lArgs <- list(expectArgs, countsArgs, ratioArgs, fitArgs, tssArgs)
@@ -67,8 +67,9 @@
   if(legend <- legend && any(ind)) {
     varNames <- c("expect", "counts", "ratio", "fit", "tss")
     isLine <- !(.catLegend("type", lArgs) %in% c("p", "n"))
+    isPoint <- !(.catLegend("type", lArgs) %in% c("l", "n"))
     legend1 <- list(col=.catLegend("col", lArgs),
-                    pch=.catLegend("pch", lArgs),
+                    pch=ifelse(isPoint, .catLegend("pch", lArgs), NA),
                     lwd=ifelse(isLine, .catLegend("lwd", lArgs), NA),
                     lty=ifelse(isLine, .catLegend("lty", lArgs), NA))
     legend3 <- list(legend=varNames[ind], x="topleft")
