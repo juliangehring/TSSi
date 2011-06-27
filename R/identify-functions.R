@@ -11,7 +11,7 @@
     for(i in 1:n) {
       indTss[fn == max(fn)] <- TRUE
       bg <- .cumulativeReads(pos, counts, indTss, basal, tau, neighbor)
-      dif <- fun(counts, bg, indTss, pos, basal, tau) ## TODO assign by name?
+      dif <- fun(counts, bg, indTss, pos, basal, tau)
       fn <- dif$delta
       fn[indTss] <- -Inf
       if(all(fn < threshold))

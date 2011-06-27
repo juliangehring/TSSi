@@ -29,8 +29,6 @@ setMethod("segmentize",
   ## check for duplicate positions within the replicates
   if(any(diff(y$start) == 0 & diff(y$replicate) == 0))
     stop("Duplicated start positions within a replicate are not allowed.")
-  
-  ## TODO: check types
 
   ## find boundaries of segments
   segmentNames <- sprintf(pattern, chr, strand, region)

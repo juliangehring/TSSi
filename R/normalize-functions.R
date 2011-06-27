@@ -40,15 +40,15 @@
     
     rOpt <- if(optimizer %in% c("optim", "all"))
       optim(fn=.assess, gr=.assessGrad, par=ratio, method="L-BFGS-B",
-            lower=lower, control=list(trace=0, maxit=500), ## CHCK: maxit
-            counts=counts, lambda=lambda, basal=basal, nRep=nRep) ## TODO: arg names
+            lower=lower, control=list(trace=0, maxit=500),
+            counts=counts, lambda=lambda, basal=basal, nRep=nRep)
     else
       list(value=Inf)
     
     rTrust <- if(optimizer %in% c("bobyqa", "all"))
       bobyqa(fn=.assess, par=ratio, lower=lower,
-             control=list(iprint=0, maxfun=10*n^2), ## CHCK: maxfun
-             counts=counts, lambda=lambda, basal=basal, nRep=NULL) ## TODO: arg names
+             control=list(iprint=0, maxfun=10*n^2),
+             counts=counts, lambda=lambda, basal=basal, nRep=NULL)
     else
       list(fval=Inf)
 
