@@ -8,7 +8,7 @@ void assessAbsGrad(double *ratio, double *basal, int *nin, double *dass) {
   *dass = 0;
 
   for(i=0; i<*nin; i++) {
-    fr = ratio[i]-*basal;
+    fr = round((ratio[i]-*basal)*1e4)/1e4;
     *dass += (fr > 0)-(fr < 0);
   }
 
