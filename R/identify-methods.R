@@ -13,6 +13,10 @@ setMethod("identify",
   ## get parameters
   basal <- parameters(obj, "basal")
   readCol <- if(fit <- parameters(obj, "fit")) "fit" else "ratio"
+  tau <- rep(tau, length.out=2)
+  
+  ## check arguments
+  .checkIdentify(threshold, tau, neighbor, fun, multicore)
 
   ## extract normalized data, apply for each segment
   y <-

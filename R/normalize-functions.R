@@ -100,3 +100,17 @@
 
   return(res)
 }
+
+
+## checkNormalize
+.checkNormalize <- function(fun, offset, basal, lambda, fit, multicore, optimizer) {
+
+  .checkVariable(fun, class="function")
+  .checkVariable(offset, class="integer", length=1)
+  .checkVariable(basal, class="numeric", length=1, range=c(0, Inf))
+  .checkVariable(lambda, class="numeric", length=2, range=c(0, Inf))
+  .checkVariable(fit, class="logical", length=1)
+  .checkVariable(multicore, class="logical", length=1)
+  .checkVariable(optimizer, class="character", length=1)
+  
+}

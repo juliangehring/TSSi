@@ -73,3 +73,15 @@
 
   return(res)
 }
+
+
+## checkIdentify ##
+.checkIdentify <- function(threshold, tau, neighbor, fun, multicore) {
+
+  .checkVariable(threshold, class="numeric", length=1, range=c(0, Inf))
+  .checkVariable(tau, class="numeric", length=2, range=c(0, Inf))
+  .checkVariable(neighbor, class="logical", length=1)
+  .checkVariable(fun, class="function")
+  .checkVariable(multicore, class="logical", length=1)
+
+}

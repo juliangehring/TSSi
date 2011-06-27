@@ -12,8 +12,14 @@ setMethod("normalize",
                    lambda=c(1, 1), fit=FALSE, multicore=TRUE,
                    optimizer="all", ...) {
 
+  ## expand lambda if needed
+  lambda <- rep(lambda, length.out=2)
+
   ## match args
   optimizer <- match.arg(optimizer, c("optim", "bobyqa", "all"))
+
+  ## check arguments
+  .checkNormalize(fun, offset, basal, lambda, fit, multicore, optimizer)
 
   ## calculate ratio
   maxRead <- max(sapply(obj@reads, .colFun, col="counts", fun=max))
