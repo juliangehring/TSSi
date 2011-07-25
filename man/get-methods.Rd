@@ -50,7 +50,7 @@
   (inherited):
   \describe{
     \item{start:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the read start sites. The second argument selects the
       individual segment; if missing returns a list containing the
@@ -58,19 +58,19 @@
     }
     
     \item{end:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the read end sites; see \code{start}.
     }
 
     \item{counts:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the raw read counts; see \code{start}.
     }
     
     \item{reads:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get all the read data of the segments, including
       e.g. \sQuote{start}, \sQuote{counts}, \sQuote{replicate}; see
@@ -78,7 +78,7 @@
     }
     
     \item{segments:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the information associated with the segments, e.g. chromosome,
       strand, region. The optional second and third arguments select the
@@ -86,20 +86,20 @@
     }
     
     \item{timestamp:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the creation timestamp of the object.
     }
     
     \item{annotation:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the annotation data, as passed through the \code{annotation}
       argument.
     }
     
     \item{[:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Subset the object, by name or index.
     }
@@ -108,14 +108,14 @@
   For class \code{TssNorm}, \code{TssResult} (inherited):
   \describe{
     \item{ratio:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Get the normalized reads based on the Poisson ratios;
       see \code{start}.
     }
     
     \item{fit:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Get the normalized reads based on the fit; see \code{start}.
     }
@@ -124,13 +124,13 @@
   For class \code{TssResult}:
   \describe{
     \item{expect:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Get the expectation for non-specific reads; see \code{start}.
     }
     
     \item{tss:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Get the identified transcription start sites; see \code{start}.
     }

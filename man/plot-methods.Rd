@@ -34,7 +34,7 @@ plot(x, y, ...)
   Visualize the raw data:
   \describe{
     \item{plot:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       \code{plot(x, y, counts=TRUE, legend=TRUE, ...)}
     }
@@ -43,7 +43,7 @@ plot(x, y, ...)
   Visualize the normalized data:
   \describe{
     \item{plot:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       \code{plot(x, y, counts=TRUE, ratio=TRUE, fit=TRUE, legend=TRUE,
 	...)}
@@ -53,7 +53,7 @@ plot(x, y, ...)
   Visualize the normalized data along with the identified TSS:
   \describe{
     \item{plot:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       \code{plot(x, y, counts=TRUE, ratio=TRUE, fit=TRUE, expect=FALSE,
 	tss=TRUE, threshold=TRUE, rug=TRUE, legend=TRUE, ...)}

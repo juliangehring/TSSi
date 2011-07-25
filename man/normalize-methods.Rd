@@ -15,12 +15,12 @@
 }
 
 \usage{
-normalize(obj, fun=mean, offset=10L, basal=1e-4, lambda=c(1, 1),
+normalize(x, fun=mean, offset=10L, basal=1e-4, lambda=c(1, 1),
 fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
 \arguments{
-  \item{obj}{Object of class \code{TssData} with raw data to normalize.} 
+  \item{x}{Object of class \code{TssData} with raw data to normalize.}
   \item{fun}{Function used to average over replicates (default:
     \code{mean}).}
   \item{offset}{Integer defining the number of bases add to the ends of
@@ -49,9 +49,9 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   Normalize read data:
   \describe{
     \item{normalize:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
-      \code{normalize(obj, ...)}
+      \code{normalize(x, ...)}
     }
   }
 }
@@ -85,7 +85,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   cores, the \code{mclapply} function of the \pkg{multicore} package can
   be used. For this, the \pkg{multicore} package has to be loaded
   manually before starting the computation, additional parameters are
-  passed via the \code{...} argument, e.g.as \code{normalize(obj,
+  passed via the \code{...} argument, e.g.as \code{normalize(x,
     mc.ncores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to
   \code{FALSE}.

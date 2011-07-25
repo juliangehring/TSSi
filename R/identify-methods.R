@@ -1,47 +1,47 @@
 ## identify ##
 setGeneric("identify",
-           function(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
+           function(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
                     fun=subtractExpectation, multicore=TRUE, ...)
            standardGeneric("identify")
            )
 
 setMethod("identify",
-          signature(obj="TssNorm"),
-          function(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
+          signature(x="TssNorm"),
+          function(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
                    fun=subtractExpectation, multicore=TRUE,  ...) {
 
   ## get parameters
-  basal <- parameters(obj, "basal")
-  readCol <- if(fit <- parameters(obj, "fit")) "fit" else "ratio"
+  basal <- parameters(x, "basal")
+  readCol <- if(fit <- parameters(x, "fit")) "fit" else "ratio"
 
   ## extract normalized data, apply for each segment
   y <-
     if(.useMulticore(multicore))
-      multicore::mclapply(obj@reads, .identifyCore,
+      multicore::mclapply(x@reads, .identifyCore,
                           basal=basal, tau=tau, threshold=threshold,
                           fun=fun, readCol=readCol, neighbor=neighbor,
                           ...)
     else
-      lapply(obj@reads, .identifyCore,
+      lapply(x@reads, .identifyCore,
              basal=basal, tau=tau, threshold=threshold, fun=fun,
              readCol=readCol, neighbor=neighbor)
   
-  names(y) <- names(obj@reads)
+  names(y) <- names(x@reads)
 
   tss <- lapply(y, '[[', "tss")
   dif <- lapply(y, '[[', "dif")
-  reads <- mapply(cbind, obj@reads, dif, SIMPLIFY=FALSE)
+  reads <- mapply(cbind, x@reads, dif, SIMPLIFY=FALSE)
 
-  segments <- segments(obj)
+  segments <- segments(x)
   segments$nTss <- sapply(tss, nrow)
 
   ## store results
-  pars <- c(obj@parameters,
+  pars <- c(x@parameters,
             list(tau=tau, threshold=threshold, fun=fun, readCol=readCol,
                  neighbor=neighbor))
 
   res <- new("TssResult",
-             obj, reads=reads, segments=segments, tss=tss, parameters=pars,
+             x, reads=reads, segments=segments, tss=tss, parameters=pars,
              timestamp=Sys.time())
   
   return(res)

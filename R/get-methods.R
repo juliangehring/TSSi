@@ -2,15 +2,15 @@
 
 ## start ##
 setGeneric("start",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("start")
            )
 
 setMethod("start",
-          signature(obj="TssData"),
-          function(obj, ind) {
+          signature(x="TssData"),
+          function(x, ind) {
 
-  res <- .getSlotIndex(obj, ind, "reads", "start")
+  res <- .getSlotIndex(x, ind, "reads", "start")
 
   return(res)
 }
@@ -19,15 +19,15 @@ setMethod("start",
 
 ## end ##
 setGeneric("end",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("end")
            )
 
 setMethod("end",
-          signature(obj="TssData"),
-          function(obj, ind) {
+          signature(x="TssData"),
+          function(x, ind) {
 
-  res <- .getSlotIndex(obj, ind, "reads", "end")
+  res <- .getSlotIndex(x, ind, "reads", "end")
   
   return(res)
 }
@@ -36,15 +36,15 @@ setMethod("end",
 
 ## counts ##
 setGeneric("counts",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("counts")
            )
 
 setMethod("counts",
-          signature(obj="TssData"),
-          function(obj, ind) {
+          signature(x="TssData"),
+          function(x, ind) {
             
-  res <- .getSlotIndex(obj, ind, "reads", "counts")
+  res <- .getSlotIndex(x, ind, "reads", "counts")
 
   return(res)
 }
@@ -53,15 +53,15 @@ setMethod("counts",
 
 ## ratio ##
 setGeneric("ratio",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("ratio")
            )
 
 setMethod("ratio",
-          signature(obj="TssNorm"),
-          function(obj, ind) {
+          signature(x="TssNorm"),
+          function(x, ind) {
             
-  res <- .getSlotIndex(obj, ind, "reads", "ratio")
+  res <- .getSlotIndex(x, ind, "reads", "ratio")
 
   return(res)
 }
@@ -70,15 +70,15 @@ setMethod("ratio",
 
 ## fit ##
 setGeneric("fit",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("fit")
            )
 
 setMethod("fit",
-          signature(obj="TssNorm"),
-          function(obj, ind) {
+          signature(x="TssNorm"),
+          function(x, ind) {
    
-  res <- .getSlotIndex(obj, ind, "reads", "fit")
+  res <- .getSlotIndex(x, ind, "reads", "fit")
 
   return(res)
 }
@@ -87,15 +87,15 @@ setMethod("fit",
 
 ## delta ##
 setGeneric("delta",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("delta")
            )
 
 setMethod("delta",
-          signature(obj="TssResult"),
-          function(obj, ind) {
+          signature(x="TssResult"),
+          function(x, ind) {
    
-  res <- .getSlotIndex(obj, ind, "reads", "delta")
+  res <- .getSlotIndex(x, ind, "reads", "delta")
 
   return(res)
 }
@@ -104,15 +104,15 @@ setMethod("delta",
 
 ## expect ##
 setGeneric("expect",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("expect")
            )
 
 setMethod("expect",
-          signature(obj="TssResult"),
-          function(obj, ind) {
+          signature(x="TssResult"),
+          function(x, ind) {
    
-  res <- .getSlotIndex(obj, ind, "reads", "expect")
+  res <- .getSlotIndex(x, ind, "reads", "expect")
 
   return(res)
 }
@@ -121,15 +121,15 @@ setMethod("expect",
 
 ## reads ##
 setGeneric("reads",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("reads")
            )
 
 setMethod("reads",
-          signature(obj="TssData"),
-          function(obj, ind) {
+          signature(x="TssData"),
+          function(x, ind) {
 
-  res <- .getSlotIndex(obj, ind, "reads")
+  res <- .getSlotIndex(x, ind, "reads")
 
   return(res)
 }
@@ -138,15 +138,15 @@ setMethod("reads",
 
 ## segments ##
 setGeneric("segments",
-           function(obj, row, column, ...)
+           function(x, row, column, ...)
            standardGeneric("segments")
            )
 
 setMethod("segments",
-          signature(obj="TssData"),
-          function(obj, row, column, drop=FALSE) {
+          signature(x="TssData"),
+          function(x, row, column, drop=FALSE) {
 
-  res <- obj@segments[row, column, drop]
+  res <- x@segments[row, column, drop]
 
   return(res)
 }
@@ -155,15 +155,15 @@ setMethod("segments",
 
 ## timestamp ##
 setGeneric("timestamp",
-           function(obj)
+           function(x)
            standardGeneric("timestamp")
            )
 
 setMethod("timestamp",
-          signature(obj="TssData"),
-          function(obj) {
+          signature(x="TssData"),
+          function(x) {
 
-  res <- obj@timestamp
+  res <- x@timestamp
 
   return(res)
 }
@@ -172,15 +172,15 @@ setMethod("timestamp",
 
 ## annotation ##
 setGeneric("annotation",
-           function(obj)
+           function(x)
            standardGeneric("annotation")
            )
 
 setMethod("annotation",
-          signature(obj="TssData"),
-          function(obj) {
+          signature(x="TssData"),
+          function(x) {
 
-  res <- obj@annotation
+  res <- x@annotation
 
   return(res)
 }
@@ -189,15 +189,15 @@ setMethod("annotation",
 
 ## parameters ##
 setGeneric("parameters",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("parameters")
            )
 
 setMethod("parameters",
-          signature(obj="TssNorm"),
-          function(obj, ind) {
+          signature(x="TssNorm"),
+          function(x, ind) {
 
-  res <- .getSlotIndex(obj, ind, "parameters")
+  res <- .getSlotIndex(x, ind, "parameters")
 
   return(res)
 }
@@ -206,15 +206,15 @@ setMethod("parameters",
 
 ## tss ##
 setGeneric("tss",
-           function(obj, ind)
+           function(x, ind)
            standardGeneric("tss")
            )
 
 setMethod("tss",
-          signature(obj="TssResult"),
-          function(obj, ind) {
+          signature(x="TssResult"),
+          function(x, ind) {
 
-  res <- .getSlotIndex(obj, ind, "tss")
+  res <- .getSlotIndex(x, ind, "tss")
 
   return(res)
 }

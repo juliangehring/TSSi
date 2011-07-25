@@ -15,12 +15,12 @@
 }
 
 \usage{
-identify(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
+identify(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
 fun=subtractExpectation, multicore=TRUE, ...)
 }
 
 \arguments{
-  \item{obj}{Object of class \code{TssNorm} with normalized data.}
+  \item{x}{Object of class \code{TssNorm} with normalized data.}
   \item{threshold}{Numeric with the minimal number of reads to be
     treated as a potential TSS.}
   \item{tau}{Numeric vector of length two specifying the
@@ -43,9 +43,9 @@ fun=subtractExpectation, multicore=TRUE, ...)
   Identify TSS:
   \describe{
     \item{identify:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
-      \code{identify(obj, ...)}
+      \code{identify(x, ...)}
     }
   }
 }
@@ -72,7 +72,7 @@ fun=subtractExpectation, multicore=TRUE, ...)
   cores, the \code{mclapply} function of the \pkg{multicore} package can
   be used. For this, the \pkg{multicore} package has to be loaded
   manually before starting the computation, additional parameters are
-  passed via the \code{...} argument, e.g.as \code{normalize(obj,
+  passed via the \code{...} argument, e.g.as \code{normalize(x,
     mc.ncores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to
   \code{FALSE}. Pleas note that the identification step is normally very

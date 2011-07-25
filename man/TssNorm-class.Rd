@@ -33,7 +33,7 @@
   identify methods:
   \describe{
     \item{identify:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Identify TSS in the normalized data.
     }
@@ -42,20 +42,20 @@
   get methods:
   \describe{
     \item{ratio:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Get the normalized reads based on the Poisson ratios,
       see\code{start}.
     }
     
     \item{fit:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Get the normalized reads based on the fit, see\code{start}.
     }
 
     \item{[:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Subset the object, by name or index.
     }

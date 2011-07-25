@@ -35,21 +35,21 @@ tssAsRangedData(x)
 \section{Methods}{
   \describe{
     \item{readsAsRangedData:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Convert the reads, as obtained by the \code{reads} method, to an
       object of class \code{RangedData}.
     }
 
     \item{segmentsAsRangedData:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Convert the segments, as obtained by the \code{segments} method,
       to an object of class \code{RangedData}.
     }
     
     \item{tssAsRangedData:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Convert the TSS predictions, as obtained by the \code{tss} method,
       to an object of class \code{RangedData}.
