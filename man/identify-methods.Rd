@@ -3,6 +3,7 @@
 \docType{methods}
 
 \alias{identifyStartSites}
+\alias{identifyStartSites-TSSi}
 \alias{identifyStartSites,TssNorm-method}
 \alias{idenfify-methods}
 
@@ -96,7 +97,7 @@ fun=subtractExpectation, multicore=TRUE, ...)
   Methods:
   \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
   \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
-  \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
+  \code{\link[TSSi]{plot-methods}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}

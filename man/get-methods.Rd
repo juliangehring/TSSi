@@ -2,34 +2,46 @@
 
 \docType{methods}
 
+\alias{get-TSSi}
 \alias{get-methods}
-\alias{start}
+\alias{start-TSSi}
 \alias{start,TssData-method}
-\alias{end}
+\alias{end-TSSi}
 \alias{end,TssData-method}
 \alias{counts}
+\alias{counts-TSSi}
 \alias{counts,TssData-method}
 \alias{reads}
+\alias{reads-TSSi}
 \alias{reads,TssData-method}
 \alias{segments}
+\alias{segments-TSSi}
 \alias{segments,TssData-method}
 \alias{timestamp}
+\alias{timestamp-TSSi}
 \alias{timestamp,TssData-method}
 \alias{annotation}
+\alias{annotation-TSSi}
 \alias{annotation,TssData-method}
-\alias{names}
+\alias{names-TSSi}
 \alias{names,TssData-method}
 \alias{ratio}
+\alias{ratio-TSSi}
 \alias{ratio,TssNorm-method}
 \alias{fit}
+\alias{fit-TSSi}
 \alias{fit,TssNorm-method}
 \alias{parameters}
+\alias{parameters-TSSi}
 \alias{parameters,TssNorm-method}
 \alias{delta}
+\alias{delta-TSSi}
 \alias{delta,TssResult-method}
 \alias{expect}
+\alias{expect-TSSi}
 \alias{expect,TssResult-method}
 \alias{tss}
+\alias{tss-TSSi}
 \alias{tss,TssResult-method}
 \alias{[,TssData-method}
 \alias{[,TssNorm-method}
@@ -153,7 +165,7 @@
   Methods:
   \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
   \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
-  \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
+  \code{\link[TSSi]{plot-methods}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}

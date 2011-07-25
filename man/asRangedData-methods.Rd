@@ -3,12 +3,16 @@
 \docType{methods}
 
 \alias{asRangedData}
+\alias{asRangedData-TSSi}
 \alias{asRangedData-methods}
 \alias{readsAsRangedData}
+\alias{readsAsRangedData-TSSi}
 \alias{readsAsRangedData,TssData-method}
 \alias{segmentsAsRangedData}
+\alias{segmentsAsRangedData-TSSi}
 \alias{segmentsAsRangedData,TssData-method}
 \alias{tssAsRangedData}
+\alias{tssAsRangedData-TSSi}
 \alias{tssAsRangedData,TssResult-method}
 
 \title{
@@ -84,7 +88,7 @@ tssAsRangedData(x)
   Methods:
   \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
   \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
-  \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
+  \code{\link[TSSi]{plot-methods}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}

@@ -3,8 +3,9 @@
 \docType{class}
 
 \alias{TssData}
+\alias{TssData-TSSi}
 \alias{TssData-class}
-\alias{show}
+\alias{show-TSSi}
 \alias{show,TssData-method}
 
 \title{
@@ -142,7 +143,7 @@
   Methods:
   \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
   \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
-  \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
+  \code{\link[TSSi]{plot-methods}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
   \code{\link[TSSi]{subtract-functions}}

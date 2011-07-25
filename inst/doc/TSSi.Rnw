@@ -56,7 +56,6 @@ set.seed(1)
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
 @
 
-\selectlanguage{english}%
 \begin{abstract}
 Along with the advances in high-throughput sequencing, the detection
 of transcription start sites \emph{(TSS)} using CAP-capture techniques
@@ -86,7 +85,7 @@ do not map to random positions. On the one hand, these reads seem
 to occur sequence dependently and therefore cluster to certain genomic
 positions, on the other hand they are detected more frequently than
 being originated from real TSS. Because currently, there is no error
-model available describing such noise, the\Rpackage{TSSi} package
+model available describing such noise, the \Rpackage{TSSi} package
 implements an heuristic approach for an automated and flexible prediction
 of TSS. 
 
@@ -108,7 +107,6 @@ data(readData)
 head(readData)
 @
 
-\selectlanguage{english}%
 
 \section{Segment read data}
 
@@ -126,7 +124,6 @@ detach(readData)
 x
 @
 
-\selectlanguage{english}%
 The final segments and the associated read data can be assessed with
 several \Rmethod{get} methods. The data from individual segments
 can be called either by its name or an index. Each segment can easily
@@ -144,7 +141,6 @@ head(start(x, 3))
 head(start(x, names(x)[3]))
 @
 
-\selectlanguage{english}%
 
 \section{Normalization}
 
@@ -179,7 +175,6 @@ head(reads(yFit, 3))
 plot(yFit, 3)
 @
 
-\selectlanguage{english}%
 
 \section{Identifying transcription start sites}
 
@@ -210,7 +205,6 @@ head(reads(z, 3))
 plot(z, 3)
 @
 
-\selectlanguage{english}%
 
 \section{Customizing figures}
 
@@ -233,7 +227,6 @@ countsArgs=list(type="h", col="darkgray", pch=NA),
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
-\selectlanguage{english}%
 
 \section{Converting and exporting results}
 
@@ -258,7 +251,6 @@ export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 @
 
-\selectlanguage{english}%
 \newpage{}
 
 
