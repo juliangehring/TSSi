@@ -1,11 +1,6 @@
 ## get methods ##
 
 ## start ##
-setGeneric("start",
-           function(x, ind)
-           standardGeneric("start")
-           )
-
 setMethod("start",
           signature(x="TssData"),
           function(x, ind) {
@@ -18,11 +13,6 @@ setMethod("start",
 
 
 ## end ##
-setGeneric("end",
-           function(x, ind)
-           standardGeneric("end")
-           )
-
 setMethod("end",
           signature(x="TssData"),
           function(x, ind) {
