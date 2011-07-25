@@ -117,27 +117,27 @@ Julian Gehring, Clemens Kreutz
 \end_layout
 
 \begin_layout Chunk
+
 <<settings, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 set.seed(1)
 \end_layout
 
 \begin_layout Chunk
+
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1,
  1.5))))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
-\begin_layout Section
-Introduction
-\end_layout
-
-\begin_layout Standard
+\begin_layout Abstract
 Along with the advances in high-throughput sequencing, the detection of
  transcription start sites 
 \emph on
@@ -161,6 +161,53 @@ Rpackage{TSSi}
 
  package offers a flexible statistical preprocessing for CAP-capture data
  and an automated identification of start sites.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+High throughput sequencing has become an essential experimental approach
+ to investigate genomes and transcriptional processes.
+ While cDNA sequencing (RNA-seq) using random priming and/or fragmentation
+ of cDNA will result in a shallow distribution of reads typically biased
+ towards the 3’ end, approaches like CAP-capture enrich 5’ ends and result
+ in more clearly distinguishable peaks around the transcription start sites.
+\end_layout
+
+\begin_layout Standard
+Predicting the location of transcription start sites 
+\emph on
+(TSS)
+\emph default
+ is hampered by the existence of alternative TSS, i.e.
+ their number within regions of transcription is unknown.
+ In addition, measurements contain false positive counts.
+ Therefore, only the counts which are significantly larger than an expected
+ number of background reads are intended to be predicted as TSS.
+ The number of false positive reads increases in regions of transcriptional
+ activity and such reads obviously do not map to random positions.
+ On the one hand, these reads seem to occur sequence dependently and therefore
+ cluster to certain genomic positions, on the other hand they are detected
+ more frequently than being originated from real TSS.
+ Because currently, there is no error model available describing such noise,
+ the
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{TSSi}
+\end_layout
+
+\end_inset
+
+ package implements an heuristic approach for an automated and flexible
+ prediction of TSS.
+ 
 \end_layout
 
 \begin_layout Section
@@ -192,22 +239,27 @@ Rvar{readData}
 \end_layout
 
 \begin_layout Chunk
+
 <<load_data>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(TSSi)
 \end_layout
 
 \begin_layout Chunk
+
 data(readData)
 \end_layout
 
 \begin_layout Chunk
+
 head(readData)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -254,27 +306,33 @@ Rclass{TssData}
 \end_layout
 
 \begin_layout Chunk
+
 <<segmentize>>=
 \end_layout
 
 \begin_layout Chunk
+
 attach(readData)
 \end_layout
 
 \begin_layout Chunk
+
 x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region,
  strand=strand)
 \end_layout
 
 \begin_layout Chunk
+
 detach(readData)
 \end_layout
 
 \begin_layout Chunk
+
 x
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -317,6 +375,7 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
+
 <<get_segments>>=
 \begin_inset Newline newline
 \end_inset
@@ -325,10 +384,12 @@ segments(x)
 \end_layout
 
 \begin_layout Chunk
+
 names(x)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -337,22 +398,27 @@ names(x)
 \end_layout
 
 \begin_layout Chunk
+
 <<get_reads>>=
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(x, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(start(x, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(start(x, names(x)[3]))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -394,14 +460,17 @@ Rpackage{multicore}
 \end_layout
 
 \begin_layout Chunk
+
 <<normalize_ratio>>=
 \end_layout
 
 \begin_layout Chunk
+
 yRatio <- normalizeCounts(x)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -410,22 +479,27 @@ yRatio <- normalizeCounts(x)
 \end_layout
 
 \begin_layout Chunk
+
 <<normalize_fit>>=
 \end_layout
 
 \begin_layout Chunk
+
 yFit <- normalizeCounts(x, fit=TRUE)
 \end_layout
 
 \begin_layout Chunk
+
 yFit
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(yFit, 3))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -434,14 +508,17 @@ head(reads(yFit, 3))
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_normalize_fit, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(yFit, 3)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -484,30 +561,37 @@ Rfunarg{tau}
 \end_layout
 
 \begin_layout Chunk
+
 <<identify>>=
 \end_layout
 
 \begin_layout Chunk
+
 z <- identifyStartSites(yFit)
 \end_layout
 
 \begin_layout Chunk
+
 z
 \end_layout
 
 \begin_layout Chunk
+
 head(segments(z))
 \end_layout
 
 \begin_layout Chunk
+
 head(tss(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -516,14 +600,17 @@ head(reads(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_identify, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(z, 3)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -573,38 +660,47 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_custom, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(z, 4,
 \end_layout
 
 \begin_layout Chunk
+
 ratio=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 threshold=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 baseline=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
 \end_layout
 
 \begin_layout Chunk
+
 countsArgs=list(type="h", col="darkgray", pch=NA),
 \end_layout
 
 \begin_layout Chunk
+
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -698,54 +794,67 @@ Rpackage{rtracklayer}
 \end_layout
 
 \begin_layout Chunk
+
 <<convert_iranges>>=
 \end_layout
 
 \begin_layout Chunk
+
 readsRd <- readsAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 segmentsRd <- segmentsAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 tssRd <- tssAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 tssRd
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<export_rtracklayer>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(rtracklayer)
 \end_layout
 
 \begin_layout Chunk
+
 tmpFile <- tempfile()
 \end_layout
 
 \begin_layout Chunk
+
 export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -761,14 +870,17 @@ Session info
 \end_layout
 
 \begin_layout Chunk
+
 <<sessionInfo, results=tex, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 toLatex(sessionInfo(), locale=FALSE)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 

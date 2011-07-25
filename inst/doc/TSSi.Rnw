@@ -56,15 +56,39 @@ set.seed(1)
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
 @
 
-
-\section{Introduction}
-
+\selectlanguage{english}%
+\begin{abstract}
 Along with the advances in high-throughput sequencing, the detection
 of transcription start sites \emph{(TSS)} using CAP-capture techniques
 has evolved recently. While many experimental applications exist,
 the analysis of such data is still non-trivial. Approaching this,
 the \Rpackage{TSSi} package offers a flexible statistical preprocessing
 for CAP-capture data and an automated identification of start sites.
+\end{abstract}
+
+\section{Introduction}
+
+High throughput sequencing has become an essential experimental approach
+to investigate genomes and transcriptional processes. While cDNA sequencing
+(RNA-seq) using random priming and/or fragmentation of cDNA will result
+in a shallow distribution of reads typically biased towards the 3’
+end, approaches like CAP-capture enrich 5’ ends and result in more
+clearly distinguishable peaks around the transcription start sites.
+
+Predicting the location of transcription start sites \emph{(TSS)}
+is hampered by the existence of alternative TSS, i.e. their number
+within regions of transcription is unknown. In addition, measurements
+contain false positive counts. Therefore, only the counts which are
+significantly larger than an expected number of background reads are
+intended to be predicted as TSS. The number of false positive reads
+increases in regions of transcriptional activity and such reads obviously
+do not map to random positions. On the one hand, these reads seem
+to occur sequence dependently and therefore cluster to certain genomic
+positions, on the other hand they are detected more frequently than
+being originated from real TSS. Because currently, there is no error
+model available describing such noise, the\Rpackage{TSSi} package
+implements an heuristic approach for an automated and flexible prediction
+of TSS. 
 
 
 \section{Data set}
@@ -84,6 +108,7 @@ data(readData)
 head(readData)
 @
 
+\selectlanguage{english}%
 
 \section{Segment read data}
 
@@ -101,6 +126,7 @@ detach(readData)
 x
 @
 
+\selectlanguage{english}%
 The final segments and the associated read data can be assessed with
 several \Rmethod{get} methods. The data from individual segments
 can be called either by its name or an index. Each segment can easily
@@ -118,6 +144,7 @@ head(start(x, 3))
 head(start(x, names(x)[3]))
 @
 
+\selectlanguage{english}%
 
 \section{Normalization}
 
@@ -152,6 +179,7 @@ head(reads(yFit, 3))
 plot(yFit, 3)
 @
 
+\selectlanguage{english}%
 
 \section{Identifying transcription start sites}
 
@@ -182,6 +210,7 @@ head(reads(z, 3))
 plot(z, 3)
 @
 
+\selectlanguage{english}%
 
 \section{Customizing figures}
 
@@ -204,6 +233,7 @@ countsArgs=list(type="h", col="darkgray", pch=NA),
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
+\selectlanguage{english}%
 
 \section{Converting and exporting results}
 
@@ -228,6 +258,7 @@ export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 @
 
+\selectlanguage{english}%
 \newpage{}
 
 
