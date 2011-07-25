@@ -1,10 +1,10 @@
-\name{normalize-methods}
+\name{normalizeCounts-methods}
 
 \docType{methods}
 
-\alias{normalize}
-\alias{normalize,TssData-method}
-\alias{normalize-methods}
+\alias{normalizeCounts}
+\alias{normalizeCounts,TssData-method}
+\alias{normalizeCounts-methods}
 
 \title{
   Normalize methods
@@ -15,7 +15,7 @@
 }
 
 \usage{
-normalize(x, fun=mean, offset=10L, basal=1e-4, lambda=c(1, 1),
+normalizeCounts(x, fun=mean, offset=10L, basal=1e-4, lambda=c(1, 1),
 fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
@@ -48,10 +48,10 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 \section{Methods}{
   Normalize read data:
   \describe{
-    \item{normalize:}{
+    \item{normalizeCounts:}{
       \code{signature(x="TssData")}
     }{
-      \code{normalize(x, ...)}
+      \code{normalizeCounts(x, ...)}
     }
   }
 }
@@ -85,7 +85,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   cores, the \code{mclapply} function of the \pkg{multicore} package can
   be used. For this, the \pkg{multicore} package has to be loaded
   manually before starting the computation, additional parameters are
-  passed via the \code{...} argument, e.g.as \code{normalize(x,
+  passed via the \code{...} argument, e.g.as \code{normalizeCounts(x,
     mc.ncores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to
   \code{FALSE}.
@@ -105,8 +105,8 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   \code{\linkS4class{TssResult}}
   
   Methods:  
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
@@ -121,18 +121,18 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
 
 \examples{
 ## preceding steps
-example(segmentize)
+example(segmentizeCounts)
 
 ## normalize data, w/o and w/ fitting
-yRatio <- normalize(x)
-yFit <- normalize(x, fit=TRUE)
+yRatio <- normalizeCounts(x)
+yFit <- normalizeCounts(x, fit=TRUE)
 
 yFit
 
 \dontrun{
 ## multicore computation
 library(multicore)
-yFit <- normalize(x, fit=TRUE, mc.ncores=2)
+yFit <- normalizeCounts(x, fit=TRUE, mc.ncores=2)
 }
 }
 

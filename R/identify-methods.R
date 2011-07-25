@@ -1,11 +1,11 @@
-## identify ##
-setGeneric("identify",
+## identifyStartSites ##
+setGeneric("identifyStartSites",
            function(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
                     fun=subtractExpectation, multicore=TRUE, ...)
-           standardGeneric("identify")
+           standardGeneric("identifyStartSites")
            )
 
-setMethod("identify",
+setMethod("identifyStartSites",
           signature(x="TssNorm"),
           function(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
                    fun=subtractExpectation, multicore=TRUE,  ...) {

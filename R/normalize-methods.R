@@ -1,12 +1,12 @@
-## normalize ##
-setGeneric("normalize",
+## normalizeCounts ##
+setGeneric("normalizeCounts",
            function(x, fun=mean, offset=10L, basal=1e-4,
                     lambda=c(1, 1), fit=FALSE, multicore=TRUE,
                     optimizer="all", ...)
-           standardGeneric("normalize")
+           standardGeneric("normalizeCounts")
            )
 
-setMethod("normalize",
+setMethod("normalizeCounts",
           signature(x="TssData"),
           function(x, fun=mean, offset=10L, basal=1e-4,
                    lambda=c(1, 1), fit=FALSE, multicore=TRUE,

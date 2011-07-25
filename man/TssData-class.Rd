@@ -28,9 +28,9 @@
 
 \section{Methods}{
 
-  segmentize methods:
+  segmentizeCounts methods:
   \describe{
-    \item{segmentize:}{
+    \item{segmentizeCounts:}{
       \code{signature(nReads="integer", start="integer")}
     }{
       Import raw data and divide into segments.
@@ -140,8 +140,8 @@
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:

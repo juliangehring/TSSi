@@ -30,9 +30,9 @@
 
   All methods for class \code{TssData}, as well as:
 
-  identify methods:
+  identifyStartSites methods:
   \describe{
-    \item{identify:}{
+    \item{identifyStartSites:}{
       \code{signature(x="TssNorm")}
     }{
       Identify TSS in the normalized data.
@@ -72,8 +72,8 @@
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:

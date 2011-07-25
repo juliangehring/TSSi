@@ -51,8 +51,8 @@
   \code{\link[TSSi]{TSSi-package}}
 
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
@@ -72,7 +72,7 @@ data(readData)
 
 ## segmentize data
 attach(readData)
-x <- segmentize(counts=counts, start=start, chr=chromosome,
+x <- segmentizeCounts(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
 detach(readData)
 
@@ -80,12 +80,12 @@ x
 segments(x)
 
 ## normalize data, w/o and w/ fitting
-yRatio <- normalize(x)
-yFit <- normalize(x, fit=TRUE)
+yRatio <- normalizeCounts(x)
+yFit <- normalizeCounts(x, fit=TRUE)
 yFit
 
 ## identify TSS
-z <- identify(yFit)
+z <- identifyStartSites(yFit)
 z
 
 ## inspect results

@@ -23,9 +23,9 @@ subtractExpectation(fg, bg, indTss, pos, basal, tau, extend=FALSE)
   \item{indTss}{Index vector indicating the expected TSS sites in
     \code{fg}.}
   \item{pos}{Positions of the reads in the segment, as given in the
-    \code{segmentize} method.}
-  \item{basal}{See the \code{normalize} method.}
-  \item{tau}{See the \code{identify} method.}
+    \code{segmentizeCounts} method.}
+  \item{basal}{See the \code{normalizeCounts} method.}
+  \item{tau}{See the \code{identifyStartSites} method.}
   \item{extend}{Logical indicating whether the background estimates
     should be computed for all positions, rather than only for those
     with reads.}
@@ -37,7 +37,7 @@ subtractExpectation(fg, bg, indTss, pos, basal, tau, extend=FALSE)
 
   Other functions with the same call structure can be used in the
   detection of the TSS by passing it as \code{fun} argument in the
-  \code{identify} method.
+  \code{identifyStartSites} method.
 }
 
 \seealso{
@@ -46,8 +46,8 @@ subtractExpectation(fg, bg, indTss, pos, basal, tau, extend=FALSE)
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:

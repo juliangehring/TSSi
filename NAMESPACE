@@ -14,9 +14,9 @@ exportClasses(TssData)
 exportClasses(TssNorm)
 exportClasses(TssResult)
 
-exportMethods(segmentize)
-exportMethods(normalize)
-exportMethods(identify)
+exportMethods(segmentizeCounts)
+exportMethods(normalizeCounts)
+exportMethods(identifyStartSites)
 
 exportMethods(reads, segments, tss, parameters, timestamp, annotation, "[")
 exportMethods(start, end, counts, ratio, fit, expect)

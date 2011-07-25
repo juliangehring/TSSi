@@ -1,10 +1,10 @@
-\name{segmentize-methods}
+\name{segmentizeCounts-methods}
 
 \docType{methods}
 
-\alias{segmentize}
-\alias{segmentize,integer,integer-method}
-\alias{segmentize-methods}
+\alias{segmentizeCounts}
+\alias{segmentizeCounts,integer,integer-method}
+\alias{segmentizeCounts-methods}
 
 \title{
   Segmentize methods
@@ -15,7 +15,7 @@
 }
 
 \usage{
-segmentize(counts, start, end=start, chr=rep(1L, length(start)),
+segmentizeCounts(counts, start, end=start, chr=rep(1L, length(start)),
 region=rep(1L, length(start)), strand=rep("*", length(start)),
 replicate=rep(1L, length(start)), annotation=NULL, ...)
 }
@@ -52,17 +52,17 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
 \section{Methods}{
   Import read data and transform it into segments:
   \describe{
-    \item{segmentize:}{
+    \item{segmentizeCounts:}{
       \code{signature(nReads="integer", start="integer")}
     }
     {
-      \code{segmentize(counts, start, ...)}
+      \code{segmentizeCounts(counts, start, ...)}
     }
   }
 }
 
 \details{
-  The \code{segmentize} method takes the raw data and breaks it into
+  The \code{segmentizeCounts} method takes the raw data and breaks it into
   segments which will be analyzed separately in the subsequent
   steps. Segments are defined in a way such that any has a unique
   combination of the input arguments \code{chr}, \code{region}, and
@@ -87,8 +87,8 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
@@ -107,7 +107,7 @@ example(readData)
 
 ## import and segmentize data
 attach(readData)
-x <- segmentize(counts=counts, start=start, chr=chromosome,
+x <- segmentizeCounts(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
 detach(readData)
 

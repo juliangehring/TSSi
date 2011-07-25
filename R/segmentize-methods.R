@@ -1,12 +1,12 @@
-## segmentize ##
-setGeneric("segmentize",
+## segmentizeCounts ##
+setGeneric("segmentizeCounts",
            function(counts, start, end=start, chr=rep(1L, length(start)),
                     region=rep(1L, length(start)), strand=rep("*", length(start)),
                     replicate=rep(1L, length(start)), annotation=NULL, ...)
-           standardGeneric("segmentize")
+           standardGeneric("segmentizeCounts")
            )
 
-setMethod("segmentize",
+setMethod("segmentizeCounts",
           signature(counts="integer", start="integer"),
           function(counts, start, end=start, chr=rep(1L, length(start)),
                    region=rep(1L, length(start)), strand=rep("*", length(start)),

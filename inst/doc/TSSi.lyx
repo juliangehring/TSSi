@@ -224,7 +224,7 @@ status open
 
 
 \backslash
-Rmethod{segmentize}
+Rmethod{segmentizeCounts}
 \end_layout
 
 \end_inset
@@ -262,7 +262,7 @@ attach(readData)
 \end_layout
 
 \begin_layout Chunk
-x <- segmentize(counts=counts, start=start, chr=chromosome, region=region,
+x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region,
  strand=strand)
 \end_layout
 
@@ -398,7 +398,7 @@ Rpackage{multicore}
 \end_layout
 
 \begin_layout Chunk
-yRatio <- normalize(x)
+yRatio <- normalizeCounts(x)
 \end_layout
 
 \begin_layout Chunk
@@ -414,7 +414,7 @@ yRatio <- normalize(x)
 \end_layout
 
 \begin_layout Chunk
-yFit <- normalize(x, fit=TRUE)
+yFit <- normalizeCounts(x, fit=TRUE)
 \end_layout
 
 \begin_layout Chunk
@@ -488,7 +488,7 @@ Rfunarg{tau}
 \end_layout
 
 \begin_layout Chunk
-z <- identify(yFit)
+z <- identifyStartSites(yFit)
 \end_layout
 
 \begin_layout Chunk
