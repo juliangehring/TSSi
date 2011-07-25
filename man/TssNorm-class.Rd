@@ -30,10 +30,10 @@
 
   All methods for class \code{TssData}, as well as:
 
-  identify methods:
+  identifyStartSites methods:
   \describe{
-    \item{identify:}{
-      \code{signature(obj="TssNorm")}
+    \item{identifyStartSites:}{
+      \code{signature(x="TssNorm")}
     }{
       Identify TSS in the normalized data.
     }
@@ -42,20 +42,20 @@
   get methods:
   \describe{
     \item{ratio:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Get the normalized reads based on the Poisson ratios,
       see\code{start}.
     }
     
     \item{fit:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Get the normalized reads based on the fit, see\code{start}.
     }
 
     \item{[:}{
-      \code{signature(obj="TssNorm")}
+      \code{signature(x="TssNorm")}
     }{
       Subset the object, by name or index.
     }
@@ -72,8 +72,8 @@
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:

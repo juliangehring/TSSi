@@ -28,9 +28,9 @@
 
 \section{Methods}{
 
-  segmentize methods:
+  segmentizeCounts methods:
   \describe{
-    \item{segmentize:}{
+    \item{segmentizeCounts:}{
       \code{signature(nReads="integer", start="integer")}
     }{
       Import raw data and divide into segments.
@@ -49,7 +49,7 @@
   get methods:
   \describe{
     \item{start:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the read start sites. The second argument selects the
       individual segment; if missing returns a list containing the
@@ -57,19 +57,19 @@
     }
     
     \item{end:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the read end sites, see \code{start}.
     }
     
     \item{counts:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the raw read counts, see \code{start}.
     }
     
     \item{reads:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get all the read data of the segments, including
       e.g. \sQuote{start}, \sQuote{counts}, \sQuote{replicate}, , see
@@ -77,7 +77,7 @@
     }
     
     \item{segments:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the information associated with the segments, e.g. chromosome,
       strand, region. The second and third argument select the segment
@@ -85,23 +85,23 @@
     }
     
     \item{timestamp:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the creation timestamp of the object.
     }
     
     \item{annotation:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Get the annotation data, as passed through the \code{annotation}
       argument.
     }
 
     \item{[:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Subset the object, by name or index.
-    }   
+    }
   }
   
   show methods:
@@ -114,14 +114,14 @@
   asRangedData methods:
   \describe{
     \item{readsAsRangedData:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Convert the reads, as obtained by the \code{reads} method, to an
       object of class \code{RangedData}.
     }
 
     \item{segmentsAsRangedData:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Convert the segments, as obtained by the \code{segments} method,
       to an object of class \code{RangedData}.
@@ -140,8 +140,8 @@
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:

@@ -33,8 +33,8 @@
   
   identify methods:
   \describe{
-    \item{identify:}{
-      \code{signature(obj="TssNorm")}
+    \item{identifyStartSites:}{
+      \code{signature(x="TssNorm")}
     }{
       Identify TSS in the normalized data.
     }
@@ -43,19 +43,19 @@
   get methods:
   \describe{
     \item{expect:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Get the expectation for non-specific reads, see\code{start}.
     }
     
     \item{tss:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Get the identified transcription start sites, see\code{start}.
     }
 
     \item{[:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Subset the object, by name or index.
     }
@@ -64,7 +64,7 @@
   asRangedData methods:
   \describe{
     \item{tssAsRangedData:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Convert the tss predictions, as obtained by the \code{tss} method,
       to an object of class \code{RangedData}.
@@ -83,8 +83,8 @@
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:

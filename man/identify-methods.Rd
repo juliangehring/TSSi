@@ -2,8 +2,8 @@
 
 \docType{methods}
 
-\alias{identify}
-\alias{identify,TssNorm-method}
+\alias{identifyStartSites}
+\alias{identifyStartSites,TssNorm-method}
 \alias{idenfify-methods}
 
 \title{
@@ -15,12 +15,12 @@
 }
 
 \usage{
-identify(obj, threshold=1, tau=c(20, 20), neighbor=TRUE,
+identifyStartSites(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
 fun=subtractExpectation, multicore=TRUE, ...)
 }
 
 \arguments{
-  \item{obj}{Object of class \code{TssNorm} with normalized data.}
+  \item{x}{Object of class \code{TssNorm} with normalized data.}
   \item{threshold}{Numeric with the minimal number of reads to be
     treated as a potential TSS.}
   \item{tau}{Numeric vector of length two specifying the
@@ -42,10 +42,10 @@ fun=subtractExpectation, multicore=TRUE, ...)
 \section{Methods}{
   Identify TSS:
   \describe{
-    \item{identify:}{
-      \code{signature(obj="TssNorm")}
+    \item{identifyStartSites:}{
+      \code{signature(x="TssNorm")}
     }{
-      \code{identify(obj, ...)}
+      \code{identifyStartSites(x, ...)}
     }
   }
 }
@@ -72,12 +72,12 @@ fun=subtractExpectation, multicore=TRUE, ...)
   cores, the \code{mclapply} function of the \pkg{multicore} package can
   be used. For this, the \pkg{multicore} package has to be loaded
   manually before starting the computation, additional parameters are
-  passed via the \code{...} argument, e.g.as \code{normalize(obj,
+  passed via the \code{...} argument, e.g.as \code{normalizeCounts(x,
     mc.ncores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to
   \code{FALSE}. Pleas note that the identification step is normally very
   fast and thus using parallel computation here may a minor impact
-  as compared to the \code{normalize} method.
+  as compared to the \code{normalizeCounts} method.
 }
 
 \value{
@@ -94,8 +94,8 @@ fun=subtractExpectation, multicore=TRUE, ...)
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
@@ -110,10 +110,10 @@ fun=subtractExpectation, multicore=TRUE, ...)
 
 \examples{
 ## preceding steps
-example(normalize)
+example(normalizeCounts)
 
 ## identify TSS
-z <- identify(yFit)
+z <- identifyStartSites(yFit)
 
 z
 }

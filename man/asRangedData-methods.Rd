@@ -35,21 +35,21 @@ tssAsRangedData(x)
 \section{Methods}{
   \describe{
     \item{readsAsRangedData:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Convert the reads, as obtained by the \code{reads} method, to an
       object of class \code{RangedData}.
     }
 
     \item{segmentsAsRangedData:}{
-      \code{signature(obj="TssData")}
+      \code{signature(x="TssData")}
     }{
       Convert the segments, as obtained by the \code{segments} method,
       to an object of class \code{RangedData}.
     }
     
     \item{tssAsRangedData:}{
-      \code{signature(obj="TssResult")}
+      \code{signature(x="TssResult")}
     }{
       Convert the TSS predictions, as obtained by the \code{tss} method,
       to an object of class \code{RangedData}.
@@ -82,8 +82,8 @@ tssAsRangedData(x)
   \code{\linkS4class{TssResult}}
   
   Methods:
-  \code{\link[TSSi]{segmentize}}, \code{\link[TSSi]{normalize}},
-  \code{\link[TSSi]{identify}}, \code{\link[TSSi]{get-methods}},
+  \code{\link[TSSi]{segmentizeCounts}}, \code{\link[TSSi]{normalizeCounts}},
+  \code{\link[TSSi]{identifyStartSites}}, \code{\link[TSSi]{get-methods}},
   \code{\link[TSSi]{plot}}, \code{\link[TSSi]{asRangedData-methods}}
 
   Functions:
@@ -97,7 +97,7 @@ tssAsRangedData(x)
 }
 
 \examples{
-example(segmentize)
+example(segmentizeCounts)
 
 readsRd <- readsAsRangedData(x)
 head(readsRd)

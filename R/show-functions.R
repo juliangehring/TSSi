@@ -1,16 +1,16 @@
 ## getSlotIndex ##
-.getSlotIndex <- function(obj, ind, slotName, fieldName) {
+.getSlotIndex <- function(x, ind, slotName, fieldName) {
 
   if(!missing(fieldName)) {
     if(!missing(ind))
-      res <- slot(obj, slotName)[[ind]][[fieldName]]
+      res <- slot(x, slotName)[[ind]][[fieldName]]
     else
-      res <- lapply(slot(obj, slotName), '[[', fieldName)
+      res <- lapply(slot(x, slotName), '[[', fieldName)
   } else {
     if(!missing(ind))
-      res <- slot(obj, slotName)[[ind]]
+      res <- slot(x, slotName)[[ind]]
     else
-      res <- slot(obj, slotName)
+      res <- slot(x, slotName)
   }
   return(res)
 }
@@ -27,9 +27,9 @@
 
 
 ## showSegment ##
-.showSegment <- function(object) {
+.showSegment <- function(x) {
 
-  segments <- segments(object)
+  segments <- segments(x)
   indent <- "   "
 
   cat(sprintf("** %s **\n", "Segments"))
@@ -38,7 +38,7 @@
   cat(.showSome(unique(segments$strand), "Strands", indent))
   cat(.showSome(unique(segments$region), "Regions", indent))
   cat(.showSome(segments$nCounts, "nCounts", indent))
-  if(as.character(class(object)) == "TssResult")
+  if(as.character(class(x)) == "TssResult")
     cat(.showSome(segments$nTss, "nTSS", indent))
   cat("\n")
 
@@ -46,9 +46,9 @@
 
 
 ## showClassInfo ##
-.showClassInfo <- function(object) {
+.showClassInfo <- function(x) {
 
-  className <- as.character(class(object))
+  className <- as.character(class(x))
   msg <- switch(className,
                 TssData="Data imported",
                 TssNorm="Data normalized",
@@ -61,9 +61,9 @@
 
 
 ## showTimestamp ##
-.showTimestamp <- function(object) {
+.showTimestamp <- function(x) {
 
-  timestamp <- as.character(timestamp(object))
+  timestamp <- as.character(timestamp(x))
 
   cat(sprintf("** %s **\n", "Timestamp"))
   cat(sprintf("   %s\n\n", timestamp))
@@ -72,9 +72,9 @@
 
 
 ## showParameters ##
-.showParameters <- function(object) {
+.showParameters <- function(x) {
 
-  pars <- parameters(object)
+  pars <- parameters(x)
   
   cat(sprintf("** %s **\n", "Parameters"))
   cat(sprintf("   %s: %s\n", names(pars), pars), sep="")

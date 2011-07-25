@@ -1,10 +1,4 @@
 ## plot ##
-setGeneric("plot",
-           function(x, y, ...)
-           standardGeneric("plot")
-           )
-
-
 setMethod("plot",
           signature(x="TssData"),
           function(x, y, counts=TRUE, legend=TRUE, ...) {
