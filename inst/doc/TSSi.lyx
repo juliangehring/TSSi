@@ -214,7 +214,29 @@ Data set
 In this vignette we use experimental CAP-capture data obtained with Solexa
  sequencing.
  The data was mapped to the genome using the bowtie algorithm and processed,
- such that the number of the 5' end of reads for each position are available.
+ such that the number of the 5' end of reads for each position are available
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The sequencing workflow at the bioconductor website describes basic steps
+ and tools for the import and processing of sequcencing data (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://bioconductor.org/help/workflows/high-throughput-sequencing/
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\end_inset
+
+.
  The data frame 
 \begin_inset ERT
 status open

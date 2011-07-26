@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{babel}
+\usepackage{url}
 \usepackage[unicode=true,pdfusetitle,
  bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
  breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false]
@@ -95,11 +96,14 @@ of TSS.
 In this vignette we use experimental CAP-capture data obtained with
 Solexa sequencing. The data was mapped to the genome using the bowtie
 algorithm and processed, such that the number of the 5' end of reads
-for each position are available. The data frame \Rvar{readData} contains
-the chromosome, the strand, the 5' position of the reads, and the
-total number of reads at that position. Further, regions based on
-existing annotation are also provided which are used to divide the
-data into independent subsets for analysis.
+for each position are available%
+\footnote{The sequencing workflow at the bioconductor website describes basic
+steps and tools for the import and processing of sequcencing data
+(\url{http://bioconductor.org/help/workflows/high-throughput-sequencing/}).%
+}. The data frame \Rvar{readData} contains the chromosome, the strand,
+the 5' position of the reads, and the total number of reads at that
+position. Further, regions based on existing annotation are also provided
+which are used to divide the data into independent subsets for analysis.
 
 <<load_data>>=
 library(TSSi)
