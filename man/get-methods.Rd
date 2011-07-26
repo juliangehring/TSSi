@@ -33,7 +33,7 @@
 \alias{fit,TssNorm-method}
 \alias{parameters}
 \alias{parameters-TSSi}
-\alias{parameters,TssNorm-method}
+\alias{parameters,TssData-method}
 \alias{delta}
 \alias{delta-TSSi}
 \alias{delta,TssResult-method}

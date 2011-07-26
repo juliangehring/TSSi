@@ -21,6 +21,7 @@
     \item{\code{reads}:}{List with the read data for each segment.}
     \item{\code{segments}:}{Data frame with the information of the
       individual segments.}
+    \item{\code{parameters}:}{List with parameters used for the analysis.}
     \item{\code{annotation}:}{Annotation data object, as passed through the
       \code{annotation} argument.}
     \item{\code{timestamp}:}{Timestamp with the creation time of the object.}
@@ -90,6 +91,12 @@
     }{
       Get the creation timestamp of the object.
     }
+
+     \item{parameters:}{
+      \code{signature(x="TssData")}
+    }{
+      Get the parameters used in the analysis.
+    }   
     
     \item{annotation:}{
       \code{signature(x="TssData")}

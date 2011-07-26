@@ -184,7 +184,7 @@ setGeneric("parameters",
            )
 
 setMethod("parameters",
-          signature(x="TssNorm"),
+          signature(x="TssData"),
           function(x, ind) {
 
   res <- .getSlotIndex(x, ind, "parameters")
