@@ -19,22 +19,23 @@ setMethod("identifyStartSites",
   .checkIdentify(threshold, tau, neighbor, fun, multicore)
 
   ## extract normalized data, apply for each segment
+  reads <- reads(x)
   y <-
     if(.useMulticore(multicore))
-      multicore::mclapply(x@reads, .identifyCore,
+      multicore::mclapply(reads, .identifyCore,
                           basal=basal, tau=tau, threshold=threshold,
                           fun=fun, readCol=readCol, neighbor=neighbor,
-                          ...)
+                          grep=.grepStrand(x), ...)
     else
-      lapply(x@reads, .identifyCore,
+      lapply(reads, .identifyCore,
              basal=basal, tau=tau, threshold=threshold, fun=fun,
-             readCol=readCol, neighbor=neighbor)
+             readCol=readCol, neighbor=neighbor, strand=.grepStrand(x))
   
-  names(y) <- names(x@reads)
+  names(y) <- names(reads)
 
   tss <- lapply(y, '[[', "tss")
   dif <- lapply(y, '[[', "dif")
-  reads <- mapply(cbind, x@reads, dif, SIMPLIFY=FALSE)
+  reads <- mapply(cbind, reads, dif, SIMPLIFY=FALSE)
 
   segments <- segments(x)
   segments$nTss <- sapply(tss, nrow)

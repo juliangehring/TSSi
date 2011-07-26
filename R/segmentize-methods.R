@@ -48,9 +48,13 @@ setMethod("segmentizeCounts",
                          start=y$start[ind1], end=y$end[ind2],
                          row.names=names(reads))
 
+  ## parameters
+  pars <- list(pattern=pattern)
+
   ## create TssData object
   res <- new("TssData",
-             reads=reads, segments=segments, annotation=annotation, timestamp=Sys.time())
+             reads=reads, segments=segments, parameters=pars, annotation=annotation,
+             timestamp=Sys.time())
 
   return(res)
 }

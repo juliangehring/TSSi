@@ -57,3 +57,24 @@
   }
 
 }
+
+
+## grepStrand ##
+.grepStrand <- function(x, strand="\\-") {
+
+  gpattern <- sprintf(parameters(x, "pattern"), ".*", strand, ".*")
+  names <- names(x)
+  res <- grepl(gpattern, names)
+  names(res) <- names
+
+  return(res)
+}
+
+
+## revertPars ##
+.revertPars <- function(i, strand, res) {
+
+  if(strand[i]) res <- rev(res)
+  
+  return(res)
+}

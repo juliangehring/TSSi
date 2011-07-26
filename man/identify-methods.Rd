@@ -26,7 +26,10 @@ fun=subtractExpectation, multicore=TRUE, ...)
     treated as a potential TSS.}
   \item{tau}{Numeric vector of length two specifying the
     \eqn{\tau}{\sQuote{tau}} parameter of the exponential function for
-    each side of the segment.}
+    each side of the segment. For the forward strand (\dQuote{+}), the
+    first and second value refer to the side towards the 5' and 3' end,
+    respectively. In the case that a single value is provided it is
+    applied to both sides.}
   \item{neighbor}{Logical whether the background estimates should be
     iteratively assigned to the predicted TSS during the estimation
     (default: TRUE).}

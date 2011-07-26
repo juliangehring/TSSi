@@ -4,7 +4,6 @@
 
   ## extract data
   start <- x$start
-  end <- x$end
   counts <- x$counts
   
   ## average over replicates if any present
@@ -31,7 +30,7 @@
   ratio <- rep(.initialFun(longReads, initial, basal)[indEst], nRep)
 
   ## store results from Poisson ratio
-  res <- data.frame(start=start, end=end, counts=counts, ratio=ratio)
+  res <- data.frame(start=start, end=x$end, counts=counts, ratio=ratio)
 
   if(fit == TRUE) {
     ## Poisson fit

@@ -82,10 +82,9 @@
     cou <- if(fit) reads$fit else reads$ratio
     indTss <- start %in% tss(x, y)$pos
     basal <- parameters(x, "basal")
-    tau <- parameters(x, "tau")
     fun <- parameters(x, "fun")
     neighbor <- parameters(x, "neighbor")
-    
+    tau <- .revertPars(y, .grepStrand(x), parameters(x, "tau"))
     cumBg <- .cumulativeReads(start, cou, indTss, basal, tau, neighbor)
     expectArgs$y <- fun(NA, cumBg, indTss, start, basal, tau, extend=TRUE)$expect
   }
