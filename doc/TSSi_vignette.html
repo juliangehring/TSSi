@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Identification of Transcription Start Sites with the TSSi package</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-07-26 14:46:23 CEST"/>
+<meta name="author" content="Julian Gehring"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="content">
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="../index.html"> UP </a>
+ |
+ <a accesskey="H" href="../index.html"> HOME </a>
+</div>
+
+<h1 class="title">Identification of Transcription Start Sites with the TSSi package</h1>
+
+
+
+
+
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Abstract </a></li>
+<li><a href="#sec-2">Introduction </a></li>
+<li><a href="#sec-3">Data set </a></li>
+<li><a href="#sec-4">Segment read data </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Abstract </h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+  Along with the advances in high-throughput sequencing, the detection
+  of transcription start sites <i>TSS</i> using CAP-capture techniques
+  has evolved recently. While many experimental applications exist,
+  the analysis of such data is still non-trivial. Approaching this,
+  the <i>TSSi</i> package offers a flexible statistical preprocessing
+  for CAP-capture data and an automated identification of start sites.
+</p>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Introduction </h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+  High throughput sequencing has become an essential experimental approach
+  to investigate genomes and transcriptional processes. While cDNA sequencing
+  (RNA-seq) using random priming and/or fragmentation of cDNA will result
+  in a shallow distribution of reads typically biased towards the 3’
+  end, approaches like CAP-capture enrich 5’ ends and result in more
+  clearly distinguishable peaks around the transcription start sites.
+</p>
+<p>  
+  Predicting the location of transcription start sites <i>TSS</i>
+  is hampered by the existence of alternative TSS, i.e. their number
+  within regions of transcription is unknown. In addition, measurements
+  contain false positive counts. Therefore, only the counts which are
+  significantly larger than an expected number of background reads are
+  intended to be predicted as TSS. The number of false positive reads
+  increases in regions of transcriptional activity and such reads obviously
+  do not map to random positions. On the one hand, these reads seem
+  to occur sequence dependently and therefore cluster to certain genomic
+  positions, on the other hand they are detected more frequently than
+  being originated from real TSS. Because currently, there is no error
+  model available describing such noise, the <i>TSSi</i> package
+  implements an heuristic approach for an automated and flexible prediction
+  of TSS.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Data set </h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+  In this vignette we use experimental CAP-capture data obtained with
+  Solexa sequencing. The data was mapped to the genome using the bowtie
+  algorithm and processed, such that the number of the 5' end of reads
+  for each position are available. The data frame <i>readData</i> contains
+  the chromosome, the strand, the 5' position of the reads, and the
+  total number of reads at that position. Further, regions based on
+  existing annotation are also provided which are used to divide the
+  data into independent subsets for analysis.
+</p>
+
+
+
+<pre class="src src-R">  <span style="color: #008b8b;">library</span>(TSSi)  
+
+</pre>
+
+
+
+
+
+<pre class="src src-R">  data(readData)
+  head(readData)  
+
+</pre>
+
+
+
+
+<pre class="example">
+   chromosome region start strand counts
+14         s1      1 82747      +      3
+15         s1      1 82771      +      1
+16         s1      1 82853      +      7
+17         s1      1 82854      +      6
+18         s1      1 82875      +      4
+19         s1      1 82898      +      5
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Segment read data </h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+  As a first step in the analysis, the read data is taken by the <i>segmentizeCounts</i>
+  method. Here, the data is divided into <i>segments</i>, for which
+  the following analysis is performed independently. This is done based
+  on the information of the chromosomes, the strands, and the optional
+  regions. The segmented data is returned as an object of the class
+  <i>TssData</i>.
+</p>
+
+
+
+<pre class="src src-R">  <span style="color: #008b8b;">attach</span>(readData)
+  x <span style="color: #008b8b;">&lt;-</span> segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
+  <span style="color: #008b8b;">detach</span>(readData)
+
+</pre>
+
+
+
+
+
+
+<pre class="src src-R">  x
+
+</pre>
+
+
+
+
+
+<pre class="example">  * Object of class 'TssData' *
+    Data imported
+
+  ** Segments **
+     Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
+     Chromosomes (2): s1, s2
+     Strands (2): +, -
+     Regions (5): 1, 2, 3, 4, 5
+     nCounts (5): 978, 587, 848, 466, 690
+
+  ** Timestamp **
+     2011-07-26 14:46:22
+</pre>
+
+
+
+<p>
+  The final segments and the associated read data can be assessed with
+  several <i>get</i> methods. The data from individual segments
+  can be called either by its name or an index. Each segment can easily
+  be visualized with the <i>plot</i> method.
+</p>
+
+
+
+<pre class="src src-R">  segments(x)
+
+</pre>
+
+
+
+
+<pre class="example">
+       chr strand region nPos nCounts   start     end
+s1_+_1  s1      +      1   28     978   82747   82994
+s1_+_2  s1      +      2   33     587  814741  815042
+s1_-_3  s1      -      3   47     848 1435037 1435157
+s2_+_4  s2      +      4   68     466 1454505 1455353
+s2_-_5  s2      -      5   43     690 1574882 1575467
+</pre>
+
+
+
+
+
+<pre class="src src-R">  names(x)
+
+</pre>
+
+
+
+
+<pre class="example">
+[1] "s1_+_1" "s1_+_2" "s1_-_3" "s2_+_4" "s2_-_5"
+</pre>
+
+
+
+
+
+<pre class="src src-R">  head(reads(x, 3))
+
+</pre>
+
+
+
+
+<pre class="example">
+     start     end counts replicate
+62 1435037 1435037      4         1
+63 1435039 1435039      4         1
+64 1435043 1435043      3         1
+65 1435045 1435045      1         1
+66 1435047 1435047      1         1
+67 1435049 1435049      1         1
+</pre>
+
+
+
+
+
+<pre class="src src-R">  head(start(x, 3))
+
+</pre>
+
+
+
+
+<pre class="example">
+[1] 1435037 1435039 1435043 1435045 1435047 1435049
+</pre>
+
+
+
+
+
+<pre class="src src-R">  head(start(x, names(x)[1]))
+
+</pre>
+
+
+
+
+<pre class="example">
+[1] 82747 82771 82853 82854 82875 82898
+</pre>
+
+
+
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+<p class="footnote"><sup><a class="footnum" name="fn.1" href="#fnr.1">1</a></sup> DEFINITION NOT FOUND: 3
+</p>
+</div>
+</div>
+
+</div>
+</div>
+<div id="postamble">
+<p class="date">Date: 2011-07-26 14:46:23 CEST</p>
+<p class="author">Author: Julian Gehring</p>
+
+</div>
+</div>
+</body>
+</html>

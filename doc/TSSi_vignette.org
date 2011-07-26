@@ -1,0 +1,261 @@
+Identification of Transcription Start Sites with the TSSi package
+
+#+AUTHOR: Julian Gehring
+
+#+LINK_UP: ../index.html
+
+#+BABEL: :exports both :tangle yes :results output scalar replace :session :width 600 :height 600
+
+#+OPTIONS: creator:nil num:nil timestamp:t email:nil author:t html-postamble:nil
+#+STYLE: <link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
+
+#+MACRO: Robject /$1/
+#+MACRO: Rfunction /$1/
+#+MACRO: Rpackage /$1/
+#+MACRO: Rclass /$1/
+#+MACRO: Rmethod /$1/
+#+MACRO: Rfunarg /$1/
+#+MACRO: Rvar /$1/
+
+
+* Abstract
+
+  Along with the advances in high-throughput sequencing, the detection
+  of transcription start sites /TSS/ using CAP-capture techniques
+  has evolved recently. While many experimental applications exist,
+  the analysis of such data is still non-trivial. Approaching this,
+  the {{{Rpackage(TSSi)}}} package offers a flexible statistical preprocessing
+  for CAP-capture data and an automated identification of start sites.
+
+  #+begin_src R :exports none
+  set.seed(1)
+  #+end_src
+
+  
+* Introduction
+
+  High throughput sequencing has become an essential experimental approach
+  to investigate genomes and transcriptional processes. While cDNA sequencing
+  (RNA-seq) using random priming and/or fragmentation of cDNA will result
+  in a shallow distribution of reads typically biased towards the 3’
+  end, approaches like CAP-capture enrich 5’ ends and result in more
+  clearly distinguishable peaks around the transcription start sites.
+  
+  Predicting the location of transcription start sites /TSS/
+  is hampered by the existence of alternative TSS, i.e. their number
+  within regions of transcription is unknown. In addition, measurements
+  contain false positive counts. Therefore, only the counts which are
+  significantly larger than an expected number of background reads are
+  intended to be predicted as TSS. The number of false positive reads
+  increases in regions of transcriptional activity and such reads obviously
+  do not map to random positions. On the one hand, these reads seem
+  to occur sequence dependently and therefore cluster to certain genomic
+  positions, on the other hand they are detected more frequently than
+  being originated from real TSS. Because currently, there is no error
+  model available describing such noise, the {{{Rpackage(TSSi)}}} package
+  implements an heuristic approach for an automated and flexible prediction
+  of TSS.
+
+
+* Data set
+
+  In this vignette we use experimental CAP-capture data obtained with
+  Solexa sequencing. The data was mapped to the genome using the bowtie
+  algorithm and processed, such that the number of the 5' end of reads
+  for each position are available. The data frame {{{Rvar(readData)}}} contains
+  the chromosome, the strand, the 5' position of the reads, and the
+  total number of reads at that position. Further, regions based on
+  existing annotation are also provided which are used to divide the
+  data into independent subsets for analysis.
+
+  #+begin_src R :results output silent
+  library(TSSi)  
+  #+end_src
+
+  #+begin_src R
+  data(readData)
+  head(readData)  
+  #+end_src
+
+
+* Segment read data
+
+  As a first step in the analysis, the read data is taken by the {{{Rmethod(segmentizeCounts)}}}
+  method. Here, the data is divided into /segments/, for which
+  the following analysis is performed independently. This is done based
+  on the information of the chromosomes, the strands, and the optional
+  regions. The segmented data is returned as an object of the class
+  {{{Rclass(TssData)}}}.
+
+  #+begin_src R
+  attach(readData)
+  x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
+  detach(readData)
+  #+end_src
+
+  #+begin_src R
+  x
+  #+end_src
+
+  The final segments and the associated read data can be assessed with
+  several {{{Rmethod(get)}}} methods. The data from individual segments
+  can be called either by its name or an index. Each segment can easily
+  be visualized with the {{{Rmethod(plot)}}} method.
+
+  #+begin_src R
+  segments(x)
+  #+end_src
+
+  #+begin_src R
+  names(x)
+  #+end_src
+
+  #+begin_src R
+  head(reads(x, 3))
+  #+end_src
+
+  #+begin_src R
+  head(start(x, 3))
+  #+end_src
+
+  #+begin_src R
+  head(start(x, names(x)[3]))
+  #+end_src
+
+
+* Normalization
+  
+  The normalization reduces the noise by shrinking the counts towards
+  zero. This step is intended to eliminate false positive counts as
+  well as making further analyzes more robust by reducing the impact
+  of large counts. Such a shrinkage or regularization procedure constitutes
+  a well-established strategy in statistics to make predictions conservative,
+  i.e. to reduce the number of false positive predictions. To enhance
+  the shrinkage of isolated counts in comparison to counts in regions
+  of strong transcriptional activity, the information of consecutive
+  genomic positions in the measurements is regarded by evaluating differences
+  between adjacent count estimates.
+
+  The computation can be performed with a fast approximation of the
+  distribution based on all reads, or fitted explicitly for each segment.
+  On platforms supporting the {{{Rpackage(multicore)}}} package, the fitting
+  can be spread over multiple processor cores in order to decrease computation
+  time.
+  
+  #+begin_src R
+  yRatio <- normalizeCounts(x)
+  #+end_src
+
+  #+begin_src R
+  yFit <- normalizeCounts(x, fit=TRUE)
+  yFit  
+  #+end_src
+
+  #+begin_src R
+  head(reads(yFit, 3))
+  #+end_src
+
+  #+LABEL: fig1
+  #+CAPTION: Figure 1
+  #+begin_src R :results output graphics :file fig1.png
+  plot(yFit, 3)  
+  #+end_src
+
+
+* Identifying transcription start sites
+
+  After normalization of the count data, an iterative algorithm is applied
+  for each segment to identify the TSS. The expected number of false
+  positive counts is initialized with a default value given by the read
+  frequency in the whole data set. The position with the largest counts
+  above is identified as a TSS, if the expected transcription level
+  is at least one read above the expected number of false positive reads.
+  The transcription levels for all TSS are calculated by adding all
+  counts to their nearest neighbor TSS.
+
+  Then, the expected number of false positive reads is updated by convolution
+  with exponential kernels. The decay rates {{{Rfunarg(tau)}}} in 3' direction
+  and towards the 5'-end can be chosen differently to account for the
+  fact that false positive counts are preferably found in 5' direction
+  of a TSS. This procedure is iterated as long as the set of TSS increases.
+
+  #+begin_src R
+  z <- identifyStartSites(yFit)
+  z  
+  #+end_src
+
+  #+begin_src R
+  head(segments(z))
+  #+end_src
+
+  #+begin_src R
+  head(tss(z, 3))
+  #+end_src
+
+  #+begin_src R
+  head(reads(z, 3))
+  #+end_src
+
+  #+LABEL: fig2
+  #+CAPTION: Figure 2
+  #+begin_src R :results output graphics :file fig2.png
+  plot(z, 3)
+  #+end_src 
+
+
+* Customizing figures
+
+  The {{{Rmethod(plot)}}} method allows for a simple, but powerful customization
+  of the produced figures. To each element of the graphic, all possible
+  arguments can be set, supplying them in the form of named lists. In
+  the following, we omit the the plotting of the threshold and the ratio
+  estimates, as well as adapt the representation of some components.
+  For a detailed description on the individual settings, please refer
+  to the {{{Rmethod(plot)}}} documentation of this package.
+
+  #+LABEL: fig3
+  #+CAPTION: Figure 3
+  #+begin_src R :results output graphics :file fig3.png
+  plot(z, 4,
+       ratio=FALSE,
+       threshold=FALSE,
+       baseline=FALSE,
+       expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
+       countsArgs=list(type="h", col="darkgray", pch=NA),
+       plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
+  #+end_src
+
+
+* Converting and exporting results
+
+  While the get methods {{{Rmethod(reads)}}},{{{Rmethod(segments)}}}, and {{{Rmethod(tss)}}}
+  provide a simple access to relevant results, such data can also be
+  represented with the framework provided by the {{{Rpackage(IRanges)}}}
+  package. Converting the data to an object of class {{{Rclass(RangedData)}}}
+  allows for a standard representation and interface to other formats,
+  for example using the {{{Rpackage(rtracklayer)}}} package.
+
+  #+begin_src R
+  readsRd <- readsAsRangedData(z)
+  segmentsRd <- segmentsAsRangedData(z)
+  tssRd <- tssAsRangedData(z)
+  tssRd  
+  #+end_src
+
+  #+begin_src R :results output silent
+  library(rtracklayer)
+  #+end_src
+  
+  #+begin_src R
+  tmpFile <- tempfile()
+  export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
+  export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
+  export.bed(tssRd, paste(tmpFile, "bed", sep="."))  
+  #+end_src
+
+
+* Session information
+
+  #+begin_src R
+  sessionInfo()
+  #+end_src
