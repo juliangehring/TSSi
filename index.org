@@ -1,0 +1,71 @@
+TSSi package: Transcription Start Site Identification
+
+#+AUTHOR: Julian Gehring
+#+DESCRIPTION: TSSi page
+
+#+LINK_UP: index.html
+#+LINK_HOME: http://julian-gehring.github.com/
+
+#+OPTIONS: creator:nil num:nil timestamp:t email:nil author:t html-postamble:nil
+#+STYLE: <link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
+
+
+* Summary
+
+  The /TSSi/ package identifies and normalizes transcription start sites in high-throughput sequencing data.
+
+  Along with the advances in high-throughput sequencing, the detection of transcription start sites (TSS) using CAP-capture techniques has evolved recently. While many experimental applications exist, the analysis of such data is still non-trivial. Approaching this, the /TSSi/ package offers a flexible statistical preprocessing for CAP-capture data and an automated identification of start sites.
+
+  Authors: Clemens Kreutz, Julian Gehring, Jens Timmer\\
+  Maintainer: Julian Gehring <julian.gehring (at) fdm.uni-freiburg.de>
+
+
+* Availability, source code, and licensing
+
+  The /TSSi/ package is written for [[http://www.r-project.org/][R]] and will be part of the [[http://bioconductor.org][bioconductor]] project with the 2.9 release scheduled for October 2011.
+
+  The complete source code of the package is publically accessible at [[https://github.com/julian-gehring/TSSi][github]] and licenced under the [[http://www.gnu.org/licenses/gpl-3.0.html][General Public License version 3 (GPL-3)]]. You are free to use the software for any purposes and you are also welcome to contribute to it in any way.
+
+
+* Usage
+   
+** Installation
+
+   In order to install the latest stable version of the /TSSi/ package from the bioconductor repository, simply run in your R session:
+   #+begin_src R
+   source("http://bioconductor.org/biocLite.R")
+   biocLite("TSSi")
+   #+end_src
+   Alternatively, you can also obtain the built packages from bioconductor and install them manually:
+   #+begin_src R
+   install.packages("path/to/TSSi_x.y.z")
+   #+end_src
+   Please note that the first method is generally the best choice.
+
+
+** Loading the package
+   
+   After the package has been installed, you can load it:
+   #+begin_src R
+   library(TSSi)
+   #+end_src
+
+
+** Documentation
+
+   A comprehensive example session on how to analyze gene sets with the /TSSi/ package can be found in the [[file:doc/TSSi_vignette.org][vignette]] of the package. This can also be assessed as a pdf file from the [[http://www.bioconductor.org/packages/release/bioc/vignettes/TSSi/inst/doc/TSSi.pdf][bioconductor website]] or within R:
+   #+begin_src R
+   vignette("TSSi")
+   #+end_src
+   Detailed descriptions of the objects, functions, and their parameters are provided in the [[http://www.bioconductor.org/packages/release/bioc/manuals/TSSi/man/TSSi.pdf][help pages]]. For details about individual parts, e.g. the /segmentizeCounts/ method, you can read the help file within R:
+   #+begin_src R
+   ?segmentizeCounts
+   #+end_src
+
+
+* Contact and contribution
+
+  If you have any questions, comments, or contributions:
+  - Contact the maintainer via e-mail.
+  - Report issues to the [[https://github.com/julian-gehring/TSSi/issues][issue tracker]].
+  - Fork the [[https://github.com/julian-gehring/TSSi][project repository]].

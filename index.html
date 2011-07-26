@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>TSSi package: Transcription Start Site Identification</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-07-26 13:37:38 CEST"/>
+<meta name="author" content="Julian Gehring"/>
+<meta name="description" content="TSSi page"/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="content">
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="index.html"> UP </a>
+ |
+ <a accesskey="H" href="http://julian-gehring.github.com/"> HOME </a>
+</div>
+
+<h1 class="title">TSSi package: Transcription Start Site Identification</h1>
+
+
+
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Summary </a></li>
+<li><a href="#sec-2">Availability, source code, and licensing </a></li>
+<li><a href="#sec-3">Usage </a>
+<ul>
+<li><a href="#sec-3-1">Installation </a></li>
+<li><a href="#sec-3-2">Loading the package </a></li>
+<li><a href="#sec-3-3">Documentation </a></li>
+</ul>
+</li>
+<li><a href="#sec-4">Contact and contribution </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Summary </h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+  The <i>TSSi</i> package identifies and normalizes transcription start sites in high-throughput sequencing data.
+</p>
+<p>
+  Along with the advances in high-throughput sequencing, the detection of transcription start sites (TSS) using CAP-capture techniques has evolved recently. While many experimental applications exist, the analysis of such data is still non-trivial. Approaching this, the <i>TSSi</i> package offers a flexible statistical preprocessing for CAP-capture data and an automated identification of start sites.
+</p>
+<p>
+  Authors: Clemens Kreutz, Julian Gehring, Jens Timmer<br/>
+  Maintainer: Julian Gehring &lt;julian.gehring (at) fdm.uni-freiburg.de&gt;
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Availability, source code, and licensing </h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+  The <i>TSSi</i> package is written for <a href="http://www.r-project.org/">R</a> and will be part of the <a href="http://bioconductor.org">bioconductor</a> project with the 2.9 release scheduled for October 2011.
+</p>
+<p>
+  The complete source code of the package is publically accessible at <a href="https://github.com/julian-gehring/TSSi">github</a> and licenced under the <a href="http://www.gnu.org/licenses/gpl-3.0.html">General Public License version 3 (GPL-3)</a>. You are free to use the software for any purposes and you are also welcome to contribute to it in any way.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Usage </h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Installation </h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+<p>
+   In order to install the latest stable version of the <i>TSSi</i> package from the bioconductor repository, simply run in your R session:
+</p>
+
+
+<pre class="src src-R">   <span style="color: #008b8b;">source</span>(<span style="color: #8b2252;">"http://bioconductor.org/biocLite.R"</span>)
+   biocLite(<span style="color: #8b2252;">"TSSi"</span>)
+
+</pre>
+
+
+
+<p>
+   Alternatively, you can also obtain the built packages from bioconductor and install them manually:
+</p>
+
+
+<pre class="src src-R">   install.packages(<span style="color: #8b2252;">"path/to/TSSi_x.y.z"</span>)
+
+</pre>
+
+
+
+<p>
+   Please note that the first method is generally the best choice.
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Loading the package </h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+<p>   
+   After the package has been installed, you can load it:
+</p>
+
+
+<pre class="src src-R">   <span style="color: #008b8b;">library</span>(TSSi)
+
+</pre>
+
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Documentation </h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+<p>
+   A comprehensive example session on how to analyze gene sets with the <i>TSSi</i> package can be found in the <a href="doc/TSSi_vignette.html">vignette</a> of the package. This can also be assessed as a pdf file from the <a href="http://www.bioconductor.org/packages/release/bioc/vignettes/TSSi/inst/doc/TSSi.pdf">bioconductor website</a> or within R:
+</p>
+
+
+<pre class="src src-R">   vignette(<span style="color: #8b2252;">"TSSi"</span>)
+
+</pre>
+
+
+
+<p>
+   Detailed descriptions of the objects, functions, and their parameters are provided in the <a href="http://www.bioconductor.org/packages/release/bioc/manuals/TSSi/man/TSSi.pdf">help pages</a>. For details about individual parts, e.g. the <i>segmentizeCounts</i> method, you can read the help file within R:
+</p>
+
+
+<pre class="src src-R">   ?segmentizeCounts
+
+</pre>
+
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Contact and contribution </h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+  If you have any questions, comments, or contributions:
+</p><ul>
+<li>Contact the maintainer via e-mail.
+</li>
+<li>Report issues to the <a href="https://github.com/julian-gehring/TSSi/issues">issue tracker</a>.
+</li>
+<li>Fork the <a href="https://github.com/julian-gehring/TSSi">project repository</a>.
+</li>
+</ul>
+
+</div>
+</div>
+<div id="postamble">
+<p class="date">Date: 2011-07-26 13:37:38 CEST</p>
+<p class="author">Author: Julian Gehring</p>
+
+</div>
+</div>
+</body>
+</html>
