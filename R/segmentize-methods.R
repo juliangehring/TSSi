@@ -20,8 +20,8 @@ setMethod("segmentizeCounts",
   
   ## order data
   ord <- order(chr, region, strand, start, end)
-  region <- region[ord] ## remove?
-  strand <- strand[ord] ## remove?
+  region <- region[ord]
+  strand <- strand[ord]
   chr <- chr[ord]
   y <- data.frame(start=start[ord], end=end[ord],
                   counts=counts[ord], replicate=replicate[ord])
