@@ -155,8 +155,8 @@
   Functions:
   \code{\link[TSSi]{subtract-functions}}
 
-  Data:
-  \code{\link[TSSi]{readData}}
+  Data set:
+  \code{\link[TSSi]{physcoCounts}}
 
   Package:
   \code{\link[TSSi]{TSSi-package}}

@@ -117,19 +117,23 @@ Julian Gehring, Clemens Kreutz
 \end_layout
 
 \begin_layout Chunk
+
 <<settings, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 set.seed(1)
 \end_layout
 
 \begin_layout Chunk
+
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1,
  1.5))))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -166,10 +170,14 @@ Introduction
 \begin_layout Standard
 High throughput sequencing has become an essential experimental approach
  to investigate genomes and transcriptional processes.
- While cDNA sequencing (RNA-seq) using random priming and/or fragmentation
- of cDNA will result in a shallow distribution of reads typically biased
- towards the 3’ end, approaches like CAP-capture enrich 5’ ends and result
- in more clearly distinguishable peaks around the transcription start sites.
+ While cDNA sequencing (
+\emph on
+RNA-seq
+\emph default
+) using random priming and/or fragmentation of cDNA will result in a shallow
+ distribution of reads typically biased towards the 3’ end, approaches like
+ CAP-capture enrich 5’ ends and yield more clearly distinguishable peaks
+ around the transcription start sites.
 \end_layout
 
 \begin_layout Standard
@@ -177,15 +185,15 @@ Predicting the location of transcription start sites
 \emph on
 (TSS)
 \emph default
- is hampered by the existence of alternative TSS, i.e.
- their number within regions of transcription is unknown.
+ is hampered by the existence of alternative ones since their number within
+ regions of transcription is unknown.
  In addition, measurements contain false positive counts.
  Therefore, only the counts which are significantly larger than an expected
  number of background reads are intended to be predicted as TSS.
  The number of false positive reads increases in regions of transcriptional
  activity and such reads obviously do not map to random positions.
  On the one hand, these reads seem to occur sequence dependently and therefore
- cluster to certain genomic positions, on the other hand they are detected
+ cluster to certain genomic positions, on the other hand, they are detected
  more frequently than being originated from real TSS.
  Because currently, there is no error model available describing such noise,
  the 
@@ -211,16 +219,20 @@ Data set
 \end_layout
 
 \begin_layout Standard
-In this vignette we use experimental CAP-capture data obtained with Solexa
- sequencing.
- The data was mapped to the genome using the bowtie algorithm and processed,
- such that the number of the 5' end of reads for each position are available
+To demonstrate the functionality and usage of this package experimental
+ CAP-capture data obtained with Solexa sequencing is used.
+ The reads was mapped to the genome, such that the number of sequenced 5'
+ end and their positions in the genome are available
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
-The sequencing workflow at the bioconductor website describes basic steps
- and tools for the import and processing of sequcencing data (
+The 
+\emph on
+sequencing workflow
+\emph default
+ at the bioconductor website describes basic steps and tools for the import
+ and processing of sequcencing data (
 \begin_inset Flex URL
 status collapsed
 
@@ -245,34 +257,54 @@ status open
 
 
 \backslash
-Rvar{readData}
+Rvar{physcoCounts}
 \end_layout
 
 \end_inset
 
- contains the chromosome, the strand, the 5' position of the reads, and
- the total number of reads at that position.
+ contains information about the chromosome, the strand, the 5' position
+ of the reads, and the total number of mapped.
  Further, regions based on existing annotation are also provided which are
  used to divide the data into independent subsets for analysis.
 \end_layout
 
 \begin_layout Chunk
-<<load_data>>=
+
+<<load_package>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(TSSi)
 \end_layout
 
 \begin_layout Chunk
-data(readData)
+
+@
 \end_layout
 
 \begin_layout Chunk
-head(readData)
+
+<<load_data>>=
 \end_layout
 
 \begin_layout Chunk
+
+data(physcoCounts)
+\end_layout
+
+\begin_layout Chunk
+
+head(physcoCounts)
+\end_layout
+
+\begin_layout Chunk
+
+table(physcoCounts$chromosome, physcoCounts$strand)
+\end_layout
+
+\begin_layout Chunk
+
 @
 \end_layout
 
@@ -281,7 +313,7 @@ Segment read data
 \end_layout
 
 \begin_layout Standard
-As a first step in the analysis, the read data is taken by the 
+As a first step in the analysis, the reads are passed to the 
 \begin_inset ERT
 status open
 
@@ -300,8 +332,8 @@ Rmethod{segmentizeCounts}
 segments
 \emph default
 , for which the following analysis is performed independently.
- This is done based on the information of the chromosomes, the strands,
- and the optional regions.
+ This is performed based on the information about the chromosomes, the strands,
+ and the regions of the reads.
  The segmented data is returned as an object of the class 
 \begin_inset ERT
 status open
@@ -319,32 +351,38 @@ Rclass{TssData}
 \end_layout
 
 \begin_layout Chunk
+
 <<segmentize>>=
 \end_layout
 
 \begin_layout Chunk
-attach(readData)
+
+attach(physcoCounts)
 \end_layout
 
 \begin_layout Chunk
+
 x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region,
  strand=strand)
 \end_layout
 
 \begin_layout Chunk
-detach(readData)
+
+detach(physcoCounts)
 \end_layout
 
 \begin_layout Chunk
+
 x
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Standard
-The final segments and the associated read data can be assessed with several
+The segments and the associated read data are accessible through several
  
 \begin_inset ERT
 status open
@@ -359,22 +397,8 @@ Rmethod{get}
 \end_inset
 
  methods.
- The data from individual segments can be called either by its name or an
- index.
- Each segment can easily be visualized with the 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-Rmethod{plot}
-\end_layout
-
-\end_inset
-
- method.
+ Data from individual segments can be referred to by either its name or
+ an index.
 \end_layout
 
 \begin_layout Chunk
@@ -382,6 +406,7 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
+
 <<get_segments>>=
 \begin_inset Newline newline
 \end_inset
@@ -390,10 +415,12 @@ segments(x)
 \end_layout
 
 \begin_layout Chunk
+
 names(x)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -402,22 +429,27 @@ names(x)
 \end_layout
 
 \begin_layout Chunk
+
 <<get_reads>>=
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(x, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(start(x, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(start(x, names(x)[3]))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -430,8 +462,8 @@ The normalization reduces the noise by shrinking the counts towards zero.
  This step is intended to eliminate false positive counts as well as making
  further analyzes more robust by reducing the impact of large counts.
  Such a shrinkage or regularization procedure constitutes a well-established
- strategy in statistics to make predictions conservative, i.e.
- to reduce the number of false positive predictions.
+ strategy in statistics to make predictions conservative, that means to
+ reduce the number of false positive predictions.
  To enhance the shrinkage of isolated counts in comparison to counts in
  regions of strong transcriptional activity, the information of consecutive
  genomic positions in the measurements is regarded by evaluating differences
@@ -439,8 +471,8 @@ The normalization reduces the noise by shrinking the counts towards zero.
 \end_layout
 
 \begin_layout Standard
-The computation can be performed with a fast approximation of the distribution
- based on all reads, or fitted explicitly for each segment.
+The computation can be performed with a approximation based on the frequency
+ of all reads or fitted explicitly for each segment.
  On platforms supporting the 
 \begin_inset ERT
 status open
@@ -459,14 +491,17 @@ Rpackage{multicore}
 \end_layout
 
 \begin_layout Chunk
+
 <<normalize_ratio>>=
 \end_layout
 
 \begin_layout Chunk
+
 yRatio <- normalizeCounts(x)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -475,22 +510,27 @@ yRatio <- normalizeCounts(x)
 \end_layout
 
 \begin_layout Chunk
+
 <<normalize_fit>>=
 \end_layout
 
 \begin_layout Chunk
+
 yFit <- normalizeCounts(x, fit=TRUE)
 \end_layout
 
 \begin_layout Chunk
+
 yFit
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(yFit, 3))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -499,14 +539,17 @@ head(reads(yFit, 3))
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_normalize_fit, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(yFit, 3)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -549,30 +592,37 @@ Rfunarg{tau}
 \end_layout
 
 \begin_layout Chunk
+
 <<identify>>=
 \end_layout
 
 \begin_layout Chunk
+
 z <- identifyStartSites(yFit)
 \end_layout
 
 \begin_layout Chunk
+
 z
 \end_layout
 
 \begin_layout Chunk
+
 head(segments(z))
 \end_layout
 
 \begin_layout Chunk
+
 head(tss(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 head(reads(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -581,19 +631,22 @@ head(reads(z, 3))
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_identify, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(z, 3)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Section
-Customizing figures
+Visualizing and customizing figures
 \end_layout
 
 \begin_layout Standard
@@ -610,12 +663,12 @@ Rmethod{plot}
 
 \end_inset
 
- method allows for a simple, but powerful customization of the produced
- figures.
- To each element of the graphic, all possible arguments can be set, supplying
+ method allows for a simple, but powerful visualization and customization
+ of the produced figures.
+ For each element of the figure, all graphical parameters can be set, supplying
  them in the form of named lists.
- In the following, we omit the the plotting of the threshold and the ratio
- estimates, as well as adapt the representation of some components.
+ In the following, plotting of the threshold and the ratio estimates are
+ omitted, as well as the representation of some components is adapted.
  For a detailed description on the individual settings, please refer to
  the 
 \begin_inset ERT
@@ -638,38 +691,47 @@ Rmethod{plot}
 \end_layout
 
 \begin_layout Chunk
+
 <<plot_custom, fig=TRUE, echo=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 plot(z, 4,
 \end_layout
 
 \begin_layout Chunk
+
 ratio=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 threshold=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 baseline=FALSE,
 \end_layout
 
 \begin_layout Chunk
+
 expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
 \end_layout
 
 \begin_layout Chunk
+
 countsArgs=list(type="h", col="darkgray", pch=NA),
 \end_layout
 
 \begin_layout Chunk
+
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -763,54 +825,67 @@ Rpackage{rtracklayer}
 \end_layout
 
 \begin_layout Chunk
+
 <<convert_iranges>>=
 \end_layout
 
 \begin_layout Chunk
+
 readsRd <- readsAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 segmentsRd <- segmentsAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 tssRd <- tssAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
+
 tssRd
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<export_rtracklayer>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(rtracklayer)
 \end_layout
 
 \begin_layout Chunk
+
 tmpFile <- tempfile()
 \end_layout
 
 \begin_layout Chunk
+
 export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -826,14 +901,17 @@ Session info
 \end_layout
 
 \begin_layout Chunk
+
 <<sessionInfo, results=tex, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 toLatex(sessionInfo(), locale=FALSE)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 

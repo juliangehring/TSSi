@@ -63,18 +63,18 @@
   \code{\linkS4class{TssResult}} 
 
   Data set:
-  \code{\link[TSSi]{readData}}
+  \code{\link[TSSi]{physcoCounts}}
 }
 
 \examples{
 ## load data set
-data(readData)
+data(physcoCounts)
 
 ## segmentize data
-attach(readData)
+attach(physcoCounts)
 x <- segmentizeCounts(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
-detach(readData)
+detach(physcoCounts)
 
 x
 segments(x)

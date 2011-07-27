@@ -95,8 +95,8 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
   Functions:
   \code{\link[TSSi]{subtract-functions}}
 
-  Data:
-  \code{\link[TSSi]{readData}}
+  Data set:
+  \code{\link[TSSi]{physcoCounts}}
 
   Package:
   \code{\link[TSSi]{TSSi-package}}
@@ -104,13 +104,13 @@ replicate=rep(1L, length(start)), annotation=NULL, ...)
 
 \examples{
 ## load data set
-example(readData)
+example(physcoCounts)
 
 ## import and segmentize data
-attach(readData)
+attach(physcoCounts)
 x <- segmentizeCounts(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
-detach(readData)
+detach(physcoCounts)
 
 x
 }

@@ -93,8 +93,8 @@ tssAsRangedData(x)
   Functions:
   \code{\link[TSSi]{subtract-functions}}
 
-  Data:
-  \code{\link[TSSi]{readData}}
+  Data set:
+  \code{\link[TSSi]{physcoCounts}}
 
   Package:
   \pkg{\link[TSSi]{TSSi-package}}

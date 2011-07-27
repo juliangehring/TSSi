@@ -1,10 +1,10 @@
-\name{readData-data}
+\name{physcoCounts-data}
 
 \docType{data}
 
-\alias{readData}
-\alias{readData-TSSi}
-\alias{readData-data}
+\alias{physcoCounts}
+\alias{physcoCounts-TSSi}
+\alias{physcoCounts-data}
 
 \title{CAP capture data}
 
@@ -13,11 +13,11 @@
   genome.
 }
 
-\usage{data(readData)}
+\usage{data(physcoCounts)}
 
 \format{
   \describe{
-    \item{readData}{Data frame with results from a 5'-CAP capture
+    \item{physcoCounts}{Data frame with results from a 5'-CAP capture
       experiment, with the columns:}
     \describe{
       \item{chromosome}{Chromosome the read is mapped to.}
@@ -33,9 +33,9 @@
 }
 
 \details{
-  The transcription data was mapped using the bowtie software. Then, the
-  positions of 5' ends of each read were extracted and the number of
-  reads at each position counted.
+  The transcription data from Physcomitrella patens was mapped using the
+  bowtie software. Then, the positions of 5' ends of each read were
+  extracted and the number of reads at each position counted.
 
   For further details, please see the publication.
 }
@@ -53,8 +53,8 @@
   Functions:
   \code{\link[TSSi]{subtract-functions}}
 
-  Data:
-  \code{\link[TSSi]{readData}}
+  Data set:
+  \code{\link[TSSi]{physcoCounts}}
 
   Package:
   \code{\link[TSSi]{TSSi-package}}
@@ -62,7 +62,7 @@
 
 \examples{
 ## load data set
-data(readData)
+data(physcoCounts)
 }
 
 \source{
