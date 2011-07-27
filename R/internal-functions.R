@@ -23,31 +23,32 @@
 
   ## check class
   if(!missing(class)) {
-    if(class == "integer") {
-      if(any(x %% 1 != 0))
-        stop(sprintf("'%s' %s.", name, "must be an integer"), call.=call.)
-    } else {
-      if(class != class(x))
-        stop(sprintf("'%s' %s '%s'.", name, "must be of class", class(x)), call.=call.)
-    }
+    switch(class,
+           integer = if(!(class(x) %in% c("numeric", "integer")) && any(x %% 1 != 0))
+             stop(sprintf("'%s' %s.", name, "must be an integer"), call.=call.),
+           numeric = if(!(class(x) %in% c("numeric", "integer")))
+             stop(sprintf("'%s' %s '%s'.", name, "must be of class", class), call.=call.),
+           if(!(class(x) %in% class))
+             stop(sprintf("'%s' %s '%s'.", name, "must be of class", class), call.=call.)
+           )
   }
 
   ## check type
   if(!missing(type)) {
     if(typeof(x) != type)
-      stop(sprintf("'%s' %s %s.", name, "must be of type", typeof(x)), call.=call.)
+      stop(sprintf("'%s' %s %s.", name, "must be of type", type), call.=call.)
   }
 
   ## check length
   if(!missing(length)) {
     if(length(x) != length)
-      stop(sprintf("'%s' %s %g.", name, "must be of length", length(x)), call.=call.)
+      stop(sprintf("'%s' %s %g.", name, "must be of length", length), call.=call.)
   }
 
   ## check range
   if(!missing(range)) {
     if(min(x) < min(range) || max(x) > max(range))
-      stop(sprintf("'%s' %s [%g,%g].", name, "must be in the range", min(x), max(x)), call.=call.)
+      stop(sprintf("'%s' %s [%g,%g].", name, "must be in the range", min(range), max(range)), call.=call.)
   }
 
   ## check value
