@@ -269,6 +269,14 @@ export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 \newpage{}
 
 
+\section*{References}
+
+For details about the method, please refer to the future publication:\\
+\emph{TSSi - An R package for transcription start site identification
+from 5’ mRNA tag data}\\
+\emph{C. Kreutz, J. Gehring, D. Lang, J. Timmer, and S. A. Rensing}
+
+
 \section*{Session info}
 
 <<sessionInfo, results=tex, echo=FALSE>>=

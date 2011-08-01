@@ -897,6 +897,31 @@ export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 \end_layout
 
 \begin_layout Section*
+References
+\end_layout
+
+\begin_layout Standard
+For details about the method, please refer to the future publication:
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+TSSi - An R package for transcription start site identification from 5’
+ mRNA tag data
+\begin_inset Newline newline
+\end_inset
+
+C.
+ Kreutz, J.
+ Gehring, D.
+ Lang, J.
+ Timmer, and S.
+ A.
+ Rensing
+\end_layout
+
+\begin_layout Section*
 Session info
 \end_layout
 
