@@ -1,0 +1,28 @@
+useDynLib(TSSi)
+
+import(methods)
+
+importFrom(graphics, plot, points, lines, rug, abline)
+importFrom(Hmisc, approxExtrap)
+importFrom(minqa, bobyqa)
+importFrom(stats, optimize, optim, convolve, dpois, start, end)
+importFrom(Biobase, selectSome)
+importFrom(plyr, rbind.fill)
+importFrom(IRanges, IRanges, RangedData, Rle)
+
+exportClasses(TssData)
+exportClasses(TssNorm)
+exportClasses(TssResult)
+
+exportMethods(segmentizeCounts)
+exportMethods(normalizeCounts)
+exportMethods(identifyStartSites)
+
+exportMethods(reads, segments, tss, parameters, timestamp, annotation, "[")
+exportMethods(start, end, counts, ratio, fit, expect)
+exportMethods(show, names)
+exportMethods(readsAsRangedData, segmentsAsRangedData, tssAsRangedData)
+exportMethods(plot)
+
+export(subtractExpectation)
+
