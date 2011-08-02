@@ -57,7 +57,6 @@ set.seed(1)
 options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
 @
 
-\selectlanguage{english}%
 \begin{abstract}
 Along with the advances in high-throughput sequencing, the detection
 of transcription start sites \emph{(TSS)} using CAP-capture techniques
@@ -116,7 +115,6 @@ head(physcoCounts)
 table(physcoCounts$chromosome, physcoCounts$strand)
 @
 
-\selectlanguage{english}%
 
 \section{Segment read data}
 
@@ -134,7 +132,6 @@ detach(physcoCounts)
 x
 @
 
-\selectlanguage{english}%
 The segments and the associated read data are accessible through several
 \Rmethod{get} methods. Data from individual segments can be referred
 to by either its name or an index.
@@ -151,7 +148,6 @@ head(start(x, 3))
 head(start(x, names(x)[3]))
 @
 
-\selectlanguage{english}%
 
 \section{Normalization}
 
@@ -185,7 +181,6 @@ head(reads(yFit, 3))
 plot(yFit, 3)
 @
 
-\selectlanguage{english}%
 
 \section{Identifying transcription start sites}
 
@@ -216,7 +211,6 @@ head(reads(z, 3))
 plot(z, 3)
 @
 
-\selectlanguage{english}%
 
 \section{Visualizing and customizing figures}
 
@@ -240,7 +234,6 @@ countsArgs=list(type="h", col="darkgray", pch=NA),
 plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
 @
 
-\selectlanguage{english}%
 
 \section{Converting and exporting results}
 
@@ -265,7 +258,6 @@ export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
 export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 @
 
-\selectlanguage{english}%
 \newpage{}
 
 
@@ -273,7 +265,7 @@ export.bed(tssRd, paste(tmpFile, "bed", sep="."))
 
 For details about the method, please refer to the future publication:\\
 \emph{TSSi - An R package for transcription start site identification
-from 5' mRNA tag data}\\
+from 5}'\emph{ mRNA tag data}\\
 \emph{C. Kreutz, J. Gehring, D. Lang, J. Timmer, and S. A. Rensing}
 
 
