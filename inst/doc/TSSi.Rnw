@@ -93,18 +93,18 @@ of TSS.
 
 \section{Data set}
 
-To demonstrate the functionality and usage of this package experimental
+To demonstrate the functionality and usage of this package, experimental
 CAP-capture data obtained with Solexa sequencing is used. The reads
-was mapped to the genome, such that the number of sequenced 5' end
+were mapped to the genome, such that the number of sequenced 5' ends
 and their positions in the genome are available%
 \footnote{The \emph{sequencing workflow} at the bioconductor website describes
 basic steps and tools for the import and processing of sequcencing
 data (\url{http://bioconductor.org/help/workflows/high-throughput-sequencing/}).%
 }. The data frame \Rvar{physcoCounts} contains information about the
-chromosome, the strand, the 5' position of the reads, and the total
-number of mapped. Further, regions based on existing annotation are
-also provided which are used to divide the data into independent subsets
-for analysis.
+chromosome, the strand, the 5' position, and the total number of mapped
+reads. Additionally, regions based on existing annotation are provided
+which are used here to divide the data into independent subsets for
+analysis.
 
 <<load_package>>=
 library(TSSi)
