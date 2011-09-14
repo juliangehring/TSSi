@@ -53,11 +53,11 @@ TSSi package: Transcription Start Site Identification
 
 ** Documentation
 
-   A comprehensive example session on how to analyze gene sets with the /TSSi/ package can be found in the [[file:doc/TSSi_vignette.org][vignette]] of the package. This can also be assessed as a pdf file from the [[http://www.bioconductor.org/packages/release/bioc/vignettes/TSSi/inst/doc/TSSi.pdf][bioconductor website]] or within R:
+   A comprehensive example session on how to analyze gene sets with the /TSSi/ package can be found in the [[file:doc/TSSi_vignette.org][vignette]] of the package. This can also be assessed as a pdf file from the [[http://www.bioconductor.org/packages/devel/bioc/vignettes/TSSi/inst/doc/TSSi.pdf][bioconductor website]] or within R:
    #+begin_src R
    vignette("TSSi")
    #+end_src
-   Detailed descriptions of the objects, functions, and their parameters are provided in the [[http://www.bioconductor.org/packages/release/bioc/manuals/TSSi/man/TSSi.pdf][help pages]]. For details about individual parts, e.g. the /segmentizeCounts/ method, you can read the help file within R:
+   Detailed descriptions of the objects, functions, and their parameters are provided in the [[http://www.bioconductor.org/packages/devel/bioc/manuals/TSSi/man/TSSi.pdf][help pages]]. For details about individual parts, e.g. the /segmentizeCounts/ method, you can read the help file within R:
    #+begin_src R
    ?segmentizeCounts
    #+end_src
