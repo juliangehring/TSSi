@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>Identification of Transcription Start Sites with the TSSi package</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-07-26 14:46:23 CEST"/>
+<meta name="generated" content="2011-09-14 08:16:45 CEST"/>
 <meta name="author" content="Julian Gehring"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -44,6 +44,12 @@ lang="en" xml:lang="en">
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
   textarea { overflow-x: auto; }
   .linenr { font-size:smaller }
   .code-highlighted {background-color:#ffff00;}
@@ -80,14 +86,19 @@ lang="en" xml:lang="en">
 
 </head>
 <body>
-<div id="content">
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
  <a accesskey="h" href="../index.html"> UP </a>
  |
  <a accesskey="H" href="../index.html"> HOME </a>
 </div>
 
+<div id="preamble">
+
+</div>
+
+<div id="content">
 <h1 class="title">Identification of Transcription Start Sites with the TSSi package</h1>
+
 
 
 
@@ -103,6 +114,11 @@ lang="en" xml:lang="en">
 <li><a href="#sec-2">Introduction </a></li>
 <li><a href="#sec-3">Data set </a></li>
 <li><a href="#sec-4">Segment read data </a></li>
+<li><a href="#sec-5">Normalization </a></li>
+<li><a href="#sec-6">Identifying transcription start sites </a></li>
+<li><a href="#sec-7">Customizing figures </a></li>
+<li><a href="#sec-8">Converting and exporting results </a></li>
+<li><a href="#sec-9">Session information </a></li>
 </ul>
 </div>
 </div>
@@ -180,29 +196,23 @@ lang="en" xml:lang="en">
 
 
 <pre class="src src-R">  <span style="color: #008b8b;">library</span>(TSSi)  
-
 </pre>
 
 
 
-
-
-<pre class="src src-R">  data(readData)
-  head(readData)  
-
+<pre class="src src-R">  data(physcoCounts)
+  head(physcoCounts)  
 </pre>
-
-
 
 
 <pre class="example">
-   chromosome region start strand counts
-14         s1      1 82747      +      3
-15         s1      1 82771      +      1
-16         s1      1 82853      +      7
-17         s1      1 82854      +      6
-18         s1      1 82875      +      4
-19         s1      1 82898      +      5
+  chromosome region start strand counts
+1         s1      1 82747      +      3
+2         s1      1 82771      +      1
+3         s1      1 82853      +      7
+4         s1      1 82854      +      6
+5         s1      1 82875      +      4
+6         s1      1 82898      +      5
 </pre>
 
 
@@ -227,22 +237,16 @@ lang="en" xml:lang="en">
 
 
 
-<pre class="src src-R">  <span style="color: #008b8b;">attach</span>(readData)
+<pre class="src src-R">  <span style="color: #008b8b;">attach</span>(physcoCounts)
   x <span style="color: #008b8b;">&lt;-</span> segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
-  <span style="color: #008b8b;">detach</span>(readData)
-
+  <span style="color: #008b8b;">detach</span>(physcoCounts)
 </pre>
-
-
 
 
 
 
 <pre class="src src-R">  x
-
 </pre>
-
-
 
 
 
@@ -257,9 +261,8 @@ lang="en" xml:lang="en">
      nCounts (5): 978, 587, 848, 466, 690
 
   ** Timestamp **
-     2011-07-26 14:46:22
+     2011-09-14 08:16:35
 </pre>
-
 
 
 <p>
@@ -272,10 +275,7 @@ lang="en" xml:lang="en">
 
 
 <pre class="src src-R">  segments(x)
-
 </pre>
-
-
 
 
 <pre class="example">
@@ -292,10 +292,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 <pre class="src src-R">  names(x)
-
 </pre>
-
-
 
 
 <pre class="example">
@@ -307,10 +304,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 <pre class="src src-R">  head(reads(x, 3))
-
 </pre>
-
-
 
 
 <pre class="example">
@@ -328,10 +322,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 <pre class="src src-R">  head(start(x, 3))
-
 </pre>
-
-
 
 
 <pre class="example">
@@ -342,34 +333,397 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  head(start(x, names(x)[1]))
-
+<pre class="src src-R">  head(start(x, names(x)[3]))
 </pre>
-
-
 
 
 <pre class="example">
-[1] 82747 82771 82853 82854 82875 82898
+[1] 1435037 1435039 1435043 1435045 1435047 1435049
 </pre>
 
 
 
-<div id="footnotes">
-<h2 class="footnotes">Footnotes: </h2>
-<div id="text-footnotes">
-<p class="footnote"><sup><a class="footnum" name="fn.1" href="#fnr.1">1</a></sup> DEFINITION NOT FOUND: 3
-</p>
-</div>
 </div>
 
 </div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Normalization </h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>  
+  The normalization reduces the noise by shrinking the counts towards
+  zero. This step is intended to eliminate false positive counts as
+  well as making further analyzes more robust by reducing the impact
+  of large counts. Such a shrinkage or regularization procedure constitutes
+  a well-established strategy in statistics to make predictions conservative,
+  i.e. to reduce the number of false positive predictions. To enhance
+  the shrinkage of isolated counts in comparison to counts in regions
+  of strong transcriptional activity, the information of consecutive
+  genomic positions in the measurements is regarded by evaluating differences
+  between adjacent count estimates.
+</p>
+<p>
+  The computation can be performed with a fast approximation of the
+  distribution based on all reads, or fitted explicitly for each segment.
+  On platforms supporting the <i>multicore</i> package, the fitting
+  can be spread over multiple processor cores in order to decrease computation
+  time.
+</p>
+
+
+
+<pre class="src src-R">  yRatio <span style="color: #008b8b;">&lt;-</span> normalizeCounts(x)
+</pre>
+
+
+
+
+<pre class="src src-R">  yFit <span style="color: #008b8b;">&lt;-</span> normalizeCounts(x, fit=<span style="color: #228b22;">TRUE</span>)
+  yFit  
+</pre>
+
+
+
+<pre class="example">  * Object of class 'TssNorm' *
+    Data normalized
+
+  ** Segments **
+     Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
+     Chromosomes (2): s1, s2
+     Strands (2): +, -
+     Regions (5): 1, 2, 3, 4, 5
+     nCounts (5): 978, 587, 848, 466, 690
+
+  ** Parameters **
+     pattern: %1$s_%2$s_%3$s
+     offset: 10
+     basal: 1e-04
+     lambda: c(1, 1)
+     fit: TRUE
+     optimizer: all
+
+  ** Timestamp **
+     2011-09-14 08:16:42
+</pre>
+
+
+
+<pre class="src src-R">  head(reads(yFit, 3))
+</pre>
+
+
+<pre class="example">
+    start     end counts   ratio       fit
+1 1435037 1435037      4 1.60000 1.9855049
+2 1435039 1435039      4 1.60000 1.9855051
+3 1435043 1435043      3 1.19999 1.9766483
+4 1435045 1435045      1 0.00010 0.8232838
+5 1435047 1435047      1 0.00010 0.8232832
+6 1435049 1435049      1 0.00010 0.8249313
+</pre>
+
+
+
+
+
+<pre class="src src-R">  plot(yFit, 3)  
+</pre>
+
+
+
+<div id="fig1" class="figure">
+<p><img src="fig1.png"  alt="fig1.png" /></p>
+<p>Figure 1</p>
 </div>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Identifying transcription start sites </h2>
+<div class="outline-text-2" id="text-6">
+
+
+<p>
+  After normalization of the count data, an iterative algorithm is applied
+  for each segment to identify the TSS. The expected number of false
+  positive counts is initialized with a default value given by the read
+  frequency in the whole data set. The position with the largest counts
+  above is identified as a TSS, if the expected transcription level
+  is at least one read above the expected number of false positive reads.
+  The transcription levels for all TSS are calculated by adding all
+  counts to their nearest neighbor TSS.
+</p>
+<p>
+  Then, the expected number of false positive reads is updated by convolution
+  with exponential kernels. The decay rates <i>tau</i> in 3' direction
+  and towards the 5'-end can be chosen differently to account for the
+  fact that false positive counts are preferably found in 5' direction
+  of a TSS. This procedure is iterated as long as the set of TSS increases.
+</p>
+
+
+
+<pre class="src src-R">  z <span style="color: #008b8b;">&lt;-</span> identifyStartSites(yFit)
+  z  
+</pre>
+
+
+
+<pre class="example">  * Object of class 'TssResult' *
+    TSS in data identified
+
+  ** Segments **
+     Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
+     Chromosomes (2): s1, s2
+     Strands (2): +, -
+     Regions (5): 1, 2, 3, 4, 5
+     nCounts (5): 978, 587, 848, 466, 690
+     nTSS (5): 2, 3, 1, 8, 5
+
+  ** Parameters **
+     pattern: %1$s_%2$s_%3$s
+     offset: 10
+     basal: 1e-04
+     lambda: c(1, 1)
+     fit: TRUE
+     optimizer: all
+     tau: c(20, 20)
+     threshold: 1
+     fun: function (fg, bg, indTss, pos, basal, tau, extend = FALSE) 
+     readCol: fit
+     neighbor: TRUE
+
+  ** Timestamp **
+     2011-09-14 08:16:42
+</pre>
+
+
+
+<pre class="src src-R">  head(segments(z))
+</pre>
+
+
+<pre class="example">
+       chr strand region nPos nCounts   start     end nTss
+s1_+_1  s1      +      1   28     978   82747   82994    2
+s1_+_2  s1      +      2   33     587  814741  815042    3
+s1_-_3  s1      -      3   47     848 1435037 1435157    1
+s2_+_4  s2      +      4   68     466 1454505 1455353    8
+s2_-_5  s2      -      5   43     690 1574882 1575467    5
+</pre>
+
+
+
+
+
+<pre class="src src-R">  head(tss(z, 3))
+</pre>
+
+
+<pre class="example">
+      pos    reads
+1 1435104 58.49943
+</pre>
+
+
+
+
+
+<pre class="src src-R">  head(reads(z, 3))
+</pre>
+
+
+<pre class="example">
+    start     end counts   ratio       fit delta    expect
+1 1435037 1435037      4 1.60000 1.9855049     0  9.021792
+2 1435039 1435039      4 1.60000 1.9855051     0  9.970622
+3 1435043 1435043      3 1.19999 1.9766483     0 12.178145
+4 1435045 1435045      1 0.00010 0.8232838     0 13.458931
+5 1435047 1435047      1 0.00010 0.8232832     0 14.874420
+6 1435049 1435049      1 0.00010 0.8249313     0 16.438776
+</pre>
+
+
+
+
+
+<pre class="src src-R">  plot(z, 3)
+</pre>
+
+
+
+<div id="fig2" class="figure">
+<p><img src="fig2.png"  alt="fig2.png" /></p>
+<p>Figure 2</p>
+</div>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Customizing figures </h2>
+<div class="outline-text-2" id="text-7">
+
+
+<p>
+  The <i>plot</i> method allows for a simple, but powerful customization
+  of the produced figures. To each element of the graphic, all possible
+  arguments can be set, supplying them in the form of named lists. In
+  the following, we omit the the plotting of the threshold and the ratio
+  estimates, as well as adapt the representation of some components.
+  For a detailed description on the individual settings, please refer
+  to the <i>plot</i> documentation of this package.
+</p>
+
+
+
+<pre class="src src-R">  plot(z, 4,
+       ratio=<span style="color: #228b22;">FALSE</span>,
+       threshold=<span style="color: #228b22;">FALSE</span>,
+       baseline=<span style="color: #228b22;">FALSE</span>,
+       expect=<span style="color: #228b22;">TRUE</span>, expectArgs=list(type=<span style="color: #8b2252;">"l"</span>), extend=<span style="color: #228b22;">TRUE</span>,
+       countsArgs=list(type=<span style="color: #8b2252;">"h"</span>, col=<span style="color: #8b2252;">"darkgray"</span>, pch=<span style="color: #228b22;">NA</span>),
+       plotArgs=list(xlab=<span style="color: #8b2252;">"Genomic position"</span>, main=<span style="color: #8b2252;">"TSS for segment 's1_-_155'"</span>))
+</pre>
+
+
+
+<div id="fig3" class="figure">
+<p><img src="fig3.png"  alt="fig3.png" /></p>
+<p>Figure 3</p>
+</div>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8">Converting and exporting results </h2>
+<div class="outline-text-2" id="text-8">
+
+
+<p>
+  While the get methods <i>reads</i>,/segments/, and <i>tss</i>
+  provide a simple access to relevant results, such data can also be
+  represented with the framework provided by the <i>IRanges</i>
+  package. Converting the data to an object of class <i>RangedData</i>
+  allows for a standard representation and interface to other formats,
+  for example using the <i>rtracklayer</i> package.
+</p>
+
+
+
+<pre class="src src-R">  readsRd <span style="color: #008b8b;">&lt;-</span> readsAsRangedData(z)
+  segmentsRd <span style="color: #008b8b;">&lt;-</span> segmentsAsRangedData(z)
+  tssRd <span style="color: #008b8b;">&lt;-</span> tssAsRangedData(z)
+  tssRd  
+</pre>
+
+
+
+<pre class="example">   RangedData with 19 rows and 2 value columns across 5 spaces
+	space             ranges |   chr strand
+     &lt;factor&gt;          &lt;IRanges&gt; | &lt;Rle&gt;  &lt;Rle&gt;
+  1    s1_+_1 [  82747,   82747] |    s1      +
+  2    s1_+_1 [  82935,   82935] |    s1      +
+  3    s1_+_2 [ 814751,  814751] |    s1      +
+  4    s1_+_2 [ 814807,  814807] |    s1      +
+  5    s1_+_2 [ 814966,  814966] |    s1      +
+  6    s1_-_3 [1435104, 1435104] |    s1      -
+  7    s2_+_4 [1454528, 1454528] |    s2      +
+  8    s2_+_4 [1454594, 1454594] |    s2      +
+  9    s2_+_4 [1454813, 1454813] |    s2      +
+  10   s2_+_4 [1455004, 1455004] |    s2      +
+  11   s2_+_4 [1455058, 1455058] |    s2      +
+  12   s2_+_4 [1455113, 1455113] |    s2      +
+  13   s2_+_4 [1455244, 1455244] |    s2      +
+  14   s2_+_4 [1455353, 1455353] |    s2      +
+  15   s2_-_5 [1575058, 1575058] |    s2      -
+  16   s2_-_5 [1575096, 1575096] |    s2      -
+  17   s2_-_5 [1575154, 1575154] |    s2      -
+  18   s2_-_5 [1575300, 1575300] |    s2      -
+  19   s2_-_5 [1575440, 1575440] |    s2      -
+</pre>
+
+
+
+<pre class="src src-R">  <span style="color: #008b8b;">library</span>(rtracklayer)
+</pre>
+
+
+
+
+
+<pre class="src src-R">  tmpFile <span style="color: #008b8b;">&lt;-</span> tempfile()
+  export.gff3(readsRd, paste(tmpFile, <span style="color: #8b2252;">"gff"</span>, sep=<span style="color: #8b2252;">"."</span>))
+  export.bed(segmentsRd, paste(tmpFile, <span style="color: #8b2252;">"bed"</span>, sep=<span style="color: #8b2252;">"."</span>))
+  export.bed(tssRd, paste(tmpFile, <span style="color: #8b2252;">"bed"</span>, sep=<span style="color: #8b2252;">"."</span>))  
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9">Session information </h2>
+<div class="outline-text-2" id="text-9">
+
+
+
+
+
+<pre class="src src-R">  sessionInfo()
+</pre>
+
+
+
+<pre class="example">  R version 2.13.1 (2011-07-08)
+  Platform: x86_64-pc-linux-gnu (64-bit)
+
+  locale:
+   [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+   [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+   [5] LC_MONETARY=C              LC_MESSAGES=en_US.UTF-8   
+   [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+   [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+  [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+  attached base packages:
+  [1] stats     graphics  grDevices utils     datasets  methods   base     
+
+  other attached packages:
+  [1] rtracklayer_1.13.13 RCurl_1.6-10        bitops_1.0-4.1     
+  [4] TSSi_0.99.0        
+
+  loaded via a namespace (and not attached):
+   [1] Biobase_2.13.9       Biostrings_2.21.9    BSgenome_1.21.3     
+   [4] cluster_1.14.0       GenomicRanges_1.5.35 grid_2.13.1         
+   [7] Hmisc_3.8-3          IRanges_1.11.26      lattice_0.19-33     
+  [10] minqa_1.1.15         plyr_1.6             Rcpp_0.9.6          
+  [13] tools_2.13.1         XML_3.4-2            zlibbioc_0.1.7
+</pre>
+
+
+</div>
+</div>
+</div>
+
 <div id="postamble">
-<p class="date">Date: 2011-07-26 14:46:23 CEST</p>
+<p class="date">Date: 2011-09-14 08:16:45 CEST</p>
 <p class="author">Author: Julian Gehring</p>
 
-</div>
+
 </div>
 </body>
 </html>

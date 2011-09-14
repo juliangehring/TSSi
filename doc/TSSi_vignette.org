@@ -73,8 +73,8 @@ Identification of Transcription Start Sites with the TSSi package
   #+end_src
 
   #+begin_src R
-  data(readData)
-  head(readData)  
+  data(physcoCounts)
+  head(physcoCounts)  
   #+end_src
 
 
@@ -88,9 +88,9 @@ Identification of Transcription Start Sites with the TSSi package
   {{{Rclass(TssData)}}}.
 
   #+begin_src R
-  attach(readData)
+  attach(physcoCounts)
   x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
-  detach(readData)
+  detach(physcoCounts)
   #+end_src
 
   #+begin_src R
