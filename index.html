@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>TSSi package: Transcription Start Site Identification</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-07-26 13:37:38 CEST"/>
+<meta name="generated" content="2011-09-14 08:14:20 CEST"/>
 <meta name="author" content="Julian Gehring"/>
 <meta name="description" content="TSSi page"/>
 <meta name="keywords" content=""/>
@@ -44,6 +44,12 @@ lang="en" xml:lang="en">
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
   textarea { overflow-x: auto; }
   .linenr { font-size:smaller }
   .code-highlighted {background-color:#ffff00;}
@@ -80,14 +86,19 @@ lang="en" xml:lang="en">
 
 </head>
 <body>
-<div id="content">
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
  <a accesskey="h" href="index.html"> UP </a>
  |
  <a accesskey="H" href="http://julian-gehring.github.com/"> HOME </a>
 </div>
 
+<div id="preamble">
+
+</div>
+
+<div id="content">
 <h1 class="title">TSSi package: Transcription Start Site Identification</h1>
+
 
 
 
@@ -137,7 +148,7 @@ lang="en" xml:lang="en">
 
 
 <p>
-  The <i>TSSi</i> package is written for <a href="http://www.r-project.org/">R</a> and will be part of the <a href="http://bioconductor.org">bioconductor</a> project with the 2.9 release scheduled for October 2011.
+  The <i>TSSi</i> package is written for <a href="http://www.r-project.org/">R</a> and will be part of the <a href="http://bioconductor.org">bioconductor</a> project with the 2.9 release scheduled for 2011.
 </p>
 <p>
   The complete source code of the package is publically accessible at <a href="https://github.com/julian-gehring/TSSi">github</a> and licenced under the <a href="http://www.gnu.org/licenses/gpl-3.0.html">General Public License version 3 (GPL-3)</a>. You are free to use the software for any purposes and you are also welcome to contribute to it in any way.
@@ -167,10 +178,7 @@ lang="en" xml:lang="en">
 
 <pre class="src src-R">   <span style="color: #008b8b;">source</span>(<span style="color: #8b2252;">"http://bioconductor.org/biocLite.R"</span>)
    biocLite(<span style="color: #8b2252;">"TSSi"</span>)
-
 </pre>
-
-
 
 <p>
    Alternatively, you can also obtain the built packages from bioconductor and install them manually:
@@ -178,10 +186,7 @@ lang="en" xml:lang="en">
 
 
 <pre class="src src-R">   install.packages(<span style="color: #8b2252;">"path/to/TSSi_x.y.z"</span>)
-
 </pre>
-
-
 
 <p>
    Please note that the first method is generally the best choice.
@@ -202,10 +207,7 @@ lang="en" xml:lang="en">
 
 
 <pre class="src src-R">   <span style="color: #008b8b;">library</span>(TSSi)
-
 </pre>
-
-
 
 
 
@@ -224,10 +226,7 @@ lang="en" xml:lang="en">
 
 
 <pre class="src src-R">   vignette(<span style="color: #8b2252;">"TSSi"</span>)
-
 </pre>
-
-
 
 <p>
    Detailed descriptions of the objects, functions, and their parameters are provided in the <a href="http://www.bioconductor.org/packages/release/bioc/manuals/TSSi/man/TSSi.pdf">help pages</a>. For details about individual parts, e.g. the <i>segmentizeCounts</i> method, you can read the help file within R:
@@ -235,10 +234,7 @@ lang="en" xml:lang="en">
 
 
 <pre class="src src-R">   ?segmentizeCounts
-
 </pre>
-
-
 
 
 
@@ -265,11 +261,13 @@ lang="en" xml:lang="en">
 
 </div>
 </div>
+</div>
+
 <div id="postamble">
-<p class="date">Date: 2011-07-26 13:37:38 CEST</p>
+<p class="date">Date: 2011-09-14 08:14:20 CEST</p>
 <p class="author">Author: Julian Gehring</p>
 
-</div>
+
 </div>
 </body>
 </html>

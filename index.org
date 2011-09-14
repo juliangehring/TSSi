@@ -22,7 +22,7 @@ TSSi package: Transcription Start Site Identification
 
 * Availability, source code, and licensing
 
-  The /TSSi/ package is written for [[http://www.r-project.org/][R]] and will be part of the [[http://bioconductor.org][bioconductor]] project with the 2.9 release scheduled for October 2011.
+  The /TSSi/ package is written for [[http://www.r-project.org/][R]] and will be part of the [[http://bioconductor.org][bioconductor]] project with the 2.9 release scheduled for 2011.
 
   The complete source code of the package is publically accessible at [[https://github.com/julian-gehring/TSSi][github]] and licenced under the [[http://www.gnu.org/licenses/gpl-3.0.html][General Public License version 3 (GPL-3)]]. You are free to use the software for any purposes and you are also welcome to contribute to it in any way.
 
