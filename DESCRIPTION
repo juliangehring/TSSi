@@ -1,8 +1,8 @@
 Package: TSSi
 Type: Package
 Title: Transcription Start Site Identification
-Version: 0.99.1
-Date: 2011-09-15
+Version: 0.99.2
+Date: 2011-09-21
 Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@fdm.uni-freiburg.de>
 Imports: methods, Hmisc, minqa, stats, Biobase, plyr, IRanges

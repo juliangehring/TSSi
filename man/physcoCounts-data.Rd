@@ -6,6 +6,10 @@
 \alias{physcoCounts-TSSi}
 \alias{physcoCounts-data}
 
+\alias{readData}
+\alias{readData-TSSi}
+\alias{readData-data}
+
 \title{CAP capture data}
 
 \description{

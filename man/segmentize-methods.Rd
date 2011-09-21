@@ -7,6 +7,11 @@
 \alias{segmentizeCounts,integer,integer-method}
 \alias{segmentizeCounts-methods}
 
+\alias{segmentize}
+\alias{segmentize-TSSi}
+\alias{segmentize,integer,integer-method}
+\alias{segmentize-methods}
+
 \title{
   Segmentize methods
 }
