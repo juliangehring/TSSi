@@ -7,6 +7,10 @@
 \alias{normalizeCounts,TssData-method}
 \alias{normalizeCounts-methods}
 
+\alias{normalize}
+\alias{normalize-TSSi}
+\alias{normalize,TssData-method}
+
 \title{
   Normalize methods
 }

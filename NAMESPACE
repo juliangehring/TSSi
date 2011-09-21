@@ -18,6 +18,10 @@ exportMethods(segmentizeCounts)
 exportMethods(normalizeCounts)
 exportMethods(identifyStartSites)
 
+exportMethods(segmentize)
+exportMethods(normalize)
+exportMethods(identify)
+
 exportMethods(reads, segments, tss, parameters, timestamp, annotation, "[")
 exportMethods(start, end, counts, ratio, fit, expect)
 exportMethods(show, names)
