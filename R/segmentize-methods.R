@@ -53,8 +53,7 @@ setMethod("segmentizeCounts",
 
   ## create TssData object
   res <- new("TssData",
-             reads=reads, segments=segments, parameters=pars, annotation=annotation,
-             timestamp=Sys.time())
+             reads=reads, segments=segments, parameters=pars, annotation=annotation)
 
   return(res)
 }

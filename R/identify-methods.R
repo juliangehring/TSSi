@@ -46,8 +46,7 @@ setMethod("identifyStartSites",
                  neighbor=neighbor))
 
   res <- new("TssResult",
-             x, reads=reads, segments=segments, tss=tss, parameters=pars,
-             timestamp=Sys.time())
+             x, reads=reads, segments=segments, tss=tss, parameters=pars)
   
   return(res)
 }

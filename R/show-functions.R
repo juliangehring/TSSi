@@ -60,17 +60,6 @@
 }
 
 
-## showTimestamp ##
-.showTimestamp <- function(x) {
-
-  timestamp <- as.character(timestamp(x))
-
-  cat(sprintf("** %s **\n", "Timestamp"))
-  cat(sprintf("   %s\n\n", timestamp))
-
-}
-
-
 ## showParameters ##
 .showParameters <- function(x) {
 

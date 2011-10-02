@@ -5,7 +5,6 @@ setMethod("show",
   
   .showClassInfo(object)
   .showSegment(object)
-  .showTimestamp(object)
 
 }
 )
@@ -19,7 +18,6 @@ setMethod("show",
   .showClassInfo(object)
   .showSegment(object)
   .showParameters(object)
-  .showTimestamp(object)
 
 }
 )
@@ -33,7 +31,6 @@ setMethod("show",
   .showClassInfo(object)
   .showSegment(object)
   .showParameters(object)
-  .showTimestamp(object)
 
 }
 )

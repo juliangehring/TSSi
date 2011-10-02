@@ -24,7 +24,6 @@
     \item{\code{parameters}:}{List with parameters used for the analysis.}
     \item{\code{annotation}:}{Annotation data object, as passed through the
       \code{annotation} argument.}
-    \item{\code{timestamp}:}{Timestamp with the creation time of the object.}
   }
 }
 
@@ -84,12 +83,6 @@
       Get the information associated with the segments, e.g. chromosome,
       strand, region. The second and third argument select the segment
       and the variable of interest.
-    }
-    
-    \item{timestamp:}{
-      \code{signature(x="TssData")}
-    }{
-      Get the creation timestamp of the object.
     }
 
      \item{parameters:}{
