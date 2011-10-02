@@ -6,20 +6,22 @@ setGeneric("identifyStartSites",
            )
 
 setMethod("identifyStartSites",
-          signature(x="TssNorm"),
+          signature(x="TssData"),
           function(x, threshold=1, tau=c(20, 20), neighbor=TRUE,
                    fun=subtractExpectation, multicore=TRUE,  ...) {
 
   ## get parameters
   basal <- parameters(x, "basal")
-  readCol <- if(fit <- parameters(x, "fit")) "fit" else "ratio"
+  ## choose data column
+  reads <- reads(x)
+  dataNames <- c("fit", "ratio", "counts")
+  readCol <- (dataNames[dataNames %in% names(reads[[1]])])[1]
   tau <- rep(tau, length.out=2)
   
   ## check arguments
   .checkIdentify(threshold, tau, neighbor, fun, multicore)
 
   ## extract normalized data, apply for each segment
-  reads <- reads(x)
   y <-
     if(.useMulticore(multicore))
       multicore::mclapply(reads, .identifyCore,

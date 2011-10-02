@@ -4,7 +4,7 @@
 
 \alias{identifyStartSites}
 \alias{identifyStartSites-TSSi}
-\alias{identifyStartSites,TssNorm-method}
+\alias{identifyStartSites,TssData-method}
 \alias{idenfify-methods}
 
 \alias{identify}
@@ -51,7 +51,7 @@ fun=subtractExpectation, multicore=TRUE, ...)
   Identify TSS:
   \describe{
     \item{identifyStartSites:}{
-      \code{signature(x="TssNorm")}
+      \code{signature(x="TssData")}
     }{
       \code{identifyStartSites(x, ...)}
     }
