@@ -11,6 +11,9 @@
 \alias{normalize-TSSi}
 \alias{normalize,TssData-method}
 
+\alias{assessPoisson}
+\alias{assessGradPoisson}
+
 \title{
   Normalize methods
 }

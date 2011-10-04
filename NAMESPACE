@@ -29,4 +29,4 @@ exportMethods(readsAsRangedData, segmentsAsRangedData, tssAsRangedData)
 exportMethods(plot)
 
 export(subtractExpectation)
-
+export(assessPoisson, assessGradPoisson)

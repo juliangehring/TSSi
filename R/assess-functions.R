@@ -1,11 +1,24 @@
-## assess ##
-.assess <- function(ratio, counts, lambda, basal, nRep) {
+## assessPoisson ##
+assessPoisson <- function(ratio, counts, lambda, basal, nRep, ...) {
 
   ass <- c(2*.nReadsLoglik(counts, ratio),
            lambda[1]*.assessAbs(ratio, basal),
            lambda[2]*.assessSteps(ratio, basal))
 
   res <- sum(ass)
+
+  return(res)
+}
+
+
+## assessGradPoisson ##
+assessGradPoisson <- function(ratio, counts, lambda, basal, nRep, ...) {
+
+  dass1 <- 2*.nReadsLoglikGrad(counts, ratio, nRep)
+  dass2 <- lambda[1]*.assessAbsGrad(ratio, basal)
+  dass3 <- lambda[2]*.assessStepsGrad(ratio, basal)
+  
+  res <- dass1 + dass2 + dass3
 
   return(res)
 }
@@ -44,19 +57,6 @@
 
   prob <- dpois(x, ratio)
   res <- -sum(log(prob[prob > 0]))
-
-  return(res)
-}
-
-
-## assessGrad ##
-.assessGrad <- function(ratio, counts, lambda, basal, nRep) {
-
-  dass1 <- 2*.nReadsLoglikGrad(counts, ratio, nRep)
-  dass2 <- lambda[1]*.assessAbsGrad(ratio, basal)
-  dass3 <- lambda[2]*.assessStepsGrad(ratio, basal)
-  
-  res <- dass1 + dass2 + dass3
 
   return(res)
 }
