@@ -38,14 +38,14 @@
     lower <- rep(basal, n)
     
     rOpt <- if(optimizer %in% c("optim", "all"))
-      optim(fn=.assess, gr=.assessGrad, par=ratio, method="L-BFGS-B",
-            lower=lower, control=list(trace=0, maxit=500),
+      optim(fn=assessPoisson, gr=assessGradPoisson, par=ratio,
+            method="L-BFGS-B", lower=lower, control=list(trace=0, maxit=500),
             counts=counts, lambda=lambda, basal=basal, nRep=nRep)
     else
       list(value=Inf)
     
     rTrust <- if(optimizer %in% c("bobyqa", "all"))
-      bobyqa(fn=.assess, par=ratio, lower=lower,
+      bobyqa(fn=assessPoisson, par=ratio, lower=lower,
              control=list(iprint=0, maxfun=10*n^2),
              counts=counts, lambda=lambda, basal=basal, nRep=NULL)
     else
@@ -64,7 +64,7 @@
 
   lopt <- rep(NA, length(counts))
   for(i in 1:length(counts)) {
-    lopt[i] <- optimize(f=.assess, counts=counts[i], lambda=lambda, basal=basal, nRep=NULL,
+    lopt[i] <- optimize(f=assessPoisson, counts=counts[i], lambda=lambda, basal=basal, nRep=NULL,
                         interval=c(0, counts[i]+1))$minimum
   }
   initial <- lopt/counts
