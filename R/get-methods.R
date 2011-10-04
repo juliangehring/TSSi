@@ -143,23 +143,6 @@ setMethod("segments",
 )
 
 
-## timestamp ##
-setGeneric("timestamp",
-           function(x)
-           standardGeneric("timestamp")
-           )
-
-setMethod("timestamp",
-          signature(x="TssData"),
-          function(x) {
-
-  res <- x@timestamp
-
-  return(res)
-}
-)
-
-
 ## annotation ##
 setGeneric("annotation",
            function(x)

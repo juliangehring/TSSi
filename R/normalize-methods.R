@@ -42,7 +42,7 @@ setMethod("normalizeCounts",
                  optimizer=optimizer))
 
   res <- new("TssNorm",
-             x, reads=normData, parameters=pars, timestamp=Sys.time())
+             x, reads=normData, parameters=pars)
 
   return(res)
 }

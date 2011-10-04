@@ -22,7 +22,6 @@
       individual segments.}
     \item{\code{annotation}:}{Annotation data object, as passed through the
       \code{annotation} argument.}
-    \item{\code{timestamp}:}{Timestamp with the creation time of the object.}
   }
 }
 

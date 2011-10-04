@@ -17,9 +17,6 @@
 \alias{segments}
 \alias{segments-TSSi}
 \alias{segments,TssData-method}
-\alias{timestamp}
-\alias{timestamp-TSSi}
-\alias{timestamp,TssData-method}
 \alias{annotation}
 \alias{annotation-TSSi}
 \alias{annotation,TssData-method}
@@ -95,12 +92,6 @@
       Get the information associated with the segments, e.g. chromosome,
       strand, region. The optional second and third arguments select the
       segment and the variable of interest.
-    }
-    
-    \item{timestamp:}{
-      \code{signature(x="TssData")}
-    }{
-      Get the creation timestamp of the object.
     }
     
     \item{annotation:}{
