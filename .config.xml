@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<site
+    base_url="http://julian-gehring.github.com/TSSi/"
+    store_into="sitemap.xml"
+    verbose="1"
+    sitemap_type="web"
+    >
+
+  <directory
+      path="."
+      url="http://julian-gehring.github.com/TSSi/"
+      />
+  
+  <filter action="drop" type="wildcard" pattern="*~" />
+  <filter action="drop" type="regexp" pattern="google.*.html" />
+  <filter action="drop" type="regexp" pattern="y_key_.*.html" />
+  <filter action="drop" type="regexp" pattern="robots.txt" />
+  <filter action="drop" type="wildcard" pattern="*.css" />
+  <filter action="drop" type="regexp" pattern="/\.[^/]*" />
+
+</site>
