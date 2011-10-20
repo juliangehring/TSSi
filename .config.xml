@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <site
-    base_url="http://julian-gehring.github.com/GSRI/"
+    base_url="http://julian-gehring.github.com/TSSi/"
     store_into="sitemap.xml"
     verbose="1"
     sitemap_type="web"
@@ -9,7 +9,7 @@
 
   <directory
       path="."
-      url="http://julian-gehring.github.com/GSRI/"
+      url="http://julian-gehring.github.com/TSSi/"
       />
   
 
