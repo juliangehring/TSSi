@@ -17,12 +17,12 @@ TSSi package: Transcription Start Site Identification
   Along with the advances in high-throughput sequencing, the detection of transcription start sites (TSS) using CAP-capture techniques has evolved recently. While many experimental applications exist, the analysis of such data is still non-trivial. Approaching this, the /TSSi/ package offers a flexible statistical preprocessing for CAP-capture data and an automated identification of start sites.
 
   Authors: Clemens Kreutz, Julian Gehring, Jens Timmer\\
-  Maintainer: Julian Gehring <julian.gehring (at) fdm.uni-freiburg.de>
+  Maintainer: Julian Gehring <julian.gehring (at) embl.de>
 
 
 * Availability, source code, and licensing
 
-  The /TSSi/ package is written for [[http://www.r-project.org/][R]] and will be part of the [[http://bioconductor.org][bioconductor]] project with the 2.9 release scheduled for 2011.
+  The /TSSi/ package is written for [[http://www.r-project.org/][R]] and part of the [[http://bioconductor.org][bioconductor]] project since the 2.9 release in November 2011. This provides the latest [[http://www.bioconductor.org/help/bioc-views/release/bioc/html/TSSi.html][stable release version]] and the current [[http://www.bioconductor.org/help/bioc-views/devel/bioc/html/TSSi.html][developer version]], including builts for major platforms supported by R.
 
   The complete source code of the package is publically accessible at [[https://github.com/julian-gehring/TSSi][github]] and licenced under the [[http://www.gnu.org/licenses/gpl-3.0.html][General Public License version 3 (GPL-3)]]. You are free to use the software for any purposes and you are also welcome to contribute to it in any way.
 
@@ -36,7 +36,7 @@ TSSi package: Transcription Start Site Identification
    source("http://bioconductor.org/biocLite.R")
    biocLite("TSSi")
    #+end_src
-   Alternatively, you can also obtain the built packages from bioconductor and install them manually:
+   Alternatively, you can also download the built packages from bioconductor and install them manually:
    #+begin_src R
    install.packages("path/to/TSSi_x.y.z")
    #+end_src
