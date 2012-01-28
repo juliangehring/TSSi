@@ -1,88 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Identification of Transcription Start Sites with the TSSi package</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Identification of Transcription Start Sites with the TSSi package"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-09-14 08:16:45 CEST"/>
+<meta name="generated" content="2012-01-28 17:13:17 CET"/>
 <meta name="author" content="Julian Gehring"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
-  pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
-  }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
-  dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
-    background: #ffffcc;
-  }
-  textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
-  /*]]>*/-->
-</style>
 <link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
+<link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
+
 
 </head>
 <body>
@@ -110,21 +41,21 @@ lang="en" xml:lang="en">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Abstract </a></li>
-<li><a href="#sec-2">Introduction </a></li>
-<li><a href="#sec-3">Data set </a></li>
-<li><a href="#sec-4">Segment read data </a></li>
-<li><a href="#sec-5">Normalization </a></li>
-<li><a href="#sec-6">Identifying transcription start sites </a></li>
-<li><a href="#sec-7">Customizing figures </a></li>
-<li><a href="#sec-8">Converting and exporting results </a></li>
-<li><a href="#sec-9">Session information </a></li>
+<li><a href="#sec-1">Abstract</a></li>
+<li><a href="#sec-2">Introduction</a></li>
+<li><a href="#sec-3">Data set</a></li>
+<li><a href="#sec-4">Segment read data</a></li>
+<li><a href="#sec-5">Normalization</a></li>
+<li><a href="#sec-6">Identifying transcription start sites</a></li>
+<li><a href="#sec-7">Customizing figures</a></li>
+<li><a href="#sec-8">Converting and exporting results</a></li>
+<li><a href="#sec-9">Session information</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Abstract </h2>
+<h2 id="sec-1">Abstract</h2>
 <div class="outline-text-2" id="text-1">
 
 
@@ -144,7 +75,7 @@ lang="en" xml:lang="en">
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Introduction </h2>
+<h2 id="sec-2">Introduction</h2>
 <div class="outline-text-2" id="text-2">
 
 
@@ -178,7 +109,7 @@ lang="en" xml:lang="en">
 </div>
 
 <div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Data set </h2>
+<h2 id="sec-3">Data set</h2>
 <div class="outline-text-2" id="text-3">
 
 
@@ -195,13 +126,13 @@ lang="en" xml:lang="en">
 
 
 
-<pre class="src src-R">  <span style="color: #008b8b;">library</span>(TSSi)  
+<pre class="src src-R"><span style="color: #008b8b;">library</span>(TSSi)  
 </pre>
 
 
 
-<pre class="src src-R">  data(physcoCounts)
-  head(physcoCounts)  
+<pre class="src src-R">data(physcoCounts)
+head(physcoCounts)  
 </pre>
 
 
@@ -222,7 +153,7 @@ lang="en" xml:lang="en">
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Segment read data </h2>
+<h2 id="sec-4">Segment read data</h2>
 <div class="outline-text-2" id="text-4">
 
 
@@ -237,31 +168,30 @@ lang="en" xml:lang="en">
 
 
 
-<pre class="src src-R">  <span style="color: #008b8b;">attach</span>(physcoCounts)
-  x <span style="color: #008b8b;">&lt;-</span> segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
-  <span style="color: #008b8b;">detach</span>(physcoCounts)
+<pre class="src src-R"><span style="color: #008b8b;">attach</span>(physcoCounts)
+x <span style="color: #008b8b;">&lt;-</span> segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
+<span style="color: #008b8b;">detach</span>(physcoCounts)
 </pre>
 
 
 
 
-<pre class="src src-R">  x
+
+
+<pre class="src src-R">x
 </pre>
 
 
+<pre class="example">
+* Object of class 'TssData' *
+  Data imported
 
-<pre class="example">  * Object of class 'TssData' *
-    Data imported
-
-  ** Segments **
-     Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
-     Chromosomes (2): s1, s2
-     Strands (2): +, -
-     Regions (5): 1, 2, 3, 4, 5
-     nCounts (5): 978, 587, 848, 466, 690
-
-  ** Timestamp **
-     2011-09-14 08:16:35
+** Segments **
+   Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
+   Chromosomes (2): s1, s2
+   Strands (2): +, -
+   Regions (5): 1, 2, 3, 4, 5
+   nCounts (5): 978, 587, 848, 466, 690
 </pre>
 
 
@@ -274,7 +204,7 @@ lang="en" xml:lang="en">
 
 
 
-<pre class="src src-R">  segments(x)
+<pre class="src src-R">segments(x)
 </pre>
 
 
@@ -291,7 +221,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  names(x)
+<pre class="src src-R">names(x)
 </pre>
 
 
@@ -303,7 +233,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  head(reads(x, 3))
+<pre class="src src-R">head(reads(x, 3))
 </pre>
 
 
@@ -321,7 +251,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  head(start(x, 3))
+<pre class="src src-R">head(start(x, 3))
 </pre>
 
 
@@ -333,7 +263,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  head(start(x, names(x)[3]))
+<pre class="src src-R">head(start(x, names(x)[3]))
 </pre>
 
 
@@ -348,7 +278,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Normalization </h2>
+<h2 id="sec-5">Normalization</h2>
 <div class="outline-text-2" id="text-5">
 
 
@@ -374,43 +304,44 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  yRatio <span style="color: #008b8b;">&lt;-</span> normalizeCounts(x)
+<pre class="src src-R">yRatio <span style="color: #008b8b;">&lt;-</span> normalizeCounts(x)
 </pre>
 
 
 
 
-<pre class="src src-R">  yFit <span style="color: #008b8b;">&lt;-</span> normalizeCounts(x, fit=<span style="color: #228b22;">TRUE</span>)
-  yFit  
+
+
+<pre class="src src-R">yFit <span style="color: #008b8b;">&lt;-</span> normalizeCounts(x, fit=<span style="color: #228b22;">TRUE</span>)
+yFit  
 </pre>
 
 
 
-<pre class="example">  * Object of class 'TssNorm' *
-    Data normalized
+  
 
-  ** Segments **
-     Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
-     Chromosomes (2): s1, s2
-     Strands (2): +, -
-     Regions (5): 1, 2, 3, 4, 5
-     nCounts (5): 978, 587, 848, 466, 690
+<pre class="example">* Object of class 'TssNorm' *
+  Data normalized
 
-  ** Parameters **
-     pattern: %1$s_%2$s_%3$s
-     offset: 10
-     basal: 1e-04
-     lambda: c(1, 1)
-     fit: TRUE
-     optimizer: all
+** Segments **
+   Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
+   Chromosomes (2): s1, s2
+   Strands (2): +, -
+   Regions (5): 1, 2, 3, 4, 5
+   nCounts (5): 978, 587, 848, 466, 690
 
-  ** Timestamp **
-     2011-09-14 08:16:42
+** Parameters **
+   pattern: %1$s_%2$s_%3$s
+   offset: 10
+   basal: 1e-04
+   lambda: c(1, 1)
+   fit: TRUE
+   optimizer: all
 </pre>
 
 
 
-<pre class="src src-R">  head(reads(yFit, 3))
+<pre class="src src-R">head(reads(yFit, 3))
 </pre>
 
 
@@ -428,7 +359,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  plot(yFit, 3)  
+<pre class="src src-R">plot(yFit, 3)  
 </pre>
 
 
@@ -444,7 +375,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">Identifying transcription start sites </h2>
+<h2 id="sec-6">Identifying transcription start sites</h2>
 <div class="outline-text-2" id="text-6">
 
 
@@ -468,43 +399,42 @@ s2_-_5  s2      -      5   43     690 1574882 1575467
 
 
 
-<pre class="src src-R">  z <span style="color: #008b8b;">&lt;-</span> identifyStartSites(yFit)
-  z  
+<pre class="src src-R">z <span style="color: #008b8b;">&lt;-</span> identifyStartSites(yFit)
+z  
 </pre>
 
 
 
-<pre class="example">  * Object of class 'TssResult' *
-    TSS in data identified
+  
 
-  ** Segments **
-     Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
-     Chromosomes (2): s1, s2
-     Strands (2): +, -
-     Regions (5): 1, 2, 3, 4, 5
-     nCounts (5): 978, 587, 848, 466, 690
-     nTSS (5): 2, 3, 1, 8, 5
+<pre class="example">* Object of class 'TssResult' *
+  TSS in data identified
 
-  ** Parameters **
-     pattern: %1$s_%2$s_%3$s
-     offset: 10
-     basal: 1e-04
-     lambda: c(1, 1)
-     fit: TRUE
-     optimizer: all
-     tau: c(20, 20)
-     threshold: 1
-     fun: function (fg, bg, indTss, pos, basal, tau, extend = FALSE) 
-     readCol: fit
-     neighbor: TRUE
+** Segments **
+   Segments (5): s1_+_1, s1_+_2, s1_-_3, s2_+_4, s2_-_5
+   Chromosomes (2): s1, s2
+   Strands (2): +, -
+   Regions (5): 1, 2, 3, 4, 5
+   nCounts (5): 978, 587, 848, 466, 690
+   nTSS (5): 2, 3, 1, 8, 5
 
-  ** Timestamp **
-     2011-09-14 08:16:42
+** Parameters **
+   pattern: %1$s_%2$s_%3$s
+   offset: 10
+   basal: 1e-04
+   lambda: c(1, 1)
+   fit: TRUE
+   optimizer: all
+   tau: c(20, 20)
+   threshold: 1
+   fun: function (fg, bg, indTss, pos, basal, tau, extend = FALSE) 
+   readCol: fit
+   neighbor: TRUE
 </pre>
 
 
 
-<pre class="src src-R">  head(segments(z))
+<pre class="src src-R">head(segments(z))
 </pre>
 
 
@@ -521,7 +451,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 
 
 
-<pre class="src src-R">  head(tss(z, 3))
+<pre class="src src-R">head(tss(z, 3))
 </pre>
 
 
@@ -534,7 +464,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 
 
 
-<pre class="src src-R">  head(reads(z, 3))
+<pre class="src src-R">head(reads(z, 3))
 </pre>
 
 
@@ -552,7 +482,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 
 
 
-<pre class="src src-R">  plot(z, 3)
+<pre class="src src-R">plot(z, 3)
 </pre>
 
 
@@ -568,7 +498,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">Customizing figures </h2>
+<h2 id="sec-7">Customizing figures</h2>
 <div class="outline-text-2" id="text-7">
 
 
@@ -584,13 +514,13 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 
 
 
-<pre class="src src-R">  plot(z, 4,
-       ratio=<span style="color: #228b22;">FALSE</span>,
-       threshold=<span style="color: #228b22;">FALSE</span>,
-       baseline=<span style="color: #228b22;">FALSE</span>,
-       expect=<span style="color: #228b22;">TRUE</span>, expectArgs=list(type=<span style="color: #8b2252;">"l"</span>), extend=<span style="color: #228b22;">TRUE</span>,
-       countsArgs=list(type=<span style="color: #8b2252;">"h"</span>, col=<span style="color: #8b2252;">"darkgray"</span>, pch=<span style="color: #228b22;">NA</span>),
-       plotArgs=list(xlab=<span style="color: #8b2252;">"Genomic position"</span>, main=<span style="color: #8b2252;">"TSS for segment 's1_-_155'"</span>))
+<pre class="src src-R">plot(z, 4,
+     ratio=<span style="color: #228b22;">FALSE</span>,
+     threshold=<span style="color: #228b22;">FALSE</span>,
+     baseline=<span style="color: #228b22;">FALSE</span>,
+     expect=<span style="color: #228b22;">TRUE</span>, expectArgs=list(type=<span style="color: #8b2252;">"l"</span>), extend=<span style="color: #228b22;">TRUE</span>,
+     countsArgs=list(type=<span style="color: #8b2252;">"h"</span>, col=<span style="color: #8b2252;">"darkgray"</span>, pch=<span style="color: #228b22;">NA</span>),
+     plotArgs=list(xlab=<span style="color: #8b2252;">"Genomic position"</span>, main=<span style="color: #8b2252;">"TSS for segment 's1_-_155'"</span>))
 </pre>
 
 
@@ -606,7 +536,7 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">Converting and exporting results </h2>
+<h2 id="sec-8">Converting and exporting results</h2>
 <div class="outline-text-2" id="text-8">
 
 
@@ -621,51 +551,53 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 
 
 
-<pre class="src src-R">  readsRd <span style="color: #008b8b;">&lt;-</span> readsAsRangedData(z)
-  segmentsRd <span style="color: #008b8b;">&lt;-</span> segmentsAsRangedData(z)
-  tssRd <span style="color: #008b8b;">&lt;-</span> tssAsRangedData(z)
-  tssRd  
+<pre class="src src-R">readsRd <span style="color: #008b8b;">&lt;-</span> readsAsRangedData(z)
+segmentsRd <span style="color: #008b8b;">&lt;-</span> segmentsAsRangedData(z)
+tssRd <span style="color: #008b8b;">&lt;-</span> tssAsRangedData(z)
+tssRd  
 </pre>
 
 
 
-<pre class="example">   RangedData with 19 rows and 2 value columns across 5 spaces
-	space             ranges |   chr strand
-     &lt;factor&gt;          &lt;IRanges&gt; | &lt;Rle&gt;  &lt;Rle&gt;
-  1    s1_+_1 [  82747,   82747] |    s1      +
-  2    s1_+_1 [  82935,   82935] |    s1      +
-  3    s1_+_2 [ 814751,  814751] |    s1      +
-  4    s1_+_2 [ 814807,  814807] |    s1      +
-  5    s1_+_2 [ 814966,  814966] |    s1      +
-  6    s1_-_3 [1435104, 1435104] |    s1      -
-  7    s2_+_4 [1454528, 1454528] |    s2      +
-  8    s2_+_4 [1454594, 1454594] |    s2      +
-  9    s2_+_4 [1454813, 1454813] |    s2      +
-  10   s2_+_4 [1455004, 1455004] |    s2      +
-  11   s2_+_4 [1455058, 1455058] |    s2      +
-  12   s2_+_4 [1455113, 1455113] |    s2      +
-  13   s2_+_4 [1455244, 1455244] |    s2      +
-  14   s2_+_4 [1455353, 1455353] |    s2      +
-  15   s2_-_5 [1575058, 1575058] |    s2      -
-  16   s2_-_5 [1575096, 1575096] |    s2      -
-  17   s2_-_5 [1575154, 1575154] |    s2      -
-  18   s2_-_5 [1575300, 1575300] |    s2      -
-  19   s2_-_5 [1575440, 1575440] |    s2      -
+  
+
+<pre class="example"> RangedData with 19 rows and 2 value columns across 5 spaces
+      space             ranges |   chr strand
+   &lt;factor&gt;          &lt;IRanges&gt; | &lt;Rle&gt;  &lt;Rle&gt;
+1    s1_+_1 [  82747,   82747] |    s1      +
+2    s1_+_1 [  82935,   82935] |    s1      +
+3    s1_+_2 [ 814751,  814751] |    s1      +
+4    s1_+_2 [ 814807,  814807] |    s1      +
+5    s1_+_2 [ 814966,  814966] |    s1      +
+6    s1_-_3 [1435104, 1435104] |    s1      -
+7    s2_+_4 [1454528, 1454528] |    s2      +
+8    s2_+_4 [1454594, 1454594] |    s2      +
+9    s2_+_4 [1454813, 1454813] |    s2      +
+10   s2_+_4 [1455004, 1455004] |    s2      +
+11   s2_+_4 [1455058, 1455058] |    s2      +
+12   s2_+_4 [1455113, 1455113] |    s2      +
+13   s2_+_4 [1455244, 1455244] |    s2      +
+14   s2_+_4 [1455353, 1455353] |    s2      +
+15   s2_-_5 [1575058, 1575058] |    s2      -
+16   s2_-_5 [1575096, 1575096] |    s2      -
+17   s2_-_5 [1575154, 1575154] |    s2      -
+18   s2_-_5 [1575300, 1575300] |    s2      -
+19   s2_-_5 [1575440, 1575440] |    s2      -
 </pre>
 
 
 
-<pre class="src src-R">  <span style="color: #008b8b;">library</span>(rtracklayer)
+<pre class="src src-R"><span style="color: #008b8b;">library</span>(rtracklayer)
 </pre>
 
 
 
 
 
-<pre class="src src-R">  tmpFile <span style="color: #008b8b;">&lt;-</span> tempfile()
-  export.gff3(readsRd, paste(tmpFile, <span style="color: #8b2252;">"gff"</span>, sep=<span style="color: #8b2252;">"."</span>))
-  export.bed(segmentsRd, paste(tmpFile, <span style="color: #8b2252;">"bed"</span>, sep=<span style="color: #8b2252;">"."</span>))
-  export.bed(tssRd, paste(tmpFile, <span style="color: #8b2252;">"bed"</span>, sep=<span style="color: #8b2252;">"."</span>))  
+<pre class="src src-R">tmpFile <span style="color: #008b8b;">&lt;-</span> tempfile()
+export.gff3(readsRd, paste(tmpFile, <span style="color: #8b2252;">"gff"</span>, sep=<span style="color: #8b2252;">"."</span>))
+export.bed(segmentsRd, paste(tmpFile, <span style="color: #8b2252;">"bed"</span>, sep=<span style="color: #8b2252;">"."</span>))
+export.bed(tssRd, paste(tmpFile, <span style="color: #8b2252;">"bed"</span>, sep=<span style="color: #8b2252;">"."</span>))  
 </pre>
 
 
@@ -676,42 +608,43 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9">Session information </h2>
+<h2 id="sec-9">Session information</h2>
 <div class="outline-text-2" id="text-9">
 
 
 
 
 
-<pre class="src src-R">  sessionInfo()
+<pre class="src src-R">sessionInfo()
 </pre>
 
 
 
-<pre class="example">  R version 2.13.1 (2011-07-08)
-  Platform: x86_64-pc-linux-gnu (64-bit)
+  
 
-  locale:
-   [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-   [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-   [5] LC_MONETARY=C              LC_MESSAGES=en_US.UTF-8   
-   [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-   [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-  [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+<pre class="example">R version 2.14.1 (2011-12-22)
+Platform: x86_64-pc-linux-gnu (64-bit)
 
-  attached base packages:
-  [1] stats     graphics  grDevices utils     datasets  methods   base     
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=C                 LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
-  other attached packages:
-  [1] rtracklayer_1.13.13 RCurl_1.6-10        bitops_1.0-4.1     
-  [4] TSSi_0.99.0        
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
 
-  loaded via a namespace (and not attached):
-   [1] Biobase_2.13.9       Biostrings_2.21.9    BSgenome_1.21.3     
-   [4] cluster_1.14.0       GenomicRanges_1.5.35 grid_2.13.1         
-   [7] Hmisc_3.8-3          IRanges_1.11.26      lattice_0.19-33     
-  [10] minqa_1.1.15         plyr_1.6             Rcpp_0.9.6          
-  [13] tools_2.13.1         XML_3.4-2            zlibbioc_0.1.7
+other attached packages:
+[1] rtracklayer_1.14.4 RCurl_1.9-5        bitops_1.0-4.1     TSSi_1.1.0        
+
+loaded via a namespace (and not attached):
+ [1] Biobase_2.14.0      Biostrings_2.22.0   BSgenome_1.22.0    
+ [4] cluster_1.14.1      GenomicRanges_1.6.4 grid_2.14.1        
+ [7] Hmisc_3.9-1         IRanges_1.12.5      lattice_0.20-0     
+[10] minqa_1.1.18        plyr_1.7.1          Rcpp_0.9.9         
+[13] tools_2.14.1        XML_3.9-2           zlibbioc_1.0.0
 </pre>
 
 
@@ -720,9 +653,9 @@ s2_-_5  s2      -      5   43     690 1574882 1575467    5
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-09-14 08:16:45 CEST</p>
+<p class="date">Date: 2012-01-28 17:13:17 CET</p>
 <p class="author">Author: Julian Gehring</p>
-
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
 
 </div>
 </body>

@@ -4,7 +4,12 @@ Identification of Transcription Start Sites with the TSSi package
 
 #+LINK_UP: ../index.html
 
-#+BABEL: :exports both :tangle yes :results output scalar replace :session :width 600 :height 600
+#+PROPERTY: session *R*
+#+PROPERTY: results output scalar replace
+#+PROPERTY: tangle yes
+#+PROPERTY: exports both
+#+PROPERTY: width 600
+#+PROPERTY: height 600
 
 #+OPTIONS: creator:nil num:nil timestamp:t email:nil author:t html-postamble:nil
 #+STYLE: <link rel="stylesheet" type="text/css" href="http://julian-gehring.github.com/worg.css" />
@@ -77,7 +82,7 @@ Identification of Transcription Start Sites with the TSSi package
   head(physcoCounts)  
   #+end_src
 
-
+  
 * Segment read data
 
   As a first step in the analysis, the read data is taken by the {{{Rmethod(segmentizeCounts)}}}
