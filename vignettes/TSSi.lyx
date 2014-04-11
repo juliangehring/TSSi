@@ -1,0 +1,847 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrartcl
+\begin_preamble
+%\VignetteIndexEntry{Introduction to the TSSi package: Identification of Transcription Start Sites}
+%\VignettePackage{TSSi}
+
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Rmethod}[1]{{\textit{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+\newcommand{\Rvar}[1]{{\textit{\textsf{#1}}}}
+
+%% avoid single lines
+\widowpenalty=10000
+\clubpenalty=10000
+
+%% format captions
+\usepackage[small,bf,margin=.5cm]{caption}
+\end_preamble
+\use_default_options false
+\begin_modules
+sweave
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Introduction to the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{TSSi}
+\end_layout
+
+\end_inset
+
+ package:
+\begin_inset Newline newline
+\end_inset
+
+Identification of Transcription Start Sites
+\end_layout
+
+\begin_layout Author
+Julian Gehring, Clemens Kreutz
+\end_layout
+
+\begin_layout Chunk
+<<settings, echo=FALSE>>=
+\end_layout
+
+\begin_layout Chunk
+set.seed(1)
+\end_layout
+
+\begin_layout Chunk
+options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1,
+ 1.5))))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Abstract
+Along with the advances in high-throughput sequencing, the detection of
+ transcription start sites 
+\emph on
+(TSS)
+\emph default
+ using CAP-capture techniques has evolved recently.
+ While many experimental applications exist, the analysis of such data is
+ still non-trivial.
+ Approaching this, the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{TSSi}
+\end_layout
+
+\end_inset
+
+ package offers a flexible statistical preprocessing for CAP-capture data
+ and an automated identification of start sites.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+High throughput sequencing has become an essential experimental approach
+ to investigate genomes and transcriptional processes.
+ While cDNA sequencing (
+\emph on
+RNA-seq
+\emph default
+) using random priming and/or fragmentation of cDNA will result in a shallow
+ distribution of reads typically biased towards the 3' end, approaches like
+ CAP-capture enrich 5' ends and yield more clearly distinguishable peaks
+ around the transcription start sites.
+\end_layout
+
+\begin_layout Standard
+Predicting the location of transcription start sites 
+\emph on
+(TSS)
+\emph default
+ is hampered by the existence of alternative ones since their number within
+ regions of transcription is unknown.
+ In addition, measurements contain false positive counts.
+ Therefore, only the counts which are significantly larger than an expected
+ number of background reads are intended to be predicted as TSS.
+ The number of false positive reads increases in regions of transcriptional
+ activity and such reads obviously do not map to random positions.
+ On the one hand, these reads seem to occur sequence dependently and therefore
+ cluster to certain genomic positions, on the other hand, they are detected
+ more frequently than being originated from real TSS.
+ Because currently, there is no error model available describing such noise,
+ the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{TSSi}
+\end_layout
+
+\end_inset
+
+ package implements an heuristic approach for an automated and flexible
+ prediction of TSS.
+ 
+\end_layout
+
+\begin_layout Section
+Data set
+\end_layout
+
+\begin_layout Standard
+To demonstrate the functionality and usage of this package, experimental
+ CAP-capture data obtained with Solexa sequencing is used.
+ The reads were mapped to the genome, such that the number of sequenced
+ 5' ends and their positions in the genome are available
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The 
+\emph on
+sequencing workflow
+\emph default
+ at the bioconductor website describes basic steps and tools for the import
+ and processing of sequcencing data (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://bioconductor.org/help/workflows/high-throughput-sequencing/
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\end_inset
+
+.
+ The data frame 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rvar{physcoCounts}
+\end_layout
+
+\end_inset
+
+ contains information about the chromosome, the strand, the 5' position,
+ and the total number of mapped reads.
+ Additionally, regions based on existing annotation are provided which are
+ used here to divide the data into independent subsets for analysis.
+\end_layout
+
+\begin_layout Chunk
+<<load_package>>=
+\end_layout
+
+\begin_layout Chunk
+library(TSSi)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+<<load_data>>=
+\end_layout
+
+\begin_layout Chunk
+data(physcoCounts)
+\end_layout
+
+\begin_layout Chunk
+head(physcoCounts)
+\end_layout
+
+\begin_layout Chunk
+table(physcoCounts$chromosome, physcoCounts$strand)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Section
+Segment read data
+\end_layout
+
+\begin_layout Standard
+As a first step in the analysis, the reads are passed to the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{segmentizeCounts}
+\end_layout
+
+\end_inset
+
+ method.
+ Here, the data is divided into 
+\emph on
+segments
+\emph default
+, for which the following analysis is performed independently.
+ This is performed based on the information about the chromosomes, the strands,
+ and the regions of the reads.
+ The segmented data is returned as an object of the class 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rclass{TssData}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Chunk
+<<segmentize>>=
+\end_layout
+
+\begin_layout Chunk
+attach(physcoCounts)
+\end_layout
+
+\begin_layout Chunk
+x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region,
+ strand=strand)
+\end_layout
+
+\begin_layout Chunk
+detach(physcoCounts)
+\end_layout
+
+\begin_layout Chunk
+x
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Standard
+The segments and the associated read data are accessible through several
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{get}
+\end_layout
+
+\end_inset
+
+ methods.
+ Data from individual segments can be referred to by either its name or
+ an index.
+\end_layout
+
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
+<<get_segments>>=
+\begin_inset Newline newline
+\end_inset
+
+segments(x)
+\end_layout
+
+\begin_layout Chunk
+names(x)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
+<<get_reads>>=
+\end_layout
+
+\begin_layout Chunk
+head(reads(x, 3))
+\end_layout
+
+\begin_layout Chunk
+head(start(x, 3))
+\end_layout
+
+\begin_layout Chunk
+head(start(x, names(x)[3]))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Section
+Normalization
+\end_layout
+
+\begin_layout Standard
+The normalization reduces the noise by shrinking the counts towards zero.
+ This step is intended to eliminate false positive counts as well as making
+ further analyzes more robust by reducing the impact of large counts.
+ Such a shrinkage or regularization procedure constitutes a well-established
+ strategy in statistics to make predictions conservative, that means to
+ reduce the number of false positive predictions.
+ To enhance the shrinkage of isolated counts in comparison to counts in
+ regions of strong transcriptional activity, the information of consecutive
+ genomic positions in the measurements is regarded by evaluating differences
+ between adjacent count estimates.
+\end_layout
+
+\begin_layout Standard
+The computation can be performed with a approximation based on the frequency
+ of all reads or fitted explicitly for each segment.
+ On platforms supporting the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{parallel}
+\end_layout
+
+\end_inset
+
+ package, the fitting can be spread over multiple processor cores in order
+ to decrease computation time.
+\end_layout
+
+\begin_layout Chunk
+<<normalize_ratio>>=
+\end_layout
+
+\begin_layout Chunk
+yRatio <- normalizeCounts(x)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
+<<normalize_fit>>=
+\end_layout
+
+\begin_layout Chunk
+yFit <- normalizeCounts(x, fit=TRUE)
+\end_layout
+
+\begin_layout Chunk
+yFit
+\end_layout
+
+\begin_layout Chunk
+head(reads(yFit, 3))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
+<<plot_normalize_fit, fig=TRUE, echo=TRUE>>=
+\end_layout
+
+\begin_layout Chunk
+plot(yFit, 3)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Section
+Identifying transcription start sites
+\end_layout
+
+\begin_layout Standard
+After normalization of the count data, an iterative algorithm is applied
+ for each segment to identify the TSS.
+ The expected number of false positive counts is initialized with a default
+ value given by the read frequency in the whole data set.
+ The position with the largest counts above is identified as a TSS, if the
+ expected transcription level is at least one read above the expected number
+ of false positive reads.
+ The transcription levels for all TSS are calculated by adding all counts
+ to their nearest neighbor TSS.
+\end_layout
+
+\begin_layout Standard
+Then, the expected number of false positive reads is updated by convolution
+ with exponential kernels.
+ The decay rates 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rfunarg{tau}
+\end_layout
+
+\end_inset
+
+ in 3' direction and towards the 5'-end can be chosen differently to account
+ for the fact that false positive counts are preferably found in 5' direction
+ of a TSS.
+ This procedure is iterated as long as the set of TSS increases.
+\end_layout
+
+\begin_layout Chunk
+<<identify>>=
+\end_layout
+
+\begin_layout Chunk
+z <- identifyStartSites(yFit)
+\end_layout
+
+\begin_layout Chunk
+z
+\end_layout
+
+\begin_layout Chunk
+head(segments(z))
+\end_layout
+
+\begin_layout Chunk
+head(tss(z, 3))
+\end_layout
+
+\begin_layout Chunk
+head(reads(z, 3))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
+<<plot_identify, fig=TRUE, echo=TRUE>>=
+\end_layout
+
+\begin_layout Chunk
+plot(z, 3)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Section
+Visualizing and customizing figures
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{plot}
+\end_layout
+
+\end_inset
+
+ method allows for a simple, but powerful visualization and customization
+ of the produced figures.
+ For each element of the figure, all graphical parameters can be set, supplying
+ them in the form of named lists.
+ In the following, plotting of the threshold and the ratio estimates are
+ omitted, as well as the representation of some components is adapted.
+ For a detailed description on the individual settings, please refer to
+ the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{plot}
+\end_layout
+
+\end_inset
+
+ documentation of this package.
+\end_layout
+
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
+<<plot_custom, fig=TRUE, echo=TRUE>>=
+\end_layout
+
+\begin_layout Chunk
+plot(z, 4,
+\end_layout
+
+\begin_layout Chunk
+ratio=FALSE,
+\end_layout
+
+\begin_layout Chunk
+threshold=FALSE,
+\end_layout
+
+\begin_layout Chunk
+baseline=FALSE,
+\end_layout
+
+\begin_layout Chunk
+expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
+\end_layout
+
+\begin_layout Chunk
+countsArgs=list(type="h", col="darkgray", pch=NA),
+\end_layout
+
+\begin_layout Chunk
+plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Section
+Converting and exporting results
+\end_layout
+
+\begin_layout Standard
+While the get methods 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{reads}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{segments}
+\end_layout
+
+\end_inset
+
+, and 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rmethod{tss}
+\end_layout
+
+\end_inset
+
+ provide a simple access to relevant results, such data can also be represented
+ with the framework provided by the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{IRanges}
+\end_layout
+
+\end_inset
+
+ package.
+ Converting the data to an object of class 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rclass{RangedData}
+\end_layout
+
+\end_inset
+
+ allows for a standard representation and interface to other formats, for
+ example using the 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+Rpackage{rtracklayer}
+\end_layout
+
+\end_inset
+
+ package.
+\end_layout
+
+\begin_layout Chunk
+<<convert_iranges>>=
+\end_layout
+
+\begin_layout Chunk
+readsRd <- readsAsRangedData(z)
+\end_layout
+
+\begin_layout Chunk
+segmentsRd <- segmentsAsRangedData(z)
+\end_layout
+
+\begin_layout Chunk
+tssRd <- tssAsRangedData(z)
+\end_layout
+
+\begin_layout Chunk
+tssRd
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Chunk
+<<export_rtracklayer>>=
+\end_layout
+
+\begin_layout Chunk
+#library(rtracklayer)
+\end_layout
+
+\begin_layout Chunk
+#tmpFile <- tempfile()
+\end_layout
+
+\begin_layout Chunk
+#export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
+\end_layout
+
+\begin_layout Chunk
+#export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
+\end_layout
+
+\begin_layout Chunk
+#export.bed(tssRd, paste(tmpFile, "bed", sep="."))
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Session info
+\end_layout
+
+\begin_layout Chunk
+<<sessionInfo, results=tex, echo=FALSE>>=
+\end_layout
+
+\begin_layout Chunk
+toLatex(sessionInfo(), locale=FALSE)
+\end_layout
+
+\begin_layout Chunk
+@
+\end_layout
+
+\end_body
+\end_document
