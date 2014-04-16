@@ -7,10 +7,6 @@
 \alias{normalizeCounts,TssData-method}
 \alias{normalizeCounts-methods}
 
-\alias{normalize}
-\alias{normalize-TSSi}
-\alias{normalize,TssData-method}
-
 \alias{assessPoisson}
 \alias{assessGradPoisson}
 
@@ -23,7 +19,7 @@
 }
 
 \usage{
-normalizeCounts(x, fun=mean, offset=10L, basal=1e-4, lambda=c(1, 1),
+normalizeCounts(x, fun=mean, offset=10L, basal=1e-4, lambda=c(0.1, 0.1),
 fit=FALSE, multicore=TRUE, optimizer="all", ...)
 }
 
@@ -39,7 +35,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   \item{fit}{Logical whether the fitting should be performed in addition
     to the estimation based on the Poisson ratios obtained from all
     reads.}
-  \item{multicore}{Logical whether to use the \pkg{multicore} package to
+  \item{multicore}{Logical whether to use the \pkg{parallel} package to
     speed up the fitting. Has only an effect if the package is
     available and loaded. For details, see the \sQuote{details}
     section.}
@@ -49,7 +45,7 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
     \dQuote{bobyqa} for the \code{bobyqa} function from the
     \pkg{minqu} package,or \dQuote{all} for taking the best fit out of
     both.}
-  \item{...}{Additional arguments passed for the \pkg{multicore} package
+  \item{...}{Additional arguments passed for the \pkg{parallel} package
     if used. For details, see the \sQuote{details} section.}
 }
 
@@ -90,11 +86,11 @@ fit=FALSE, multicore=TRUE, optimizer="all", ...)
   evaluating differences between adjacent count estimates.
 
   In order to distribute the identification step over multiple processor
-  cores, the \code{mclapply} function of the \pkg{multicore} package can
-  be used. For this, the \pkg{multicore} package has to be loaded
+  cores, the \code{mclapply} function of the \pkg{parallel} package can
+  be used. For this, the \pkg{parallel} package has to be loaded
   manually before starting the computation, additional parameters are
   passed via the \code{...} argument, e.g.as \code{normalizeCounts(x,
-    mc.ncores=2)}. The \code{multicore} argument can further be used to
+    mc.cores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to
   \code{FALSE}.
 }
@@ -138,8 +134,8 @@ yFit <- normalizeCounts(x, fit=TRUE)
 yFit
 
 \dontrun{
-## multicore computation
-library(multicore)
+## parallel computation
+library(parallel)
 yFit <- normalizeCounts(x, fit=TRUE, mc.ncores=2)
 }
 }

@@ -7,10 +7,6 @@
 \alias{identifyStartSites,TssData-method}
 \alias{idenfify-methods}
 
-\alias{identify}
-\alias{identify-TSSi}
-\alias{identify,TssNorm-method}
-
 \title{
   Identify methods
 }
@@ -39,11 +35,11 @@ fun=subtractExpectation, multicore=TRUE, ...)
     (default: TRUE).}
   \item{fun}{Function to calculate the expectation for each TSS. For
     details, see the \sQuote{details} section.}
-  \item{multicore}{Logical whether to use the \pkg{multicore} package to
+  \item{multicore}{Logical whether to use the \pkg{parallel} package to
     speed up the computation. Has only an effect if the package is
     available and loaded. For details, see the \sQuote{details}
     section.}
-  \item{...}{Additional arguments passed for the \pkg{multicore} package
+  \item{...}{Additional arguments passed for the \pkg{parallel} package
     if used. For details, see the \sQuote{details} section.}
 }
 
@@ -77,11 +73,11 @@ fun=subtractExpectation, multicore=TRUE, ...)
   set of TSS increases.
 
   In order to distribute the identification step over multiple processor
-  cores, the \code{mclapply} function of the \pkg{multicore} package can
-  be used. For this, the \pkg{multicore} package has to be loaded
+  cores, the \code{mclapply} function of the \pkg{parallel} package can
+  be used. For this, the \pkg{parallel} package has to be loaded
   manually before starting the computation, additional parameters are
   passed via the \code{...} argument, e.g.as \code{normalizeCounts(x,
-    mc.ncores=2)}. The \code{multicore} argument can further be used to
+    mc.cores=2)}. The \code{multicore} argument can further be used to
   temporarily disable the parallel estimation by setting it to
   \code{FALSE}. Pleas note that the identification step is normally very
   fast and thus using parallel computation here may a minor impact

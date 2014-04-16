@@ -144,16 +144,11 @@ setMethod("segments",
 
 
 ## annotation ##
-setGeneric("annotation",
-           function(x)
-           standardGeneric("annotation")
-           )
-
 setMethod("annotation",
-          signature(x="TssData"),
-          function(x) {
+          signature(object="TssData"),
+          function(object) {
 
-  res <- x@annotation
+  res <- object@annotation
 
   return(res)
 }

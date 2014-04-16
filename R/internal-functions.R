@@ -1,7 +1,7 @@
 ## useMulticore ##
 .useMulticore <- function(multicore=TRUE) {
 
-  res <- multicore && "multicore" %in% .packages() && any("mclapply" %in% objects("package:multicore"))
+  res <- multicore && "parallel" %in% .packages() && any("mclapply" %in% objects("package:parallel"))
 
   return(res)
 }

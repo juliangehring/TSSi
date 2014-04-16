@@ -6,8 +6,11 @@
 \alias{plot-TSSi}
 \alias{plot-methods}
 \alias{plot,TssData-method}
+\alias{plot,TssData,ANY-method}
 \alias{plot,TssNorm-method}
+\alias{plot,TssNorm,ANY-method}
 \alias{plot,TssResult-method}
+\alias{plot,TssResult,ANY-method}
 
 \title{
   Plot methods

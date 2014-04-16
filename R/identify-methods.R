@@ -24,10 +24,10 @@ setMethod("identifyStartSites",
   ## extract normalized data, apply for each segment
   y <-
     if(.useMulticore(multicore))
-      multicore::mclapply(reads, .identifyCore,
+      parallel::mclapply(reads, .identifyCore,
                           basal=basal, tau=tau, threshold=threshold,
                           fun=fun, readCol=readCol, neighbor=neighbor,
-                          grep=.grepStrand(x), ...)
+                          strand=.grepStrand(x), ...)
     else
       lapply(reads, .identifyCore,
              basal=basal, tau=tau, threshold=threshold, fun=fun,
@@ -53,19 +53,3 @@ setMethod("identifyStartSites",
   return(res)
 }
 )
-
-
-setGeneric("identify",
-           function(x, threshold=1, exppara=c(20, 20), neighbor=TRUE,
-                    fun=subtractExpectation, multicore=TRUE, ...)
-           standardGeneric("identify")
-           )
-
-setMethod("identify",
-          signature(x="TssNorm"),
-          function(x, threshold=1, exppara=c(20, 20), neighbor=TRUE,
-                   fun=subtractExpectation, multicore=TRUE,  ...) {
-
-  identifyStartSites(x, threshold, exppara, neighbor, fun, multicore, ...)
-
-})

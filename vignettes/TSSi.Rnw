@@ -1,0 +1,270 @@
+%% LyX 2.0.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,english]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false]
+ {hyperref}
+\usepackage{breakurl}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+<<echo=F>>=
+  if(exists(".orig.enc")) options(encoding = .orig.enc)
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\VignetteIndexEntry{Introduction to the TSSi package: Identification of Transcription Start Sites}
+%\VignettePackage{TSSi}
+
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Rmethod}[1]{{\textit{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+\newcommand{\Rvar}[1]{{\textit{\textsf{#1}}}}
+
+%% avoid single lines
+\widowpenalty=10000
+\clubpenalty=10000
+
+%% format captions
+\usepackage[small,bf,margin=.5cm]{caption}
+
+\makeatother
+
+\begin{document}
+
+\title{Introduction to the \Rpackage{TSSi} package:\\
+Identification of Transcription Start Sites}
+
+
+\author{Julian Gehring, Clemens Kreutz}
+
+\maketitle
+<<settings, echo=FALSE>>=
+set.seed(1)
+options(width=65, SweaveHooks=list(fig=function() par(mar=c(5.1, 5.1, 4.1, 1.5))))
+@
+
+\begin{abstract}
+Along with the advances in high-throughput sequencing, the detection
+of transcription start sites \emph{(TSS)} using CAP-capture techniques
+has evolved recently. While many experimental applications exist,
+the analysis of such data is still non-trivial. Approaching this,
+the \Rpackage{TSSi} package offers a flexible statistical preprocessing
+for CAP-capture data and an automated identification of start sites.
+\end{abstract}
+
+\section{Introduction}
+
+High throughput sequencing has become an essential experimental approach
+to investigate genomes and transcriptional processes. While cDNA sequencing
+(\emph{RNA-seq}) using random priming and/or fragmentation of cDNA
+will result in a shallow distribution of reads typically biased towards
+the 3' end, approaches like CAP-capture enrich 5' ends and yield more
+clearly distinguishable peaks around the transcription start sites.
+
+Predicting the location of transcription start sites \emph{(TSS)}
+is hampered by the existence of alternative ones since their number
+within regions of transcription is unknown. In addition, measurements
+contain false positive counts. Therefore, only the counts which are
+significantly larger than an expected number of background reads are
+intended to be predicted as TSS. The number of false positive reads
+increases in regions of transcriptional activity and such reads obviously
+do not map to random positions. On the one hand, these reads seem
+to occur sequence dependently and therefore cluster to certain genomic
+positions, on the other hand, they are detected more frequently than
+being originated from real TSS. Because currently, there is no error
+model available describing such noise, the \Rpackage{TSSi} package
+implements an heuristic approach for an automated and flexible prediction
+of TSS. 
+
+
+\section{Data set}
+
+To demonstrate the functionality and usage of this package, experimental
+CAP-capture data obtained with Solexa sequencing is used. The reads
+were mapped to the genome, such that the number of sequenced 5' ends
+and their positions in the genome are available%
+\footnote{The \emph{sequencing workflow} at the bioconductor website describes
+basic steps and tools for the import and processing of sequcencing
+data (\url{http://bioconductor.org/help/workflows/high-throughput-sequencing/}).%
+}. The data frame \Rvar{physcoCounts} contains information about the
+chromosome, the strand, the 5' position, and the total number of mapped
+reads. Additionally, regions based on existing annotation are provided
+which are used here to divide the data into independent subsets for
+analysis.
+
+<<load_package>>=
+library(TSSi)
+@
+<<load_data>>=
+data(physcoCounts)
+head(physcoCounts)
+table(physcoCounts$chromosome, physcoCounts$strand)
+@
+
+
+\section{Segment read data}
+
+As a first step in the analysis, the reads are passed to the \Rmethod{segmentizeCounts}
+method. Here, the data is divided into \emph{segments}, for which
+the following analysis is performed independently. This is performed
+based on the information about the chromosomes, the strands, and the
+regions of the reads. The segmented data is returned as an object
+of the class \Rclass{TssData}.
+
+<<segmentize>>=
+attach(physcoCounts)
+x <- segmentizeCounts(counts=counts, start=start, chr=chromosome, region=region, strand=strand)
+detach(physcoCounts)
+x
+@
+
+The segments and the associated read data are accessible through several
+\Rmethod{get} methods. Data from individual segments can be referred
+to by either its name or an index.
+
+
+<<get_segments>>=
+segments(x)
+names(x)
+@
+
+<<get_reads>>=
+head(reads(x, 3))
+head(start(x, 3))
+head(start(x, names(x)[3]))
+@
+
+
+\section{Normalization}
+
+The normalization reduces the noise by shrinking the counts towards
+zero. This step is intended to eliminate false positive counts as
+well as making further analyzes more robust by reducing the impact
+of large counts. Such a shrinkage or regularization procedure constitutes
+a well-established strategy in statistics to make predictions conservative,
+that means to reduce the number of false positive predictions. To
+enhance the shrinkage of isolated counts in comparison to counts in
+regions of strong transcriptional activity, the information of consecutive
+genomic positions in the measurements is regarded by evaluating differences
+between adjacent count estimates.
+
+The computation can be performed with a approximation based on the
+frequency of all reads or fitted explicitly for each segment. On platforms
+supporting the \Rpackage{parallel} package, the fitting can be spread
+over multiple processor cores in order to decrease computation time.
+
+<<normalize_ratio>>=
+yRatio <- normalizeCounts(x)
+@
+
+<<normalize_fit>>=
+yFit <- normalizeCounts(x, fit=TRUE)
+yFit
+head(reads(yFit, 3))
+@
+
+<<plot_normalize_fit, fig=TRUE, echo=TRUE>>=
+plot(yFit, 3)
+@
+
+
+\section{Identifying transcription start sites}
+
+After normalization of the count data, an iterative algorithm is applied
+for each segment to identify the TSS. The expected number of false
+positive counts is initialized with a default value given by the read
+frequency in the whole data set. The position with the largest counts
+above is identified as a TSS, if the expected transcription level
+is at least one read above the expected number of false positive reads.
+The transcription levels for all TSS are calculated by adding all
+counts to their nearest neighbor TSS.
+
+Then, the expected number of false positive reads is updated by convolution
+with exponential kernels. The decay rates \Rfunarg{tau} in 3' direction
+and towards the 5'-end can be chosen differently to account for the
+fact that false positive counts are preferably found in 5' direction
+of a TSS. This procedure is iterated as long as the set of TSS increases.
+
+<<identify>>=
+z <- identifyStartSites(yFit)
+z
+head(segments(z))
+head(tss(z, 3))
+head(reads(z, 3))
+@
+
+<<plot_identify, fig=TRUE, echo=TRUE>>=
+plot(z, 3)
+@
+
+
+\section{Visualizing and customizing figures}
+
+The \Rmethod{plot} method allows for a simple, but powerful visualization
+and customization of the produced figures. For each element of the
+figure, all graphical parameters can be set, supplying them in the
+form of named lists. In the following, plotting of the threshold and
+the ratio estimates are omitted, as well as the representation of
+some components is adapted. For a detailed description on the individual
+settings, please refer to the \Rmethod{plot} documentation of this
+package.
+
+
+<<plot_custom, fig=TRUE, echo=TRUE>>=
+plot(z, 4,
+ratio=FALSE,
+threshold=FALSE,
+baseline=FALSE,
+expect=TRUE, expectArgs=list(type="l"), extend=TRUE,
+countsArgs=list(type="h", col="darkgray", pch=NA),
+plotArgs=list(xlab="Genomic position", main="TSS for segment 's1_-_155'"))
+@
+
+
+\section{Converting and exporting results}
+
+While the get methods \Rmethod{reads}, \Rmethod{segments}, and \Rmethod{tss}
+provide a simple access to relevant results, such data can also be
+represented with the framework provided by the \Rpackage{IRanges}
+package. Converting the data to an object of class \Rclass{RangedData}
+allows for a standard representation and interface to other formats,
+for example using the \Rpackage{rtracklayer} package.
+
+<<convert_iranges>>=
+readsRd <- readsAsRangedData(z)
+segmentsRd <- segmentsAsRangedData(z)
+tssRd <- tssAsRangedData(z)
+tssRd
+@
+<<export_rtracklayer>>=
+#library(rtracklayer)
+#tmpFile <- tempfile()
+#export.gff3(readsRd, paste(tmpFile, "gff", sep="."))
+#export.bed(segmentsRd, paste(tmpFile, "bed", sep="."))
+#export.bed(tssRd, paste(tmpFile, "bed", sep="."))
+@
+
+\newpage{}
+
+
+\section*{Session info}
+
+<<sessionInfo, results=tex, echo=FALSE>>=
+toLatex(sessionInfo(), locale=FALSE)
+@
+
+\end{document}
