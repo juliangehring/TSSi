@@ -1,12 +1,12 @@
 Package: TSSi
 Type: Package
 Title: Transcription Start Site Identification
-Version: 1.11.0
+Version: 1.13.0
 Date: 2013-07-26
 Author: Clemens Kreutz, Julian Gehring
 Maintainer: Julian Gehring <julian.gehring@embl.de>
-Depends: R (>= 2.13.2), BiocGenerics (>= 0.3.2)
-Imports: BiocGenerics, methods, Hmisc, minqa, stats, Biobase (>=
+Depends: R (>= 2.13.2), BiocGenerics (>= 0.3.2), IRanges
+Imports: methods, BiocGenerics, S4Vectors, Hmisc, minqa, stats, Biobase (>=
         0.3.2), plyr, IRanges
 Suggests: rtracklayer
 Enhances: parallel

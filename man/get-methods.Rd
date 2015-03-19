@@ -73,7 +73,7 @@
     }
 
     \item{counts:}{
-      \code{signature(x="TssData")}
+      \code{signature(object="TssData")}
     }{
       Get the raw read counts; see \code{start}.
     }

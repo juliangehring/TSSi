@@ -2,14 +2,15 @@ useDynLib(TSSi)
 
 import(methods)
 
-importFrom(BiocGenerics, annotation, "annotation<-")
+import(BiocGenerics)
+import(S4Vectors)
 importFrom(graphics, plot, points, lines, rug, abline)
 importFrom(Hmisc, approxExtrap)
 importFrom(minqa, bobyqa)
-importFrom(stats, optimize, optim, convolve, dpois, start, end)
+importFrom(stats, optimize, optim, convolve, dpois)
 importFrom(Biobase, selectSome)
 importFrom(plyr, rbind.fill)
-importFrom(IRanges, IRanges, RangedData, Rle)
+importFrom(IRanges, IRanges, RangedData)
 
 exportClasses(TssData)
 exportClasses(TssNorm)

@@ -25,16 +25,11 @@ setMethod("end",
 
 
 ## counts ##
-setGeneric("counts",
-           function(x, ind)
-           standardGeneric("counts")
-           )
-
 setMethod("counts",
-          signature(x="TssData"),
-          function(x, ind) {
+          signature(object="TssData"),
+          function(object, ind) {
             
-  res <- .getSlotIndex(x, ind, "reads", "counts")
+  res <- .getSlotIndex(object, ind, "reads", "counts")
 
   return(res)
 }
