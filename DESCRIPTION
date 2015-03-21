@@ -1,7 +1,7 @@
 Package: TSSi
 Type: Package
 Title: Transcription Start Site Identification
-Version: 1.13.1
+Version: 1.13.2
 Author: Julian Gehring, Clemens Kreutz
 Maintainer: Julian Gehring <julian.gehring@embl.de>
 Depends: R (>= 2.13.2)

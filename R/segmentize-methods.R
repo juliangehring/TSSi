@@ -14,7 +14,7 @@ setMethod("segmentizeCounts",
                    pattern="%1$s_%2$s_%3$s", ...) {
 
   ## check length of arguments
-  .checkSegmentize(counts, start, end, chr, region, strand, replicate, annotation, pattern)
+  #.checkSegmentize(counts, start, end, chr, region, strand, replicate, annotation, pattern)
   if(!all(sapply(list(start, chr, region, strand, replicate), length) == length(counts)))
     warning("Input arguments do not have the same length.")
   

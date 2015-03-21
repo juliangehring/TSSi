@@ -19,17 +19,17 @@ setMethod("identifyStartSites",
   tau <- rep(tau, length.out=2)
   
   ## check arguments
-  .checkIdentify(threshold, tau, neighbor, fun, multicore)
+  #.checkIdentify(threshold, tau, neighbor, fun, multicore)
 
   ## extract normalized data, apply for each segment
   y <-
     if(.useMulticore(multicore))
-      parallel::mclapply(reads, .identifyCore,
+      parallel::mclapply(seq_along(reads), .identifyCore, reads,
                           basal=basal, tau=tau, threshold=threshold,
                           fun=fun, readCol=readCol, neighbor=neighbor,
                           strand=.grepStrand(x), ...)
     else
-      lapply(reads, .identifyCore,
+      lapply(seq_along(reads), .identifyCore, reads,
              basal=basal, tau=tau, threshold=threshold, fun=fun,
              readCol=readCol, neighbor=neighbor, strand=.grepStrand(x))
   

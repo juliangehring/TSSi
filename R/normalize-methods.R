@@ -19,7 +19,7 @@ setMethod("normalizeCounts",
   optimizer <- match.arg(optimizer, c("optim", "bobyqa", "all"))
 
   ## check arguments
-  .checkNormalize(fun, offset, basal, lambda, fit, multicore, optimizer)
+  #.checkNormalize(fun, offset, basal, lambda, fit, multicore, optimizer)
 
   ## calculate ratio
   reads <- reads(x)

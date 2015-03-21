@@ -1,14 +1,15 @@
 ## identifyCore ##
-.identifyCore <- function(x, basal, tau, threshold, fun, readCol, neighbor, strand) {
+.identifyCore <- function(i, reads, basal, tau, threshold, fun, readCol, neighbor, strand) {
 
   ## extract data
+  x <- reads[[i]]
   pos <- x$start
   fn <- counts <- x[[readCol]]
   n <- length(counts)
 
   ## correct parameter for strand
-  tau <- .revertPars(match.call()[[2]][[3]], strand, tau)
-
+  tau <- .revertPars(i, strand, tau)
+  
   if(any(counts >= threshold)) {
     indTss <- logical(n)
     for(i in 1:n) {
