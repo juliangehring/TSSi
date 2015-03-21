@@ -104,10 +104,8 @@ tssAsRangedData(x)
 example(segmentizeCounts)
 
 readsRd <- readsAsRangedData(x)
-head(readsRd)
 
 segmentsRd <- segmentsAsRangedData(x)
-head(segmentsRd)
 }
 
 \keyword{methods}

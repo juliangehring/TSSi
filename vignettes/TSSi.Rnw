@@ -248,7 +248,6 @@ for example using the \Rpackage{rtracklayer} package.
 readsRd <- readsAsRangedData(z)
 segmentsRd <- segmentsAsRangedData(z)
 tssRd <- tssAsRangedData(z)
-tssRd
 @
 <<export_rtracklayer>>=
 #library(rtracklayer)

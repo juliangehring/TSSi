@@ -111,8 +111,6 @@ attach(physcoCounts)
 x <- segmentizeCounts(counts=counts, start=start, chr=chromosome,
 region=region, strand=strand)
 detach(physcoCounts)
-
-x
 }
 
 \keyword{methods}

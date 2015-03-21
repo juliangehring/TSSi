@@ -785,10 +785,6 @@ tssRd <- tssAsRangedData(z)
 \end_layout
 
 \begin_layout Chunk
-tssRd
-\end_layout
-
-\begin_layout Chunk
 @
 \end_layout
 

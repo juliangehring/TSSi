@@ -1,17 +1,14 @@
 Package: TSSi
 Type: Package
 Title: Transcription Start Site Identification
-Version: 1.13.0
-Date: 2013-07-26
-Author: Clemens Kreutz, Julian Gehring
+Version: 1.13.1
+Author: Julian Gehring, Clemens Kreutz
 Maintainer: Julian Gehring <julian.gehring@embl.de>
 Depends: R (>= 2.13.2)
-Imports: methods, BiocGenerics (>= 0.3.2), S4Vectors, Hmisc, minqa, stats,
-	 Biobase (>= 0.3.2), plyr, IRanges
+Imports: methods, BiocGenerics (>= 0.3.2), S4Vectors, Hmisc, minqa, stats, Biobase (>= 0.3.2), plyr, IRanges
 Suggests: rtracklayer
 Enhances: parallel
-Description: Identify and normalize transcription start sites in
-             high-throughput sequencing data.
+Description: Identify and normalize transcription start sites in high-throughput sequencing data.
 License: GPL-3
 LazyLoad: yes
 URL: http://julian-gehring.github.com/TSSi/
